@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.HouseInformationMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.HouseInformation" >
+    <id column="house_information_id" property="houseInformationId" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="rent_type" property="rentType" jdbcType="VARCHAR" />
+    <result column="house_information_address" property="houseInformationAddress" jdbcType="VARCHAR" />
+    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    house_information_id, province, city, rent_type, house_information_address, house_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from houseinformation
+    where house_information_id = #{houseInformationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from houseinformation
+    where house_information_id = #{houseInformationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.HouseInformation" >
+    insert into houseinformation (house_information_id, province, city, 
+      rent_type, house_information_address, house_id
+      )
+    values (#{houseInformationId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{rentType,jdbcType=VARCHAR}, #{houseInformationAddress,jdbcType=VARCHAR}, #{houseId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.HouseInformation" >
+    insert into houseinformation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="houseInformationId != null" >
+        house_information_id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="rentType != null" >
+        rent_type,
+      </if>
+      <if test="houseInformationAddress != null" >
+        house_information_address,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="houseInformationId != null" >
+        #{houseInformationId,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="rentType != null" >
+        #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="houseInformationAddress != null" >
+        #{houseInformationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.HouseInformation" >
+    update houseinformation
+    <set >
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="rentType != null" >
+        rent_type = #{rentType,jdbcType=VARCHAR},
+      </if>
+      <if test="houseInformationAddress != null" >
+        house_information_address = #{houseInformationAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where house_information_id = #{houseInformationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.HouseInformation" >
+    update houseinformation
+    set province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      rent_type = #{rentType,jdbcType=VARCHAR},
+      house_information_address = #{houseInformationAddress,jdbcType=VARCHAR},
+      house_id = #{houseId,jdbcType=INTEGER}
+    where house_information_id = #{houseInformationId,jdbcType=INTEGER}
+  </update>
+</mapper>
