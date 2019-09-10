@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<head>
+    <title>房间详情</title>
+    <link rel="stylesheet" type="text/css" href="css/houseitem.css">
+    <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="imag/favicon.ico">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        // body...
+        $(function () {
+            $(document).scroll(function () {
+                var scroH = $(this).scrollTop();
+                if(scroH>=300){
+                    $("#mscrollHeader").fadeIn(500);
+                }else{
+                    $("#mscrollHeader").fadeOut(500);
+                }
+            });
+
+        });
+
+
+    </script>
+
+</head>
+<body>
+<div class="detail_wrapper">
+    <div class="detail_head clearfix">
+        <a href="http://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>
+        <ul class="nav_R nav_commen">
+            <li><a rel="nofollow" title="" class="show-register-box" href="http://www.xiaozhu.com/register?next=http%3A%2F%2Fsh.xiaozhu.com%2Ffangzi%2F25053341903.html">注册</a></li>
+            <li>·</li>
+            <li><a rel="nofollow" class="logindialog" href="http://www.xiaozhu.com/login?next=http%3A%2F%2Fsh.xiaozhu.com%2Ffangzi%2F25053341903.html">登录</a></li>
+            <li>·</li>
+            <li class="current">
+                <a href="#ongo" class="openTri_R">短租指南</a>
+                <div class="head_pop width_58 top40">
+                    <div class="pop_column">
+                        <span><a class="fl" href="http://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=tenant">房客指南</a><a class="fr" href="http://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=landlord">房东指南</a></span>
+                    </div></div>
+            </li>
+            <li>
+                <a href="#ongo" class="icon_iphone">手机小猪</a>
+                <div class="head_pop w_120 top40">
+                    <div>
+                        <img src="img/code_pic.png" alt="小猪" title="小猪">
+                    </div>
+                    <a href="http://www.xiaozhu.com/appdownload/fk" target="_blank">了解更多</a>
+                </div>
+            </li>
+            <li><a rel="nofollow" data-href="http://www.xiaozhu.com/publish" class="btn_free show-register-box" id="Pub_Btn">免费发布房源</a></li>
+        </ul></div>
+
+</div>
+<div class="header_bg" style="position: fixed; width: 100%;     top: 0px; left: 0px; z-index: 999; display: none;"         id="mscrollHeader">
+    <div class="detail_header clearfix">
+        <div class="nav_l">
+            <a class="xz_logo" href="#">小猪</a>
+            <ul id="scorllFather">
+                <li class="cur">
+                    <a href="#ongo">实拍照片</a>
+                </li>
+                <li class="">
+                    <a href="#ongo">详细介绍</a>
+                </li>
+                <li>
+                    <a href="#ongo">位置地图</a>
+                </li>
+                <li>
+                    <a href="#ongo">预订须知</a>
+                </li>
+                <li>
+                    <a href="#ongo">入住点评</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav_r clearfix" id="scrollPrice">
+            <div class="fl">¥<span class="detail_avgprice">380</span><em>起</em></div>
+            <div class="time_r">每晚</div>
+        </div>
+    </div>
+</div>
+<div class="wrap clearfix con_bg">
+    <div class="con_l">
+        <div class="pho_info">
+            <h4>
+                <em>马卡龙/底楼幽静独院清新洋房loft</em>
+            </h4>
+            <p title="上海市徐汇区乌鲁木齐南路145号">
+                <em class="col_pink">
+                    <a href="http://www.xiaozhu.com">小猪</a>
+                    &gt;
+                    <a href="http://sh.xiaozhu.com/">上海</a>
+                    &gt;
+                </em>
+                <span class="pr5">上海市徐汇区乌鲁木齐南路145号
+                                  </span>
+            </p>
+
+            <div class="labels">
+                <span class="col_slogn" title="下单即可入住，无需房东确认"><i class="new_ico"></i>速订</span>
+                <span class="col_slogn" title="周租月租有折扣，长期入住更实惠"><i class="new_ico"></i>长租优惠</span>
+                <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
+                        <i class="new_ico"></i>优品
+                </span>
+                <span class="col_slogn" title="随时入住、交通便利、适合办公">
+                 <i class="new_ico"></i>商旅首选
+                 </span>
+
+
+
+
+                &nbsp;
+            </div>
+
+        </div>
+        <!-- 轮播图 -->
+        <div class="pho_show clearfix" id="detailImageBox">
+            <div class="pho_show_l">
+                轮播图
+
+            </div>
+            <div class="pho_show_r">
+
+            </div>
+
+        </div>
+        <div id="introducePart">
+            <ul class="house_info clearfix" id="introduce">
+                <li class="border_none">
+                    <h6 class="h_ico1">整套出租</h6>
+                    <p>房屋面积：25平米<br>                         房屋户型：1室0厅1卫1厨0阳台</p>                 </li>
+                <li>
+                    <h6 class="h_ico2">宜住2人</h6>
+                    <p>
+                        房客独享整套房屋
+                    </p>
+                </li>
+                <li>
+                    <h6 class="h_ico3">共1张</h6>
+                    <p>
+
+                        双人床：1.4m宽 × 2m长 ×1张<br>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
