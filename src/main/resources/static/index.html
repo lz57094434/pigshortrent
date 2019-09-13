@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        var arr = ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"];
+        var ord = 0;//代表当前图片的序号，从0开始。
+        var myTimer = null;
+
+        function initUI() {
+            $("#banner_con li:first").css({"backgroundColor": "red"});
+        }
+
+        function initEvent() {
+            $("#banner_con li").click(function () {
+                goImg($("#banner_con li").index(this));
+            });
+            $("#leftArrow").click(function () {
+                let transord = ord - 1;
+                transord = transord < 0 ? arr.length - 1 : transord;
+                goImg(transord);
+            });
+            $("#rightArrow").click(function () {
+                let transord = ord + 1;
+                transord = transord > arr.length - 1 ? 0 : transord;
+                goImg(transord);
+            });
+        }
+
+        //1、自动播放
+        function autoPlay() {
+            myTimer = setInterval(function () {
+                //一、改变数据
+                // 1、记录当前序号（淡出的图片序号）
+                let outOrd = ord;
+                //2、改变要显示的图片的序号（淡出图片序号加一）
+                ord++;
+                if (ord > arr.length - 1) {
+                    ord = 0;
+                }
+                //二、改变外观
+                let $img = $("#banner_con img");
+                //1、淡入淡出效果
+                //让一张(outOrd)淡出 当前消失
+                $img.eq(outOrd).animate({"opacity": 0}, 2000);
+                //让一张(ord)淡入下一张图片显示
+                $img.eq(ord).animate({"opacity": 1}, 2000);
+            }, 4000);
+        }
+
+        //3、跳转到指定的图片
+        function goImg(transOrd) {
+            //一、改变数据
+            // 1、记录当前序号（淡出的图片序号）
+            let outOrd = ord;
+            //2、改变要显示的图片的序号（传入的图片序号）
+            ord = transOrd;
+            if (ord > arr.length - 1) {
+                ord = 0;
+            }
+            //二、改变外观
+            let $img = $("#banner_con img");
+            //1、淡入淡出效果
+            //让一张(outOrd)淡出 当前消失
+            $img.eq(outOrd).animate({"opacity": 0}, 2000);
+            //让一张(ord)淡入下一张图片显示
+            $img.eq(ord).animate({"opacity": 1}, 2000);
+        }
+
+        $(function () {
+            //1、初始化界面
+            initUI();
+            //2、绑定事件
+            initEvent();
+            //3、自动播放
+            autoPlay();
+        });
+        //短租指南，鼠标滑过弹框
+        $(function () {
+            var timer;
+            $(".rent").hover(function () {
+                clearTimeout(timer);
+                $(".rent_pop").show();
+            }, function () {
+                timer = setTimeout(function () {
+                    $(".rent_pop").hide()
+                }, 0);
+            })
+            $(".rent_pop").hover(function () {
+                clearTimeout(timer);
+            }, function () {
+                $(".rent_pop").hide();
+            })
+        })
+        //    手机小猪，效果同上
+        $(function () {
+            var timer;
+            $(".phonePig").hover(function () {
+                clearTimeout(timer);
+                $(".phonePig_pop").show();
+            }, function () {
+                timer = setTimeout(function () {
+                    $(".phonePig_pop").hide()
+                }, 0);
+            });
+            $(".phonePig_pop").hover(function () {
+                clearTimeout(timer);
+            }, function () {
+                $(".phonePig_pop").hide();
+            })
+        })
+
+        //锚点链接的平滑滚动
+        $(function () {
+            $("#return").click(function () {
+                $("html,body").animate({
+                    scrollTop: $($(this).attr("href")).offset().top
+                }, 500);
+                return false;
+            })
+        })
+        //滚动条滑动到一定位置显示锚点返回按钮
+        $(document).scroll(function () {
+            var scroH = $(this).scrollTop();
+            if (scroH >= 200) {
+                $("#to_go").fadeIn(500);
+            } else {
+                $("#to_go").fadeOut(500);
+            }
+        });
+    //    房客点评
+        $(function () {
+            $("#fk_li1").hover(function () {
+                $("#fk_dianP1").show();
+                $("#fk_dianP2").hide();
+                $("#fk_dianP3").hide();
+                $("#fk_dianP4").hide();
+            },function () {
+                $("#fk_dianP1").show();
+            });
+            $("#fk_li2").hover(function () {
+                // $("#fk_li1").style.backgroundColor="white";
+                $("#fk_dianP1").hide();
+                $("#fk_dianP2").show();
+                $("#fk_dianP3").hide();
+                $("#fk_dianP4").hide();
+            },function () {
+                $("#fk_dianP2").show();
+            });
+            $("#fk_li3").hover(function () {
+                $("#fk_dianP1").hide();
+                $("#fk_dianP2").hide();
+                $("#fk_dianP3").show();
+                $("#fk_dianP4").hide();
+
+            },function () {
+                $("#fk_dianP3").show();
+            });
+            $("#fk_li4").hover(function () {
+                $("#fk_dianP1").hide();
+                $("#fk_dianP2").hide();
+                $("#fk_dianP3").hide();
+                $("#fk_dianP4").show();
+            },function () {
+                $("#fk_dianP4").show();
+            })
+        })
+    //    房东点评
+        $(function () {
+            $("#fd_li1").hover(function () {
+                $("#fd_dianP1").show();
+                $("#fd_dianP2").hide();
+                $("#fd_dianP3").hide();
+                $("#fd_dianP4").hide();
+            },function () {
+                $("#fd_dianP1").show();
+            });
+            $("#fd_li2").hover(function () {
+                $("#fd_dianP1").hide();
+                $("#fd_dianP2").show();
+                $("#fd_dianP3").hide();
+                $("#fd_dianP4").hide();
+            },function () {
+                $("#fd_dianP2").show();
+            });
+            $("#fd_li3").hover(function () {
+                $("#fd_dianP1").hide();
+                $("#fd_dianP2").hide();
+                $("#fd_dianP3").show();
+                $("#fd_dianP4").hide();
+
+            },function () {
+                $("#fd_dianP3").show();
+            });
+            $("#fd_li4").hover(function () {
+                $("#fd_dianP1").hide();
+                $("#fd_dianP2").hide();
+                $("#fd_dianP3").hide();
+                $("#fd_dianP4").show();
+            },function () {
+                $("#fd_dianP4").show();
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div>
+    <!--title-->
+    <div class="head_bar" id="top">
+        <div class="head_bar_con">
+            <a href="#" class="logo_index"></a>
+            <span class="slogan_v2">居住自由主义</span>
+            <div class="nav_R">
+                <a href="#" class="registered">注册</a>
+                <span>·</span>
+                <a href="#" class="login">登录</a>
+                <span>·</span>
+                <a href="#" class="rent">短租指南</a>
+                <div class="rent_pop" hidden="true">
+                    <span>
+                        <a href="#" class="f1">房客指南</a>
+                        <a href="#" class="f2">房东指南</a>
+                    </span>
+                </div>
+                <a href="#" class="phonePig">手机小猪</a>
+                <div class="phonePig_pop" hidden="true">
+                    <span>
+                        <a href="#" target="_blank">
+                            <img src="img/code_pic.png" alt="小猪" title="小猪"
+                                 style="width: 98px;height: 98px;top: 10px;left: 11px;">
+                        </a>
+                        <a href="#" class="learnMore">了解更多</a>
+                    </span>
+                </div>
+                <a href="#" class="btn_free" id="Pub_Btn">免费发布房间</a>
+            </div>
+
+
+        </div>
+    </div>
+    <!--图片轮播，搜索-->
+    <div id="banner_con">
+        <!--轮播图-->
+        <div>
+            <img id="imgId1" src="img/lunbotu1.jpg"/>
+            <img id="imgId2" src="img/lunbotu2.jpg"/>
+            <img id="imgId3" src="img/lunbotu3.jpg"/>
+            <img id="imgId4" src="img/lunbotu4.jpg"/>
+            <img id="imgId5" src="img/lunbotu5.jpg"/>
+        </div>
+        <!--左箭头-->
+        <span id="leftArrow"></span>
+        <!--右箭头-->
+        <span id="rightArrow"></span>
+        <!--上阴影-->
+        <span class="bg_up_shadow"></span>
+        <!--搜索框-->
+        <div class="search_index">
+            <!--城市-->
+            <div class="search_column_l">
+                <span class="icon_place_box" id="suggest_icon">
+                    <img src="img/position.png" class="iconfton_l">
+                </span>
+                <input type="text" id="searchcity" name="searchcity" placeholder="城市或目的地" class="ipt_search_l"
+                       autocomplete="off" style="background-color:transparent;border:0;outline: 0;">
+            </div>
+            <!--日期-->
+            <div class="search_column_r">
+                <span class="icon_place_box" id="calendar_btn_s">
+                    <img src="img/calendar.png" class="iconfton_r">
+                </span>
+                <input type="text" readonly id="startenddate" name="startenddate" placeholder="选择入住日期"
+                       class="ipt_search_r" autocomplete="off"
+                       style="background-color:transparent;border:0;outline: 0;">
+            </div>
+            <!--button-->
+            <div class="index_search_box">
+                <input type="button" value="搜索小猪" onclick class="btn_pink_search">
+                <span class="icon_palce_box" id="">
+                    <img src="img/right_arrow.png" class="iconfton_right_arrow">
+                </span>
+            </div>
+
+        </div>
+    </div>
+    <!--推荐app-->
+    <div class="index_ad1" style="background-color: #18B8C1">
+        <a href="#" id="indexAdPic" target="_blank">
+            <img src="img/recommandapp.jpg" class="Pic_size">
+        </a>
+    </div>
+    <!--房间展示页面-->
+    <div class="room_show">
+        <div class="index_T">
+            <h1>别住酒店，住我家</h1>
+            <span>相知无远近，万里尚为邻</span>
+        </div>
+        <div class="content_v2">
+            <div class="room_show_div">
+                <div class="show_1">
+                    <img class="img_room"
+                         src="https://image.xiaozhustatic3.com/00,400,326,2/11,0,8,15993,3000,2000,3f7d9fb3.jpg"
+                         width="400" height="326" alt="小猪-点头像看其他房-熊先生摄影民宿2-石路中式">
+                    <div class="rooms_intro">
+                        <img class="img_user_fd"
+                             src="https://image.xiaozhustatic1.com/22/12,0,28,8187,375,375,a974881c.jpg">
+                        <span class="room_name">屋里灰灰的家 - 苏州</span>
+                        <span class="index_price">￥240</span>
+                    </div>
+                    <a href="#" target="_blank" class="room_hover"></a>
+                </div>
+                <div class="show_1">
+                    <img class="img_room" alt="小猪-西涌（西冲） 舒适宜居宽敞双床房近沙滩" width="400" height="326"
+                         src="https://image.xiaozhustatic2.com/00,400,326,2/9,0,3,5096,1800,1200,25afc714.jpg">
+                    <div class="rooms_intro">
+                        <img class="img_user_fd"
+                             src="https://image.xiaozhustatic2.com/22/9,0,69,3086,329,329,36b65a23.jpg">
+                        <span class="room_name">西涌蝴蝶家民宿的家 - 深圳</span>
+                        <span class="index_price">￥112</span>
+                    </div>
+                    <a href="#" target="_blank" class="room_hover"></a>
+                </div>
+                <div class="show_1 noMargin">
+                    <img class="img_room" width="400" height="326"
+                         src="http://www.xiaozhu.com/images/index_city/city_sh.jpg">
+                    <div class="rooms_intro city_top">
+                        <span class="index_price">20000+套</span>
+                        <span class="room_name">包容厚德  ·  北京</span>
+                    </div>
+                    <a href="#" class="room_hover" target="_blank"></a>
+                </div>
+                <div class="show_2">
+                    <img class="img_room city_big" width="820" height="326"
+                         src="http://www.xiaozhu.com/images/index_city/city_nj_big.jpg">
+                    <div class="rooms_intro_big">
+                        <span class="room_name">金陵春梦  ·  南京</span><br>
+                        <span class="index_price">10000+套</span>
+                    </div>
+                    <a href="#" class="room_hover" target="_blank"></a>
+                </div>
+                <div class="show_1 noMargin">
+                    <img class="img_room" alt="小猪-深圳东站布吉地铁站万象汇沃尔玛温馨小清新民宿" width="400" height="326"
+                         src="https://image.xiaozhustatic1.com/00,400,326,2/51,0,84,57933,1800,1200,78142291.jpg">
+                    <div class="rooms_intro">
+                        <img class="img_user_fd"
+                             src="https://image.xiaozhustatic3.com/22/15,0,83,22326,260,260,626e66b8.jpg">
+                        <span class="room_name">飄揚的家 - 深圳</span>
+                        <span class="index_price">¥288</span>
+                    </div>
+                    <a href="#" target="_blank" class="room_hover"></a>
+                </div>
+                <div class="show_1">
+                    <img class="img_room" alt="小猪-暑期特价/住4-6人地铁解放碑洪崖洞日式两房" width="400" height="326"
+                         src="https://image.xiaozhustatic3.com/00,400,326,2/51,0,31,1555,1800,1200,bda9f9d9.jpg">
+                    <div class="rooms_intro">
+                        <img class="img_user_fd"
+                             src="https://image.xiaozhustatic1.com/22/13,0,88,6087,329,329,50545224.jpg">
+                        <span class="room_name">壹玥的家 - 重庆</span>
+                        <span class="index_price">¥268</span>
+                    </div>
+                    <a href="#" class="room_hover" target="_blank"></a>
+                </div>
+                <div class="show_1">
+                    <img class="img_room" alt="小猪-晓歇/客至/宽窄巷子地铁口汉服电梯观景房" width="400" height="326"
+                         src="https://image.xiaozhustatic2.com/00,400,326,2/16,0,13,34681,1800,1200,4b5fbdac.jpg">
+                    <div class="rooms_intro">
+                        <img class="img_user_fd"
+                             src="https://image.xiaozhustatic2.com/22/12,0,56,23759,260,260,6879f8e7.jpg">
+                        <span class="room_name">旅途晓歇胡小龙的家 - 成都</span>
+                        <span class="index_price">¥428</span>
+                    </div>
+                    <a href="#" class="room_hover" target="_blank"></a>
+                </div>
+                <div class="show_1 noMargin">
+                    <img class="img_room" width="400" height="326"
+                         src="http://www.xiaozhu.com/images/index_city/city_cq.jpg">
+                    <div class="rooms_intro city_top">
+                        <span class="index_price">20000+套</span>
+                        <span class="room_name">热辣山城  ·  重庆</span>
+                    </div>
+                    <a href="#" target="_blank" class="room_hover"></a>
+                </div>
+                <div class="show_1">
+                    <img class="img_room" alt="小猪-地铁口/美式乡村带阁楼/落地大窗春熙路宽窄巷" width="400" height="326"
+                         src="https://image.xiaozhustatic1.com/00,400,326,2/18,0,72,15403,1800,1201,0c3c9c94.jpg">
+                    <div class="rooms_intro">
+                        <img class="img_user_fd"
+                             src="https://image.xiaozhustatic3.com/22/14,0,30,2090,329,329,de3baf97.jpg">
+                        <span class="room_name">o_olili的家 - 成都</span>
+                        <span class="index_price">¥198</span>
+                    </div>
+                    <a href="#" class="room_hover" target="_blank"></a>
+                </div>
+                <div class="show_2 noMargin">
+                    <img class="img_room city_big" width="820" height="326"
+                         src="http://www.xiaozhu.com/images/index_city/city_hz_big.jpg">
+                    <div class="rooms_intro_big">
+                        <span class="room_name">最忆西湖  ·  杭州</span><br>
+                        <span class="index_price">10000+套</span>
+                    </div>
+                    <a href="#" class="room_hover" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="index_T">
+        <h1>让分享和信赖悄然发生</h1>
+        <span>完善的安全机制和信用机制，帮助房东和房客</span>
+    </div>
+    <!--内容v2-->
+    <div class="content_v2 marginBot30">
+        <a href="#" name="authentication" class="content_show1">
+            <span class="ads1"></span>
+        </a>
+        <a href="#" name="transaction" class="content_show2">
+            <span class="ads2"></span>
+        </a>
+        <a href="#" name="protection" class="content_show3">
+            <span class="ads3"></span>
+        </a>
+        <a href="#" name="comment" class="content_show4">
+            <span class="ads4"></span>
+        </a>
+    </div>
+    <!--推荐内容-->
+    <div class="index_comment">
+        <div class="index_T">
+            <h1 class="white">世间所有的相遇都是久别重逢</h1>
+            <span class="white">房客和房东都在彼此感动着</span>
+        </div>
+        <div id="commentdiary">
+            <div class="comment_column">
+                <div class="cmt_con">
+                    <span class="comment_user">房客点评</span>
+                    <div id="fk_dianP1" style="display: block;">
+                        <div class="portrait">
+                            <img style="right: 265px;" src="https://image.xiaozhustatic2.com/22/51,0,34,31824,132,132,4601acbd.jpg">
+                        </div>
+                        <span>zgStannu</span>
+                        <span>2019.08</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">房东先生从头到尾都给我留下了深刻的印象，很耐心的解答问题，有任何问题都能顺利解决。民宿离海很近，虽然不能下海，但是沙质十分细腻，还有很多可爱的小螃蟹在等你。结束一天的行程，在沙滩上漫步也是很好的体验！房间是麻雀虽小，但五脏俱全，设施完备，满足生活需求。总之，海边沙滩漫步，海风烧烤啤酒，蓝天红瓦热心市民。青岛，一个来了不会后悔的城市。这是一段非常快乐的时光，感谢相遇。</a>
+                        </span>
+                    </div>
+                    <div id="fk_dianP2" style="display: none;">
+                        <div class="portrait">
+                            <img style="right: 265px;" src="https://image.xiaozhustatic1.com/22/51,0,97,65814,132,132,54506055.jpg">
+                        </div>
+                        <span>豪车汇</span>
+                        <span>2019.07</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">这家客栈简直太棒了！老板娘也很好，我们半夜十二点过才到客栈，一直等着我们。房间超级干净，设施用品也是各种好，五星级标准。院子里有个大花园，还有个超大玻璃平台公用休闲区，本来只准备住一天，后来果断续住。老板娘人真的很好，我们出去玩遇到什么问题打电话给她，马上就帮我们解决，反正真的超好。强烈推荐这家客栈，离古城超级近，真心棒棒哒！！！</a>
+                        </span>
+                    </div>
+                    <div id="fk_dianP3" style="display: none;">
+                        <div class="portrait">
+                            <img style="right: 265px;" src="https://image.xiaozhustatic1.com/22/10,0,46,18075,375,376,6bb15e83.jpg">
+                        </div>
+                        <span>LoisTao</span>
+                        <span>2019.08</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">非常棒的入住体验，刚到房东就热情地带我们去住所。房子打扫得很干净，布置得也很温馨。房东耐心地教我们水电煤的使用方法，还为我们准备了小点心，并交代我们如果对附近不熟，可以随时联系房东太太咨询。房东太太也告知我们床品都消毒清洗过，所以睡得特别安心。房子离宽窄巷、锦里以及地铁都特别近，走路即可到达。还有一个开通VIP的大投影，简直太舒适了～有机会到成都一定还会入住的！</a>
+                        </span>
+                    </div>
+                    <div id="fk_dianP4" style="display: none;">
+                        <div class="portrait">
+                            <img style="right: 265px;" src="https://image.xiaozhustatic3.com/22/21,0,64,6686,132,132,4d4ddb5e.jpg">
+                        </div>
+                        <span>王树jl</span>
+                        <span>2019.08</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">看见这家民宿就被吸引了，感觉很有情调，来了果然没有失望。小院设计的很漂亮，也很用心，硬件设施很好。吃完饭天色渐暗，在小院品茶，乘凉，烧烤，闲谈，真的很惬意。本来想第二天一早去青龙峡的，可小院里能玩的东西太多了，早上感觉没玩够就又玩了一上午，下午才去的青龙峡。只住了一天，真的有点没住够。有K歌房，还有一台街机，童年回忆啊。老人们都在打麻将，反正我看没有闲着的，大家难得聚在一起，玩的都很开心。</a>
+                        </span>
+                    </div>
+                    <ul class="cmt_ul">
+                        <li id="fk_li1"class="cmt_current"></li>
+                        <li id="fk_li2"></li>
+                        <li id="fk_li3"></li>
+                        <li id="fk_li4"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="comment_column">
+                <div class="cmt_con cmt_R">
+                    <span class="comment_user">房东日记</span>
+                    <div id="fd_dianP1" style="display: none;">
+                        <div class="portrait">
+                            <img style="left: 265px;" src="https://image.xiaozhustatic3.com/22/18,0,23,23124,363,363,45e4cbab.jpg">
+                        </div>
+                        <span>沐云月</span>
+                        <span>2019.07.07</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">我出生在美丽的洱海边，步入社会后开过服装店，开过饭店，最后回到洱海边做了一位迎五湖四海客人的房东。我爱好不多，平时喜欢清晨环海路跑跑步，看看美丽的日出，也喜欢开着小车兜兜风，中午在家品品茶，再照顾一下满院子的小萌肉。超喜欢养猫咪，可是它们后来都跑了！还喜欢用镜头留下每一个美好的瞬间，喜欢用脚步去丈量景区的每一个角落。欢迎加入我的队伍，我在苍山脚下洱海边等着你哦!</a>
+                        </span>
+                    </div>
+                    <div id="fd_dianP2" style="display: none;">
+                        <div class="portrait">
+                            <img style="left: 265px;" src="https://image.xiaozhustatic1.com/22/51,0,12,106528,329,329,a56f7992.jpg">
+                        </div>
+                        <span>青岛金沙滩儒家</span>
+                        <span>2019.06.16</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">我的第一位房客是上海来的小姑娘，带着父母还有小宝宝。带她们来到房间，进去的瞬间她们真的好开心。她们一起来了6个人，定的是套二房间我觉得是住不下，正好自己家三居室还空着一套就给她们住了，所以进房间一个劲说谢谢我。客人住了3天，退房后我进房间确实是意外了，房间住的特别的干净整洁，一尘不染，更意外的是她回到单位把我的民宿告诉了同事，之后她们来玩都会在小猪上预订我家的房子。有时候所有等待和付出都是值得的。</a>
+                        </span>
+                    </div>
+                    <div id="fd_dianP3" style="display: none;">
+                        <div class="portrait">
+                            <img style="left: 265px;" src="https://image.xiaozhustatic2.com/22/20,0,16,11894,260,260,f118416c.jpg">
+                        </div>
+                        <span>宜居日租</span>
+                        <span>2019.07.03</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">赵公子是土生土长的承德人，走过这个城市的大街小巷，你知道的避暑山庄、外八庙、棒锤山就是我小屋的邻居，我带着我佛系的小屋走进日租的行列，我不是全职房东，我有我钟爱的工作，可以说做日租是我的爱好，我希望用我的热情迎接每一个来承德游玩的游客。我不是叼着烟、走路六亲不认的房东，我是一个性格温柔办事爽快的房东，只想和您说，认识您很高兴，我和我的小屋欢迎您的到来，我和我的小屋一定会给您家的感觉！</a>
+                        </span>
+                    </div>
+                    <div id="fd_dianP4" style="display: block;">
+                        <div class="portrait">
+                            <img style="left: 265px;" src="https://image.xiaozhustatic2.com/22/19,0,5,29567,260,260,e0698628.jpg">
+                        </div>
+                        <span>大理海景别墅</span>
+                        <span>2019.06.16</span>
+                        <span class="comment_W">
+                            <a style="color: white;font-size: 12px;" href="#" target="_blank">13年夫妻蜜月之行来到了丽江，短短几天吸引住了我并且将我留住。在丽江经营一家客栈三年多给了我生活中想要的、也结交了五湖四海的朋友、最值得庆祝的是我大儿子的来到。孩子慢慢成长不得不回到城市教育和生活，很不舍的将客栈转掉回到了城市生活。时隔6年我夫妻二人带着我的小儿子又来到了大理，并且再次选择留在大理，慢慢融入这边的气候、生活节奏。每个人都有着自己向往的生活方式和规划的人生目标，我选择了我想要的生活方式。没有十全十美的人生选择自己所爱并爱自己所选择就足够了。</a>
+                        </span>
+                    </div>
+                    <ul class="cmt_ul left260">
+                        <li id="fd_li1" style="background-color: #F05B72" class="cmt_current"></li>
+                        <li id="fd_li2"></li>
+                        <li id="fd_li3"></li>
+                        <li id="fd_li4"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--底部内容-->
+    <div class="foot_v2">
+        <span class="foot_T">关注我们</span>
+        <div class="see_ul">
+            <a href="#" class="icon_l">
+                <span class="icon_wx"></span>
+            </a>
+            <a href="#" class="icon_r">
+                <span class="icon_wb"></span>
+            </a>
+        </div>
+        <div class="foot_ul">
+            <a href="#" class="tenant_guide">
+                <span class="tenant">房客指南</span>
+            </a>
+            <a href="#" class="landlord_guide">
+                <span class="landlord">房东指南</span>
+            </a>
+            <div class="aboutUs">
+                <span class="guide_T">关于我们</span>
+                <a href="#" target="_blank" class="little_specification">关于小猪</a>
+                <a href="#" target="_blank" class="little_specification">加入我们</a>
+                <a href="#" target="_blank" class="little_specification">联系我们</a>
+            </div>
+            <div class="netHelp">
+                <span class="guide_T">网站帮助</span>
+                <a href="#" target="_blank" class="little_specification">帮助中心</a>
+                <a href="#" target="_blank" class="little_specification">网站地图</a>
+            </div>
+            <div class="netAgreement">
+                <span class="guide_T">网站协议</span><br>
+                <a href="#" target="_blank" class="little_specification">服务协议</a>
+                <a href="#" target="_blank" class="little_specification">房东规则</a>
+                <a href="#" target="_blank" class="little_specification">房客规则</a>
+                <a href="#" target="_blank" class="little_specification">房源上线标准</a>
+                <a href="#" target="_blank" class="little_specification">隐私保护</a>
+                <a href="#" target="_blank" class="little_specification">版权声明</a>
+                <a href="#" target="_blank" class="little_specification">免责声明</a>
+                <a href="#" target="_blank" class="little_specification">知识产权声明</a>
+                <a href="#" target="_blank" class="little_specification">点评发布规则</a>
+                <a href="#" target="_blank" class="little_specification">日本标准住宅宿泊仲介业约款</a>
+            </div>
+            <!-- 在线客服-->
+            <div class="online_kf">
+                <span class="logindialog">
+                    <i></i>
+                    在线客服
+                </span>
+                <p>客服电话 130 - 2390 - 7312</p>
+                <p>客服邮箱 570944934@qq.com</p>
+            </div>
+        </div>
+        <dl class="link_dl">
+            <dt>城市导航</dt>
+            <dd>
+                <a target="_blank" href="#" class="little_specification">北京短租房</a>
+                <a target="_blank" href="#" class="little_specification">上海短租房</a>
+                <a target="_blank" href="#" class="little_specification">南京短租房</a>
+                <a target="_blank" href="#" class="little_specification">成都短租房</a>
+                <a target="_blank" href="#" class="little_specification">广州短租房</a>
+                <a target="_blank" href="#" class="little_specification">重庆短租房</a>
+                <a target="_blank" href="#" class="little_specification">武汉短租房</a>
+                <a target="_blank" href="#" class="little_specification">大连短租房</a>
+                <a target="_blank" href="#" class="little_specification">三亚短租房</a>
+                <a target="_blank" href="#" class="little_specification">丽江短租房</a>
+                <a target="_blank" href="#" class="little_specification">天津短租房</a>
+                <a target="_blank" href="#" class="little_specification">香港短租房</a>
+                <a target="_blank" href="#" class="little_specification">长沙短租房</a>
+                <a target="_blank" href="#" class="little_specification">无锡短租房</a>
+                <a target="_blank" href="#" class="little_specification">昆明短租房</a>
+                <a target="_blank" href="#" class="little_specification">济南短租房</a>
+                <a target="_blank" href="#" class="little_specification">厦门短租房</a>
+                <a target="_blank" href="#" class="little_specification">青岛短租房</a>
+                <a target="_blank" href="#" class="little_specification">郑州短租房</a>
+                <a target="_blank" href="#" class="little_specification">西安短租房</a>
+                <a target="_blank" href="#" class="little_specification">杭州短租房</a>
+                <a target="_blank" href="#" class="little_specification">深圳短租房</a>
+                <a target="_blank" href="#" class="little_specification">沈阳短租房</a>
+                <a target="_blank" href="#" class="little_specification">苏州短租房</a>
+            </dd>
+        </dl>
+        <div class="foot_btm">
+            京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp;
+            <a href="#" target="_blank">安全联盟</a>
+            &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp;
+            <a href="#" name="yingyezhizhao" target="_blank">营业执照号 103613118</a>
+            <span></span>
+        </div>
+        <div style="margin:0 auto;color:#bdc3c7;font-size: 12px;">
+            <a href="#" target="_blank" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <img src="img/govRecord_icon.png" style="width:20px;height: 20px;">
+                <p style="display:inline-block;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#bdc3c7;">
+                    京公网安备 11010802020380号</p>
+            </a>
+            违法和不良信息举报电话：4000107890（1号转6号） 举报邮箱：570944934@qq.com
+        </div>
+
+
+    </div>
+
+</div>
+<!--    浮动状态框-->
+<div class="suspension">
+    <ul class="suspension_lf">
+        <li class="sus_list1" id="im_chat_btn" title="在线消息">
+            <span style="position: relative"></span>
+        </li>
+        <li class="sus_list2" id="im_collection_btn" title="收藏">
+            <span></span>
+        </li>
+        <li class="sus_list3" id="im_noticeAndNotification_btn" title="提醒和系统消息">
+            <span></span>
+        </li>
+        <li class="sus_list4" id="im_feedBack_btn" title="反馈">
+            <span></span>
+        </li>
+        <li class="sus_list5" id="im_qrCode_btn" title="二维码">
+            <span></span>
+        </li>
+    </ul>
+    <div class="suspension_rg" id="to_go">
+        <a href="#top" id="return"></a>
+    </div>
+</div>
+</body>
+</html>
+
+
+
