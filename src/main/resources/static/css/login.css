@@ -1,0 +1,30 @@
+#allpage{
+    width:1600px;
+    height: 700px;
+    background-image: url("../image/loginimage.jpg");
+}
+#logo{
+    position: relative;
+    top: 50px;
+    left: 30px;
+    width: 128px;
+    height: 61px;
+    text-indent: -9999px;
+    display: block;
+    background-image: url("../image/logo.png");
+    float: left;
+}
+#wenzi{
+    float: left;
+    position: relative;
+    width: 200px;
+    height: 20px;
+    left: 50px;
+    top: 65px;
+}
+.r_main_l {
+    float: left;
+    width: 343px;
+    border-right: 1px solid #eee;
+    padding-right: 50px;
+}

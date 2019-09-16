@@ -3,8 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/base.css">
 </head>
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    var codd = null;
+
+    function chec(that) {
+        $.ajax({
+            url: "/insert",
+            type: 'post',
+            data: {
+                'userName': $("#userName").val(),
+                'password': $("#password").val()
+            },
+            success: function (data) {
+                if (codd = 1) {
+                    javascript:location.href = 'login.html';
+                }
+            }
+        })
+    }
+
+    function check(that) {
+        $("#help").text("");
+        $.ajax({
+            url: "/select",
+            type: 'post',
+            data: {'userName': $("#userName").val()},
+            success: function (data) {
+                if (data == "") {
+                    $("#help").text("用户名可以使用")
+                    codd = 1;
+                } else {
+                    $("#help").text("您的用户名已经存在");
+                    codd = 0;
+                }
+            }
+        })
+    }
+</script>
 <body>
-sdfasf
+<div id="allpage">
+    <div id="logo"></div>
+    <div id="wenzi">居住自由主义</div>
+    <div id="main">
+        <span style="font-size: 18px" id="zhucexiaozhu"> 注册小猪账号</span>
+        <ul>
+            <li>
+                <input id="userName" placeholder="请输入你的账号" onblur="check(this)">
+            </li>
+            <li>
+                <span id="help"></span>
+            </li>
+            <li>
+                <input id="password" type="password" placeholder="请输入你的密码">
+            </li>
+            <li>
+                <input type="button" value="登陆" id="butt" onclick="chec(this)">
+            </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

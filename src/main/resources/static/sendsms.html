@@ -28,6 +28,7 @@
                 code=all.verifyCode;
             },
             error: function () {
+
             }
         });
     }
@@ -42,10 +43,11 @@
             if($('#pass').val()=="")
             {
                 $('#pass').after("<span style='color: red' id='error1'>您的密码为空请重新输入</span>");
-                javascript:location.href='hello.html';
+                javascript:location.href='register.html';
             }
             else{
                 $('#pass').after("<span style='color: red' id='error2'>密码错误</span>");
+                javascript:location.href='register.html';
             }
             $('#pass').val("");
         }
