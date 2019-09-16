@@ -21,7 +21,7 @@ public class SmsCtrl {
          * @return
          * @throws ClientException
          */
-            @RequestMapping(value = "/smsXxs")
+        @RequestMapping(value = "/smsXxs")
         @ResponseBody
         public Map<String,Object> smsXxs(String phone, HttpServletRequest request) throws ClientException {
             Map<String,Object> map = new HashMap<>();
@@ -36,6 +36,9 @@ public class SmsCtrl {
             request.getSession().setAttribute("CodePhone",map);
             if( response.getCode().equals("OK")) {
                 map.put("isOk","OK");
+            }
+            else{
+                System.out.println(response.getCode());
             }
             return map;
         }
