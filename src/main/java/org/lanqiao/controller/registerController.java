@@ -30,4 +30,10 @@ public class registerController {
         return regandlogin.selectuser2(userName,password);
     }
 
+    @ResponseBody
+    @RequestMapping("/select3")
+    public User selectuser3(String  phone){
+        return regandlogin.selectuser3(phone);
+    }
+
 }

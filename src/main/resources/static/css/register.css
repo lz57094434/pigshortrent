@@ -22,42 +22,42 @@
     left: 50px;
     top: 65px;
 }
-#main{
-    position: relative;
-    width: 638px;
-    height: 408px;
-    padding: 30px;
-    background-color: white;
-    left: 400px;
-    top: 150px;
-}
-#zhucexiaozhu{
-    left: -30px;
-}
-#userName{
-    margin-top: 30px;
-    position: relative;
-    left: -50px;
-    width: 200px;
-    height: 30px;
-}
-#help{
-    position: relative;
-    left: 50px;
-    width: 200px;
-    height: 30px;
-}
-#password{
-    margin-top: 30px;
-    position: relative;
-    left: 50px;
-    width: 200px;
-    height: 30px;
-}
-#butt{
-    position: relative;
-    left: 50px;
-    width: 100px;
-    height: 40px;
-    top: 30px;
-}
+/*#main{*/
+/*    position: relative;*/
+/*    width: 638px;*/
+/*    height: 408px;*/
+/*    padding: 30px;*/
+/*    background-color: white;*/
+/*    left: 400px;*/
+/*    top: 150px;*/
+/*}*/
+/*#zhucexiaozhu{*/
+/*    left: -30px;*/
+/*}*/
+/*#userName{*/
+/*    margin-top: 30px;*/
+/*    position: relative;*/
+/*    left: -50px;*/
+/*    width: 200px;*/
+/*    height: 30px;*/
+/*}*/
+/*#help{*/
+/*    position: relative;*/
+/*    left: 50px;*/
+/*    width: 200px;*/
+/*    height: 30px;*/
+/*}*/
+/*#password{*/
+/*    margin-top: 30px;*/
+/*    position: relative;*/
+/*    left: 50px;*/
+/*    width: 200px;*/
+/*    height: 30px;*/
+/*}*/
+/*#butt{*/
+/*    position: relative;*/
+/*    left: 50px;*/
+/*    width: 100px;*/
+/*    height: 40px;*/
+/*    top: 30px;*/
+/*}*/

@@ -23,6 +23,11 @@ public class RegandloginImpl implements Regandlogin {
 
     @Override
     public User selectuser2(String userName, String password) {
-        return userMapper.selectuser2(userName,password);
+        return userMapper.selectuser2(userName, password);
+    }
+
+    @Override
+    public User selectuser3(String phone) {
+        return userMapper.selectuser3(phone);
     }
 }
