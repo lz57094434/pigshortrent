@@ -20,14 +20,30 @@
     <result column="latitude" property="latitude" jdbcType="REAL" />
     <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
+      <association property="comment" javaType="org.lanqiao.entity.Comment">
+          <id column="house_id" property="houseId"></id>
+          <result column="score" property="score"/>
+      </association>
   </resultMap>
+
   <sql id="Base_Column_List" >
     house_id, house_name, house_price, deposit, house_number, house_address, house_area, 
     house_model, live_nubmer, character_des, internal_sit, traffic_sit, surrounding_sit, 
     house_imgurl, longitude, latitude, publisher_id, user_id
   </sql>
+
+    <select id="OrderMessage" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.House">
+        select c.score,h.*
+        from comment c,house h
+        where c.house_id=h.house_id
+    </select>
+
+
+  <select id="getHouseMsg" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.House">
+    select * from house
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from house
     where house_id = #{houseId,jdbcType=INTEGER}

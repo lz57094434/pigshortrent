@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8">
+    <script src="js/vue.js" type="text/javascript"></script>
+    <title>vue分页</title>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body id="app-body">
+
+<div class="pagetation_info clearfix">
+    <ul class="pagetation_box">
+           
+        <li class="firstPage" @click=" page.currentpage = 0 "><a href="javascript:;">首页</a></li>
+           
+        <li class="prev" v-show=" page.currentpage > 0 " @click=" page.currentpage-- "><a href="javascript:;">&lt;</a>
+        </li>
+           
+        <li v-for="d in page.totalpage" @click=" page.currentpage = $index "
+            :class=" page.currentpage == $index ? 'active' : '' "><a href="javascript:;">{{$index + 1}}</a></li>
+           
+        <li class="next" v-show=" page.currentpage < page.totalpage - 1 " @click=" page.currentpage++ "><a
+                href="javascript:;">&gt;</a></li>
+           
+        <li class="lastPage" @click=" page.currentpage = page.totalpage - 1 "><a href="javascript:;">尾页</a></li>
+    </ul>
+    <div class="num_total">
+            共 <span>{{page.totalrecord}}</span> 条信息，共 <span>{{page.totalpage}}</span> 页
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: "#app-body",
+        data: {
+            "page": {
+                "totalrecord": 100,
+                "currentpage": 0,
+                "pagesize": 20,
+                "totalpage": 5,
+            },
+        },
+        watch: {
+            "page.currentpage": function (val) {
+                var _this = this;
+                _this._getList();
+            },
+        },
+        methods: {
+            _getList: function () {
+            }
+        },
+        ready: function () {
+            var _this = this;
+        }
+    });
+</script>
+
+</body>
+
+</html>

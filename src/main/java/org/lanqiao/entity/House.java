@@ -1,5 +1,7 @@
 package org.lanqiao.entity;
 
+import io.lettuce.core.dynamic.annotation.Param;
+
 public class House {
     private Integer houseId;
 
@@ -36,6 +38,16 @@ public class House {
     private Integer publisherId;
 
     private Integer userId;
+
+    private Comment comment;
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
 
     public Integer getHouseId() {
         return houseId;
@@ -179,5 +191,30 @@ public class House {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "houseId=" + houseId +
+                ", houseName='" + houseName + '\'' +
+                ", housePrice=" + housePrice +
+                ", deposit=" + deposit +
+                ", houseNumber=" + houseNumber +
+                ", houseAddress='" + houseAddress + '\'' +
+                ", houseArea='" + houseArea + '\'' +
+                ", houseModel='" + houseModel + '\'' +
+                ", liveNubmer=" + liveNubmer +
+                ", characterDes='" + characterDes + '\'' +
+                ", internalSit='" + internalSit + '\'' +
+                ", trafficSit='" + trafficSit + '\'' +
+                ", surroundingSit='" + surroundingSit + '\'' +
+                ", houseImgurl='" + houseImgurl + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", publisherId=" + publisherId +
+                ", userId=" + userId +
+                ", comment=" + comment +
+                '}';
     }
 }

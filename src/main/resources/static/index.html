@@ -9,11 +9,9 @@
         var arr = ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"];
         var ord = 0;//代表当前图片的序号，从0开始。
         var myTimer = null;
-
         function initUI() {
             $("#banner_con li:first").css({"backgroundColor": "red"});
         }
-
         function initEvent() {
             $("#banner_con li").click(function () {
                 goImg($("#banner_con li").index(this));
@@ -29,7 +27,6 @@
                 goImg(transord);
             });
         }
-
         //1、自动播放
         function autoPlay() {
             myTimer = setInterval(function () {
@@ -50,7 +47,6 @@
                 $img.eq(ord).animate({"opacity": 1}, 2000);
             }, 4000);
         }
-
         //3、跳转到指定的图片
         function goImg(transOrd) {
             //一、改变数据
@@ -69,7 +65,6 @@
             //让一张(ord)淡入下一张图片显示
             $img.eq(ord).animate({"opacity": 1}, 2000);
         }
-
         $(function () {
             //1、初始化界面
             initUI();
@@ -112,7 +107,6 @@
                 $(".phonePig_pop").hide();
             })
         })
-
         //锚点链接的平滑滚动
         $(function () {
             $("#return").click(function () {
@@ -528,7 +522,7 @@
                         </span>
                     </div>
                     <ul class="cmt_ul left260">
-                        <li id="fd_li1" style="background-color: #F05B72" class="cmt_current"></li>
+                        <li id="fd_li1" class="cmt_current"></li>
                         <li id="fd_li2"></li>
                         <li id="fd_li3"></li>
                         <li id="fd_li4"></li>

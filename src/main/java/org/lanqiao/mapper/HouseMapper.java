@@ -1,7 +1,16 @@
 package org.lanqiao.mapper;
 
-import org.lanqiao.entity.House;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import org.lanqiao.entity.House;
+import org.springframework.stereotype.Repository;
+
+
+import java.util.List;
+
+@Mapper
+@Repository
 public interface HouseMapper {
     int deleteByPrimaryKey(Integer houseId);
 
@@ -14,4 +23,9 @@ public interface HouseMapper {
     int updateByPrimaryKeySelective(House record);
 
     int updateByPrimaryKey(House record);
+
+    House getHouseMsg();
+
+    List<House> OrderMessage();
+
 }

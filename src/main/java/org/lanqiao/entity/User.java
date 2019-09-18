@@ -1,8 +1,9 @@
 package org.lanqiao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private Integer userId;
 
     private String userName;
@@ -26,6 +27,15 @@ public class User {
     private String work;
 
     private String userNote;
+
+    public User(Integer userId, String userName, String password){
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public User(){
+    }
 
     public Integer getUserId() {
         return userId;
@@ -121,5 +131,23 @@ public class User {
 
     public void setUserNote(String userNote) {
         this.userNote = userNote == null ? null : userNote.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", realName='" + realName + '\'' +
+                ", cardId='" + cardId + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday=" + birthday +
+                ", userAddress='" + userAddress + '\'' +
+                ", work='" + work + '\'' +
+                ", userNote='" + userNote + '\'' +
+                '}';
     }
 }
