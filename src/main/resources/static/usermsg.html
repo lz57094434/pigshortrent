@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/usermsg.css" type="text/css">
 <script src="js/jquery-3.4.1.js"></script>
 <script>
-    var userId = 1;
+    var userId = 2;
     var username;
     var password;
     var phone;
@@ -23,7 +23,7 @@
             $.ajax({
                 url: "/s",
                 type: "post",
-                data: {"userId": 1},
+                data: {"userId": 2},
                 dataType: "json",
                 success: function (data) {
                     $("#uy_name").val(data.userName);
