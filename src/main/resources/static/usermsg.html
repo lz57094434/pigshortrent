@@ -7,24 +7,17 @@
 <link rel="stylesheet" href="css/usermsg.css" type="text/css">
 <script src="js/jquery-3.4.1.js"></script>
 <script>
-$(function () {
-    $("#center #b").click(function() {
-        //提交数据
-        var userName = $("input[name='c']").val();
-
-        if(){
-            $.ajax({
-                type: "post",
-                url: "http://localhost:8080/register",
-                dataType: "json",
-                data: {
-
-                }
-            })}else{
-            alert("请正确填写信息")
-        }
-    });
-})
+    $(function () {
+        $("input[name='t']").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:8080/usermsg",
+                    dataType: "json",
+                    data: {
+                    }
+                })
+        });
+    })
 </script>
 <body>
 <div id="top"></div>
@@ -34,30 +27,112 @@ $(function () {
     <div id="cent3">
         <div id="index">
             <ul>
-                <li><div class="i_i"><a>个人资料</a></div></li>
+                <li>
+                    <div class="i_i"><a>个人资料</a></div>
+                </li>
             </ul>
-            </div>
+        </div>
         <div id="msg_main">
             <form method="post">
-            <div class="l_t" >基本信息</div>
-            <div class="m"><div class="g">用户名:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:0.5px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">密码:</div><div class="a_msg"></div><div class="i"><input name="c" type="password" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">手机号码:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">邮箱:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">出生日期:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">地址:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="l_t">个人信息</div><div class="note">仅用于必要的安全环节，其他情况我们将严格为您保密</div>
-            <div class="m"><div class="g">真实姓名:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">身份证:</div><div class="a_msg"></div><div class="i"><input name="c" type="text" style="width:200px;height:20px;border:1px solid #666666;"><input type="button" value="修改" style="background-color: #ffffff;border: 0" ></div></div>
-            <div class="m"><div class="g">性别:</div><div class="i"><input name="c" type="radio" value="" style="width: 40px">男<input name="c" type="radio" value="" style="width: 40px">女</div></div>
+                <div class="l_t">基本信息</div>
+                <div class="m">
+                    <div class="g">用户名:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_name" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                        <input name="t" type="button" value="修改" style="background-color: #ffffff;border: 0"></div>
+                </div>
+                <div class="m">
+                    <div class="g">密码:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_pass" type="password"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">手机号码:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_tell" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">邮箱:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_email" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">出生日期:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_birth" type="date"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">地址:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_address" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="l_t">个人信息</div>
+                <div class="note">仅用于必要的安全环节，其他情况我们将严格为您保密</div>
+                <div class="m">
+                    <div class="g">真实姓名:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_rail" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">身份证:</div>
+                    <div class="a_msg"></div>
+                    <div class="i"><input name="u_card" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
+                                                                                                           value="修改"
+                                                                                                           style="background-color: #ffffff;border: 0">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">性别:</div>
+                    <div class="i"><input name="u_sex" type="radio" value="" style="width: 40px">男<input name="c"
+                                                                                                     type="radio"
+                                                                                                     value=""
+                                                                                                     style="width: 40px">女
+                    </div>
+                </div>
             </form>
         </div>
     </div>
     <div id="foot">
 
-        <div class="foot_btm">京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp; <a  |="" name="mt8SMvYyRDI92b06nuDs8dPFapllCJYidqhM1WlOoGRZ9DWpbo" rel="nofollow" target="_blank">安全联盟</a> &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp; <a  |="" name="yingyezhizhao" rel="nofollow" target="_blank">营业执照号 103613118</a> <span style="display:none">  &nbsp;&nbsp; 地址：北京市海淀区知春路56号   &nbsp;&nbsp;电话：010-62961978</span>
+        <div class="foot_btm">京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp; <a |=""
+                                                                                             name="mt8SMvYyRDI92b06nuDs8dPFapllCJYidqhM1WlOoGRZ9DWpbo"
+                                                                                             rel="nofollow"
+                                                                                             target="_blank">安全联盟</a>
+            &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp; <a |="" name="yingyezhizhao" rel="nofollow" target="_blank">营业执照号
+                103613118</a> <span
+                    style="display:none">  &nbsp;&nbsp; 地址：北京市海淀区知春路56号   &nbsp;&nbsp;电话：010-62961978</span>
             <div style="margin:0 auto;color:#bdc3c7;">
-                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020380" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="img/govRecord_icon.png"><p style="display:inline-block;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#bdc3c7;">京公网安备 11010802020380号</p></a>
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020380"
+                   style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
+                        src="img/govRecord_icon.png">
+                    <p style="display:inline-block;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#bdc3c7;">
+                        京公网安备 11010802020380号</p></a>
                 &nbsp;&nbsp; 违法和不良信息举报电话：4000107890（1号转6号） &nbsp;&nbsp; 举报邮箱：jubao@xiaozhu.com
             </div>
         </div>

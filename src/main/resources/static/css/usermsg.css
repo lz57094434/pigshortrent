@@ -3,7 +3,7 @@
 }
 body{
     width: 1366px;
-    height: 1000px;
+    height: 700px;
     font: normal 14px/22px "Microsoft YaHei";
 }
 ul{
@@ -97,7 +97,7 @@ ul li{
 #foot{
     float: left;
     width: 1004px;
-    height: 200px;
+    height: 100px;
 }
 
 .foot_btm {
@@ -119,6 +119,7 @@ ul li{
 .note{
     float: left;
     font-size: small;
+    margin: 4px 0 0 0 ;
     width: 600px;
     color: #959ea7;
 }
