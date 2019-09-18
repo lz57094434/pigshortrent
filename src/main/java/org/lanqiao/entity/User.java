@@ -1,5 +1,9 @@
 package org.lanqiao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class User {
@@ -18,7 +22,7 @@ public class User {
     private String cardId;
 
     private String sex;
-
+    @DateTimeFormat (pattern= "yyyy-MM-dd")
     private Date birthday;
 
     private String userAddress;

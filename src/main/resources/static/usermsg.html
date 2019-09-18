@@ -7,15 +7,105 @@
 <link rel="stylesheet" href="css/usermsg.css" type="text/css">
 <script src="js/jquery-3.4.1.js"></script>
 <script>
+    var userId = 1;
+    var username;
+    var password;
+    var phone;
+    var email;
+    var realName;
+    var cardId;
+    var birthday;
+    var userAddress;
+    var u_sex;
     $(function () {
-        $("input[name='t']").click(function () {
-                $.ajax({
-                    type: "post",
-                    url: "http://localhost:8080/usermsg",
-                    dataType: "json",
-                    data: {
+        //查询个人信息
+        $(".i_i").click(function () {
+            $.ajax({
+                url: "/s",
+                type: "post",
+                data: {"userId": 1},
+                dataType: "json",
+                success: function (data) {
+                    $("#uy_name").val(data.userName);
+                    $("#uy_pass").val(data.password);
+                    $("#uy_tell").val(data.phone);
+                    $("#uy_email").val(data.email);
+                    $("#uy_rail").val(data.realName);
+                    $("#uy_card").val(data.cardId);
+                    $("#uy_sex").val(data.sex);
+                    $("#uy_birth").val(data.birthday);
+                    $("#uy_address").val(data.userAddress);
+
+                    if ($("input[name='u_name']").val() == "") {
+                        username = data.userName;
+                    } else {
+                        username = $("input[name='u_name']").val();
                     }
-                })
+
+                    if ($("input[name='u_pass']").val() == "") {
+                        password = data.password;
+                    } else {
+                        password = $("input[name='u_pass']").val();
+                    }
+                    if ($("input[name='u_tell']").val() == "") {
+                        phone = data.phone;
+                    } else {
+                        phone = $("input[name='u_tell']").val();
+                    }
+                    if ($("input[name='u_email']").val() == "") {
+                        email = data.email;
+                    } else {
+                        email = $("input[name='u_email']").val();
+                    }
+                    if ($("input[name='u_rail']").val() == "") {
+                        realName = data.realName;
+                    } else {
+                        realName = $("input[name='u_rail']").val();
+                    }
+                    if ($("input[name='u_card']").val() == "") {
+                        cardId = data.cardId;
+                    } else {
+                        cardId = $("input[name='u_card']").val();
+                    }
+                    if ($("input[name='u_address']").val() == "") {
+                        userAddress = data.userAddress;
+                    } else {
+                        userAddress = $("input[name='u_address']").val();
+                    }
+                    if ($("input[name='u_birth']").val() == "") {
+                        birthday = data.birthday;
+                    } else {
+                        birthday = $("input[name='u_birth']").val();
+                    }
+                    if ($("input[name='u_sex']").val() == "") {
+                        u_sex = data.sex;
+                    } else {
+                        u_sex = $("input[name='u_sex']").val();
+                    }
+                }
+            })
+        })
+
+        //更新
+        $("input[name='t']").click(function () {
+            username = $("input[name='u_name']").val();
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8080/usermsg",
+                dataType: "json",
+                data: {
+                    "userName": username,
+                    "userId": userId,
+                    "sex": u_sex,
+                    "password": password,
+                    "phone": phone,
+                    "email": email,
+                    "realName": realName,
+                    "cardId": cardId,
+                    "birthday": birthday,
+                    "userAddress": userAddress
+                }
+            })
         });
     })
 </script>
@@ -37,82 +127,92 @@
                 <div class="l_t">基本信息</div>
                 <div class="m">
                     <div class="g">用户名:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_name" style="width: 130px;border: 0">
                     <div class="i"><input name="u_name" type="text"
                                           style="width:200px;height:20px;border:1px solid #666666;">
-                        <input name="t" type="button" value="修改" style="background-color: #ffffff;border: 0"></div>
+                        <input name="t" type="button" value="保存" style="background-color: #ffffff;border: 0"></div>
                 </div>
                 <div class="m">
                     <div class="g">密码:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_pass" style="width: 130px;border: 0">
                     <div class="i"><input name="u_pass" type="password"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;"> <input
+                            type="button"
+                            value="修改"
+                            style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">手机号码:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_tell" style="width: 130px;border: 0">
                     <div class="i"><input name="u_tell" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;"> <input
+                            type="button"
+                            value="修改"
+                            style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">邮箱:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_email" style="width: 130px;border: 0">
                     <div class="i"><input name="u_email" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;"> <input
+                            type="button"
+                            value="修改"
+                            style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">出生日期:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_birth" style="width: 130px;border: 0">
                     <div class="i"><input name="u_birth" type="date"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">地址:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_address" style="width: 130px;border: 0">
                     <div class="i"><input name="u_address" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;"> <input
+                            type="button"
+                            value="修改"
+                            style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
                 <div class="l_t">个人信息</div>
                 <div class="note">仅用于必要的安全环节，其他情况我们将严格为您保密</div>
                 <div class="m">
                     <div class="g">真实姓名:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_rail" style="width: 130px;border: 0">
                     <div class="i"><input name="u_rail" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;"> <input
+                            type="button"
+                            value="修改"
+                            style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">身份证:</div>
-                    <div class="a_msg"></div>
+                    <input type="text" id="uy_card" style="width: 180px;border: 0">
                     <div class="i"><input name="u_card" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;"><input type="button"
-                                                                                                           value="修改"
-                                                                                                           style="background-color: #ffffff;border: 0">
+                                          style="width:200px;height:20px;border:1px solid #666666;"> <input
+                            type="button"
+                            value="修改"
+                            style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">性别:</div>
-                    <div class="i"><input name="u_sex" type="radio" value="" style="width: 40px">男<input name="c"
-                                                                                                     type="radio"
-                                                                                                     value=""
-                                                                                                     style="width: 40px">女
+                    <input type="text" id="uy_sex" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_sex" type="radio" value="" style="width: 40px">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            name="c"
+                            type="radio"
+                            value=""
+                            style="width: 40px">女
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                type="button"
+                                value="修改"
+                                style="background-color: #ffffff;border: 0">
                     </div>
                 </div>
             </form>
