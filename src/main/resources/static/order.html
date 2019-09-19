@@ -16,56 +16,6 @@
                     houseInfo: [],
                 },
             });
-            //分页
-            var FenYe = new Vue({
-                el: "#fenYe",
-                data: {
-                    page: 4,//总页数
-                    pageNum: 1,//当前页数
-                    fenYes: [],//分几页
-                },
-                methods: {
-                    nextPage: function () {
-                        if (FenYe.pageNum == FenYe.page) {
-                            alert("当前是最后一页");
-                        } else {
-                            FenYe.pageNum++;
-
-                            //    留白写方法名
-                            MessagesPage();
-                        }
-                    },
-                    perPage: function () {
-                        if (FenYe.pageNum == 1) {
-                            alert("当前为第一页");
-                        } else {
-                            FenYe.pageNum--;
-                            //    留白写方法名
-                            MessagesPage()
-                        }
-                    },
-                    fenYePage: function (index) {
-                        FenYe.pageNum = index + 1;
-                        //    留白写方法名
-                        MessagesPage();
-                    },
-                    fenYeJump: function () {
-                        if (FenYe.pageNum > FenYe.page) {
-                            alert("超过最大页数");
-                            FenYe.pageNum = FenYe.page;
-                        }
-                        //    留白写方法名
-                        MessagesPage();
-                    }
-                }
-            })
-            //评分
-            var Score = new Vue({
-                el: ".star_title",
-                data: {
-                    score: [],
-                }
-            })
             $(function () {
                 //插入数据
                 $("input[type='submit']").click(function () {
@@ -83,20 +33,74 @@
                 })
                 MessagesPage();
             });
-
+            //分页
+            var FenYe = new Vue({
+                el: "#fenye",
+                data: {
+                    // infos:[],//显示订单信息
+                    page: 4,//总页数
+                    pageNum: 1,//当前页数
+                    fenYes: [],//从1排到总页数
+                },
+                methods: {
+                    nextPage: function () {
+                        if (FenYe.pageNum == FenYe.page) {
+                            alert("当前是最后一页");
+                        } else {
+                            FenYe.pageNum++;
+                            //    留白写方法名
+                            MessagesPage();
+                        }
+                    },
+                    perPage: function () {
+                        if (FenYe.pageNum == 1) {
+                            alert("当前为第一页");
+                        } else {
+                            FenYe.pageNum--;
+                            //    留白写方法名
+                            MessagesPage()
+                        }
+                    },
+                    fenyePage: function (index) {
+                        FenYe.pageNum = index + 1;
+                        //    留白写方法名
+                        MessagesPage();
+                    },
+                    fenYeJump: function () {
+                        if (FenYe.pageNum > FenYe.page) {
+                            alert("超过最大页数");
+                            FenYe.pageNum = FenYe.page;
+                        }
+                        //    留白写方法名
+                        MessagesPage();
+                    }
+                }
+            })
             function MessagesPage() {
                 //分页
                 $.ajax({
                     url:"/page",
                     type: "post",
                     dataType: "json",
-                    data:{pageNum:FenYe.pageNum,pageSize:"1"},
+                    data:{pageNum:FenYe.pageNum,pageSize:1},
                     success:function (data) {
-                        // alert(1);
-                        FenYe.fenYes.splice(0, FenYe.fenYes.length);//清空分页数组
-                        var page = data.page;//得到总页数
-                        FenYe.page = page;
-                        console.log(data)
+                        // FenYe.fenYes.splice(0, FenYe.fenYes.length);//清空分页数组
+                        // var page = data.page;//得到总页数
+                        // FenYe.page = page;
+                        // for (var i=0;i<page;i++){
+                        //     FenYe.fenYes.push({page:i+1})
+                        // }
+                        Messages.houseInfo.splice(0, Messages.houseInfo.length)//清空数组
+                        var pageInfo = data.list;
+                        for (var i = 0; i < pageInfo.length; i++) {
+                            Messages.houseInfo.push({
+                                houseName: pageInfo[i].houseName, housePrice: pageInfo[i].housePrice,
+                                houseNumber: pageInfo[i].houseNumber, characterDes: pageInfo[i].characterDes,
+                                houseArea: pageInfo[i].houseArea, liveNumber: pageInfo[i].liveNumber
+                            });
+                        }
+                        // FenYe.fenYes.splice(0,FenYe.fenYes.length);
+
                     }
                 })
                 //商品信息
@@ -107,20 +111,20 @@
                     data: {"houseId": 1},
                     success: function (data) {
                         // alert(1)
-                        for (var i = 0; i < data.length; i++) {
-                            Messages.houseInfo.splice(0, Messages.houseInfo.length)//清空数组
-                            Messages.houseInfo.push({
-                                houseName: data[i].houseName, housePrice: data[i].housePrice,
-                                houseNumber: data[i].houseNumber, characterDes: data[i].characterDes,
-                                houseArea: data[i].houseArea, liveNumber: data[i].liveNumber
-                            })
-                            // alert(data[i].houseName)
-
-                        }
+                        // for (var i = 0; i < data.length; i++) {
+                        //     Messages.houseInfo.splice(0, Messages.houseInfo.length)//清空数组
+                        //     Messages.houseInfo.push({
+                        //         houseName: data[i].houseName, housePrice: data[i].housePrice,
+                        //         houseNumber: data[i].houseNumber, characterDes: data[i].characterDes,
+                        //         houseArea: data[i].houseArea, liveNumber: data[i].liveNumber
+                        //     })
+                        // }
                     }
                 })
             }
+
         })
+
     </script>
 </head>
 <body>
@@ -287,21 +291,31 @@
                         <div class="star_title">
                             <!--                            <h2>评分：{{score.score}}</h2>-->
                         </div>
-                        <ul class="main_star">
+                        <ul class="main_star" style="display: none;">
                             <li><h3>服务：⭐⭐⭐⭐</h3></li>
                             <li><h3>环境：⭐⭐⭐⭐</h3></li>
                             <li><h3>交通：⭐⭐⭐⭐</h3></li>
                             <li><h3>售后：⭐⭐⭐⭐</h3></li>
                         </ul>
+                        <ul class="main_star"  style="display: none;">
+                            <li><h3>服务：⭐⭐⭐</h3></li>
+                            <li><h3>环境：⭐⭐⭐⭐⭐</h3></li>
+                            <li><h3>交通：⭐⭐</h3></li>
+                            <li><h3>售后：⭐⭐⭐</h3></li>
+                        </ul>
+                        <ul class="main_star"  style="display: none;">
+                            <li><h3>服务：⭐⭐⭐⭐</h3></li>
+                            <li><h3>环境：⭐⭐⭐</h3></li>
+                            <li><h3>交通：⭐⭐⭐</h3></li>
+                            <li><h3>售后：⭐⭐⭐⭐</h3></li>
+                        </ul>
+                        <ul class="main_star"  style="display: block;">
+                            <li><h3>服务：⭐⭐⭐⭐</h3></li>
+                            <li><h3>环境：⭐⭐⭐</h3></li>
+                            <li><h3>交通：⭐⭐⭐</h3></li>
+                            <li><h3>售后：⭐⭐</h3></li>
+                        </ul>
                     </div>
-                    <!--                                        <div class="people_review" id="getMsg">-->
-                    <!--                                            <div class="people_review_top"><span>楼层：{{commentId}}#</span></div>-->
-                    <!--                                            <div class="people_review_main">-->
-                    <!--                                                <span>{{message}}</span>-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="people_review_down"><span>发表时间：{{commentDate}}</span></div>-->
-                    <!--                                        </div>-->
-
 
                     <form>
                         <div class="pingLun">
@@ -320,13 +334,14 @@
     </div>
     <!--    分页-->
     <div class="page" id="app-body">
-        <div id="fenYe">
+        <div id="fenye">
             <button @click="perPage">上一页</button>
-            <a>{{fenye.page}}</a>
-            <button>下一页</button>
+            <a v-for="fenYe in fenYe">{{fenYe}}</a>
+            <button @click="nextPage">下一页</button>
             <span>共{{page}}页</span>
-            <span>到第<input type="text" size="1px">页</span><input type="button" value="确定">
+            <span>到第<input type="text" size="1px">页</span><input type="button" value="确定" @click="">
         </div>
+
     </div>
     <!--footer-->
     <div class="footer mg_center">
