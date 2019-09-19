@@ -9,7 +9,6 @@ file:
     path: D:/upload
 
 
-
 mybatis:
 #  mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: org.lanqiao.entity

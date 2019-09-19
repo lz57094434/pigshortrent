@@ -6,15 +6,14 @@
 </head>
 <link href="css/mm.css" rel="stylesheet">
 <script src="js/jquery-3.4.1.js"></script>
-<!--<script src="js/jquery.ui.widget.js"></script>-->
-<!--<script src="js/jquery.iframe-transport.js"></script>-->
-<!--<script src="js/jquery.fileupload.js"></script>-->
-<!--<script src="js/jquery.fileupload-process.js"></script>-->
-<!--<script src="js/jquery.fileupload-validate.js"></script>-->
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script>
+<script src="js/jquery.fileupload-process.js"></script>
+<script src="js/jquery.fileupload-validate.js"></script>
 <script src="js/img.js"></script>
 <script>
     $(function() {
-
         $("input[name='button']").click(function () {
             // alert($("input[name=housename]").val());
             $.ajax({
@@ -31,13 +30,14 @@
                     "surroundingSit":$("input[name=surrounding_sit]").val()
                     ,"deposit":$("input[name=house_deposit]").val(),
                     "houseModel":$("input[name=house_model]").val(),
-                    "houseAddress":$("input[name=house_address]").val()+$("input[name=address_three]").val()
-                      },
+                    "houseAddress":$("input[name=house_address]").val()+$("input[name=address_three]").val(),
+                    "latitude":$("input[name=latitude]").val(),"longitude":$("input[name=longitude]").val()
+                     "houseImgUrl":$("input[name=logo]").val()},
                 dataType: "Json",
                 success:function(data) {
                 }
             })
-
+           window.location="";
         });
         // $("input[name=butt]").click(function () {
         //     alert($("input[name=file]").val());
@@ -51,6 +51,19 @@
         //     }
         // })
         // })
+        $("input[name=butto]").click(function () {
+            $.ajax({
+                type: "post",
+                url: "/insert",
+                data: {"houseImgUrl":$("input[name=file]").val()},
+                contentType: false, // 注意这里应设为false
+                processData: false,    //false
+                cache: false,    //缓存
+                success: function(data){
+                    console.log(data);
+                }
+            })
+        })
 
 
     })
@@ -97,7 +110,7 @@
     <span class="input-size">详细地址:</span>
     <input type="text" name="address_three" value="" class="input_mod" placeholder="具体至门牌">
     </div>
-
+<!---->
     <div id="kind-house">
         <span class="input-size">房屋类型:</span>
         <input type="text" name="house_model" value="" class="input_mod" placeholder="">
@@ -144,13 +157,21 @@
             <span class="input-size">房子押金:</span>
             <input type="text" name="house_deposit" value="" class="house-name">元
         </div>
+        <div class="kind">
+            <span class="input-size">经度:</span>
+            <input type="text" name="longitude" value="" class="house-name">
+        </div>
+        <div class="kind">
+            <span class="input-size">纬度:</span>
+            <input type="text" name="latitude" value="" class="house-name">
+        </div>
         <input type="button" name="button" value="提交">
     </form>
-    <div class="file-box">
-        <img id="preview" />
-        <input type="text" id="imgfield" class="txt" placeholder="预览">
-        <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
-    </div>
+
+    <input type="hidden" name="logo1" value="" >
+    logo:<input type="file" class="fileupload" name="logo" multiple="multiple">
+    <button id="logo">上传</button> <div id="image">预览：</div>
+
 </div>
 <div class="snow-container">
     <div class="snow foreground"></div>

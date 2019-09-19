@@ -29,10 +29,17 @@ public class HouseController {
     public int insertHouse(House house){
         return houseServiceImpl.houseInsert(house);
    }
-//   @RequestMapping("/Imginsert")
-//    public int insertImg(HouseImg houseImg){
-//        return  houseServiceImpl.sendImg(houseImg);
-//   }
+   @RequestMapping("/Imginsert")
+    public int insertImg(HouseImg houseImg){
+        return  houseServiceImpl.sendImg(houseImg);
+   }
+    @Value("${file.location.path}")
+    private String fileLocation;
+    @RequestMapping("/insert")
+    public String insert( MultipartFile file){
+        String url = FileUpload.upload(file,"/upload",fileLocation);
+        return url;
+    }
     @RequestMapping("/payInsert")
     public int insertPay(Pay pay){
        return houseServiceImpl.payInsert(pay);

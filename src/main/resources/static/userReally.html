@@ -29,7 +29,15 @@
                     success: function (data) {
                     }
                 })
+            window.location.href="mm.html";
+        });
+        $.ajax({
+            url:"/s",
+            type:"post",
+            dataType:"json",
+            success :
         })
+
           })
 </script>
 <body>
@@ -167,5 +175,13 @@
         <a target="_blank" href="#">苏州短租房</a>
     </dd>
 </dl>
+<div class="snow-container">
+    <div class="snow foreground"></div>
+    <div class="snow foreground layered"></div>
+    <div class="snow middleground"></div>
+    <div class="snow middleground layered"></div>
+    <div class="snow background"></div>
+    <div class="snow background layered"></div>
+</div>
 </body>
 </html>
