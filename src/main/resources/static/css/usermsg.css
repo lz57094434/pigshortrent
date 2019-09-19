@@ -20,7 +20,7 @@ ul li {
     width: 1366px;
     height: 57px;
     float: left;
-    background-color: black;
+    background: linear-gradient(black,black);
     font: 12px/1.5 Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -160,4 +160,74 @@ ul li {
     padding-right: 19px;
     border-radius: 13px;
     border-color: gray;
+}
+
+
+
+.top-one{
+    margin-left: 150px;
+}
+.logo_black {
+    background: url(../img/pig.png)no-repeat;
+}
+.logo_v2 {
+    width: 120px;
+    height: 40px;
+    display: block;
+    float: left;
+    margin-top: 8px;
+}
+.slogan {
+    background: url(../img/luge.png) no-repeat;
+    display: inline-block;
+    float: left;
+    height: 40px;
+    margin-top: 8px;
+    width: 140px;
+}
+.nav{
+    float: right;
+margin-top: 13px;
+    width: 600px;
+}
+.nav li {
+    color: white;
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+}
+.nav li a{
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+.line_index {
+    background: url(//jci.xiaozhustatic2.com/e19080801/images/icon_header.png) no-repeat;
+}
+.line_index {
+    background-position: -265px -60px;
+    height: 21px;
+    width: 1px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.nav li .btn_public {
+    width: 126px;
+    height: 31px;
+    display: inline-block;
+}
+.nav li .btn_public {
+    background: url(../img/fabu.png) no-repeat;
+}
+
+.nav li a.iphone {
+    background-position: 0 -125px;
+    padding-left: 24px;
+    margin-left: 10px;
+}
+.nav li a.icon {
+    background:
+        /*url(//jci.xiaozhustatic2.com/e19080801/images/icon_head.png);*/
+            url(../img/phone.png)no-repeat;
 }

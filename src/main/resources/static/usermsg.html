@@ -20,24 +20,24 @@
     $(function () {
         //查询个人信息
         // $(".i_i").click(function () {
-            $.ajax({
-                url: "/s",
-                type: "post",
-                data: {"userId": 3},
-                dataType: "json",
-                success: function (data) {
-                    $("#uy_name").val(data.userName);
-                    $("#uy_pass").val(data.password);
-                    $("#uy_tell").val(data.phone);
-                    $("#uy_email").val(data.email);
-                    $("#uy_rail").val(data.realName);
-                    $("#uy_card").val(data.cardId);
-                    $("#uy_sex").val(data.sex);
-                    $("#uy_birth").val(data.birthday);
-                    $("#uy_address").val(data.userAddress);
+        $.ajax({
+            url: "/s",
+            type: "post",
+            data: {"userId": 3},
+            dataType: "json",
+            success: function (data) {
+                $("#uy_name").val(data.userName);
+                $("#uy_pass").val(data.password);
+                $("#uy_tell").val(data.phone);
+                $("#uy_email").val(data.email);
+                $("#uy_rail").val(data.realName);
+                $("#uy_card").val(data.cardId);
+                $("#uy_sex").val(data.sex);
+                $("#uy_birth").val(data.birthday);
+                $("#uy_address").val(data.userAddress);
+                $("#qwqw").val(data.userName);
 
-
-                }
+            }
             // })
         })
 
@@ -54,7 +54,7 @@
                 password = $("input[name='u_pass']").val();
             }
             if ($("input[name='u_tell']").val() == "") {
-                phone =  $("#uy_tell").val();
+                phone = $("#uy_tell").val();
             } else {
                 phone = $("input[name='u_tell']").val();
             }
@@ -105,15 +105,45 @@
                     "birthday": birthday,
                     "userAddress": userAddress
                 },
-                success:function () {
-                    window.location.href="http://localhost:8080/usermsg.html"
+                success: function () {
+                    window.location.href = "http://localhost:8080/usermsg.html"
                 }
             })
         });
     })
 </script>
 <body>
-<div id="top"></div>
+<div id="top">
+    <div class="top">
+        <div class="top-one">
+            <a class="logo_v2 logo_black" href="#"></a>
+            <span class="slogan"></span>
+
+            <ul class="nav">
+                <li>
+                    <a id="qwqw" href="#">232</a>
+                </li>
+                <li>
+                    <span class="line_index"></span></li>
+                <li>
+                    <a href="#">我的订单</a>
+                </li>
+                <li>
+                    <span class="line_index"></span>
+                </li>
+                <li>
+                    <a class="active" href="#">短租指南</a>
+                </li>
+                <li>
+                    <a href="#" class="icon iphone">手机小猪</a>
+                </li>
+                <li>
+                    <a id="Pub_Btn" class="btn_public " href="#"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div id="main">
     <div id="cent1"><img src="img/img1.jpg"></div>
     <div id="cent2">我是房客>个人资料</div>
@@ -133,7 +163,7 @@
                     <input type="text" id="uy_name" style="width: 130px;border: 0">
                     <div class="i"><input name="u_name" type="text"
                                           style="width:200px;height:20px;border:1px solid #666666;">
-                        </div>
+                    </div>
                 </div>
                 <div class="m">
                     <div class="g">密码:</div>
