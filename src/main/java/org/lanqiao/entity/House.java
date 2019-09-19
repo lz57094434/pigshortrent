@@ -1,6 +1,5 @@
 package org.lanqiao.entity;
 
-import io.lettuce.core.dynamic.annotation.Param;
 
 public class House {
     private Integer houseId;

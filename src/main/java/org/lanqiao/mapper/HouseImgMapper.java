@@ -19,5 +19,4 @@ public interface HouseImgMapper {
 
     int updateByPrimaryKey(HouseImg record);
 
-    HouseImg getHouseImg(Integer houseId);
 }

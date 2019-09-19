@@ -24,7 +24,6 @@ public interface HouseMapper {
 
     int updateByPrimaryKey(House record);
 
-    House getHouseMsg();
 
     List<House> OrderMessage();
 
