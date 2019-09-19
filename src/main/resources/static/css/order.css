@@ -293,8 +293,8 @@ ul, ol {
 .page{
     /*float: left;*/
     position: relative;
-    bottom: 400px;
-    right: 300px;
+    bottom: 420px;
+    right: 650px;
 }
 
 .footer {

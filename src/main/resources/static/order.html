@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/order.css">
-    <link rel="stylesheet" href="css/vueFenye.css">
+<!--    <link rel="stylesheet" href="css/vueFenye.css">-->
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/vue.js"></script>
     <script>
@@ -335,11 +335,12 @@
     <!--    分页-->
     <div class="page" id="app-body">
         <div id="fenye">
+            <span>共{{page}}页</span>
             <button @click="perPage">上一页</button>
             <a v-for="fenYe in fenYe">{{fenYe}}</a>
             <button @click="nextPage">下一页</button>
-            <span>共{{page}}页</span>
-            <span>到第<input type="text" size="1px">页</span><input type="button" value="确定" @click="">
+
+<!--            <span>到第<input type="text" size="1px">页</span><input type="button" value="确定" @click="">-->
         </div>
 
     </div>
