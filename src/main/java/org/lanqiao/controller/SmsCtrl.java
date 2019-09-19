@@ -1,19 +1,27 @@
 package org.lanqiao.controller;
 
+import com.alipay.api.AlipayApiException;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import org.lanqiao.Tool.CodeUtil;
 import org.lanqiao.Tool.SmsTool;
+import org.lanqiao.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 @Controller
 @RequestMapping("/sms")
 public class SmsCtrl {
+
+    @Autowired
+    OrderService orderService;
         /**
          * 发送短信
          * @param phone
@@ -42,6 +50,12 @@ public class SmsCtrl {
             }
             return map;
         }
+
+    @RequestMapping("/ali")
+    public void ali(HttpServletResponse response, HttpServletRequest request) throws IOException, AlipayApiException {
+        orderService.ali( response,request);
     }
+
+}
 
 
