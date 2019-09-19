@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/comment.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script rel="stylesheet" src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url:"/get",
+                type:"post",
+                data:{"houseId":1,"userId":1},
+                dataType:"json",
+                success: function (data) {
+                    for(var i=0;i<data.length;i++){
+                        $(".comment_list").append("<div class=\"comment_list_box\">\n" +
+                            "                <img class=\"head_picture\"  src=\"image/picture.png\">\n" +
+                            "                <div class=\"information\">\n" +
+                            "                    <h6 data-id=\"114144681700\">\n" +
+                            "                        <span class=\"col_pink\">" +
+                                             data[i].user.userName+
+                            "                        </span>入住时间：\n" +
+                            "                        <if> "+data[i].commentDate+"</if>\n" +
+                            "                    </h6>\n" +
+                                             data[i].message+
+                            "                </div>\n" +
+                            "            </div>");
+                    }
+                }
+
+            })
+        })
+    </script>
+    <!--<script>-->
+        <!--$(function () {-->
+            <!--$(".tab_other").click(function () {-->
+                <!--// $(".comment_list").remove();-->
+                <!--$.ajax({-->
+                    <!--url:"/get",-->
+                    <!--type:"post",-->
+                    <!--data:{"houseId":2,"userId":2},-->
+                    <!--dataType:"json",-->
+                    <!--success: function (data) {-->
+                        <!--alert(data);-->
+                        <!--for(var i=0;i<data.length;i++){-->
+                            <!--$(".comment_list").append("<div class=\"comment_list_box\">\n" +-->
+                                <!--"                <img class=\"head_picture\" lazy_src=\"finish\" title=\"o9雨过天晴\" alt=\"\" src=\"https://image.xiaozhustatic2.com/22/20,0,78,33450,132,132,3753fad1.jpg\">\n" +-->
+                                <!--"                <div class=\"information\">\n" +-->
+                                <!--"                    <h5 class=\"information_tit\">\n" +-->
+                                <!--"                        <a href=\"http://sz.xiaozhu.com/fangzi/8847474163.html\" target=\"_blank\">\n" +-->
+                                                            <!--data[i].house.houseName+-->
+                                <!--"                            \n" +-->
+                                <!--"                        </a>\n" +-->
+                                <!--"                    </h5>\n" +-->
+                                <!--"                    <h6 data-id=\"114144681700\">\n" +-->
+                                <!--"                        <span class=\"col_pink\"> "+-->
+                                                    <!--data[i].user.userName+-->
+                                                    <!--"</span>入住时间：\n" +-->
+                                <!--"                        <if>"+-->
+                                                    <!--data[i].comment_date+"" +-->
+                                <!--"                        </if>\n" +-->
+                                <!--"                    </h6>\n" +-->
+                                                    <!--data[i].message+"\n" +-->
+                                <!--"                </div>\n" +-->
+                                <!--"            </div>");-->
+                        <!--}-->
+                    <!--}-->
+
+                <!--})-->
+            <!--})-->
+        <!--})-->
+    <!--</script>-->
+</head>
+<body>
+<div class="comment">
+  <ul class="comment_tab">
+      <li class="tab_this">本房源点评(20)</li>
+      <!--<li class="tab_other">房东其他房源点评(15)</li>-->
+  </ul>
+    <div class="comment_box">
+        <div class="comment_score">
+                <div class="score_l">
+                    <span class="x_score">4.9<em class="all_score">/5分</em></span>
+                    <ul class="stars_box">
+                        <li class="stars_info"><img src="image/star.png"></li>
+                        <li class="stars_info "><img src="image/star.png"></li>
+                        <li class="stars_info "><img src="image/star.png"></li>
+                        <li class="stars_info "><img src="image/star.png"></li>
+                        <li class="stars_info"><img src="image/star.png"></li>
+                    </ul>
+                </div>
+                <ul class="score_details">
+                    <li><span>整洁卫生</span>4.9分</li>
+                    <li><span>描述相符</span>5分</li>
+                    <li><span>交通位置</span>5分</li>
+                    <li><span>安全程度</span>5分</li>
+                    <li><span>性价比</span>4.7分</li>
+                </ul>
+        </div>
+        <div class="comment_list">
+            <!--<div class="comment_list_box">-->
+                <!--<img lazy_src="finish"  src="image/picture.png">-->
+                <!--<div class="information">-->
+                    <!--<h5 class="information_tit">-->
+                        <!--<a href="http://sz.xiaozhu.com/fangzi/8847474163.html" target="_blank">-->
+                            <!--data[i].housr_name-->
+                        <!--</a>-->
+                    <!--</h5>-->
+                    <!--<h6 data-id="114144681700">-->
+                        <!--<span class="col_pink"> data[i].user_name</span>入住时间：-->
+                        <!--<if> data[i].comment_date</if>-->
+                    <!--</h6>-->
+                    <!--data[i].message-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

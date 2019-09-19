@@ -1,5 +1,6 @@
 package org.lanqiao.entity;
 
+import javax.validation.constraints.Email;
 import java.util.Date;
 
 public class User {
@@ -121,5 +122,23 @@ public class User {
 
     public void setUserNote(String userNote) {
         this.userNote = userNote == null ? null : userNote.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", realName='" + realName + '\'' +
+                ", cardId='" + cardId + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday=" + birthday +
+                ", userAddress='" + userAddress + '\'' +
+                ", work='" + work + '\'' +
+                ", userNote='" + userNote + '\'' +
+                '}';
     }
 }

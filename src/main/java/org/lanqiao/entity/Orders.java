@@ -3,6 +3,8 @@ package org.lanqiao.entity;
 import java.util.Date;
 
 public class Orders {
+    private User user;
+    private House house;
     private Integer ordersId;
 
     private Integer ordersPrice;
@@ -12,6 +14,22 @@ public class Orders {
     private Integer userId;
 
     private Integer houseId;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
 
     public Integer getOrdersId() {
         return ordersId;
@@ -51,5 +69,18 @@ public class Orders {
 
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "user=" + user +
+                ", house=" + house +
+                ", ordersId=" + ordersId +
+                ", ordersPrice=" + ordersPrice +
+                ", ordersDate=" + ordersDate +
+                ", userId=" + userId +
+                ", houseId=" + houseId +
+                '}';
     }
 }

@@ -7,16 +7,67 @@
     <result column="comment_date" property="commentDate" jdbcType="TIMESTAMP" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="house_id" property="houseId" jdbcType="INTEGER" />
+
+      <association property="user" javaType="org.lanqiao.entity.User">
+
+      <id column="user_id" property="userId" jdbcType="INTEGER" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="password" property="password" jdbcType="VARCHAR" />
+      <result column="phone" property="phone" jdbcType="VARCHAR" />
+      <result column="email" property="email" jdbcType="VARCHAR" />
+      <result column="real_name" property="realName" jdbcType="VARCHAR" />
+      <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+      <result column="sex" property="sex" jdbcType="VARCHAR" />
+      <result column="birthday" property="birthday" jdbcType="DATE" />
+      <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+      <result column="work" property="work" jdbcType="VARCHAR" />
+      <result column="user_note" property="userNote" jdbcType="VARCHAR" />
+      </association>
+
+      <association property="house" javaType="org.lanqiao.entity.House">
+
+          <id column="house_id" property="houseId" jdbcType="INTEGER" />
+          <result column="house_name" property="houseName" jdbcType="VARCHAR" />
+          <result column="house_price" property="housePrice" jdbcType="INTEGER" />
+          <result column="deposit" property="deposit" jdbcType="INTEGER" />
+          <result column="house_number" property="houseNumber" jdbcType="INTEGER" />
+          <result column="house_address" property="houseAddress" jdbcType="VARCHAR" />
+          <result column="house_area" property="houseArea" jdbcType="VARCHAR" />
+          <result column="house_model" property="houseModel" jdbcType="VARCHAR" />
+          <result column="live_nubmer" property="liveNubmer" jdbcType="INTEGER" />
+          <result column="character_des" property="characterDes" jdbcType="VARCHAR" />
+          <result column="internal_sit" property="internalSit" jdbcType="VARCHAR" />
+          <result column="traffic_sit" property="trafficSit" jdbcType="VARCHAR" />
+          <result column="surrounding_sit" property="surroundingSit" jdbcType="VARCHAR" />
+          <result column="house_imgurl" property="houseImgurl" jdbcType="VARCHAR" />
+          <result column="longitude" property="longitude" jdbcType="REAL" />
+          <result column="latitude" property="latitude" jdbcType="REAL" />
+          <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
+          <result column="user_id" property="userId" jdbcType="INTEGER" />
+      </association>
+
   </resultMap>
   <sql id="Base_Column_List" >
     comment_id, message, comment_date, user_id, house_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from comment
+    select * from comment
     where comment_id = #{commentId,jdbcType=INTEGER}
   </select>
+  <select id="getAllComment"  resultMap="BaseResultMap">
+    select * from comment c,user u, house h where u.user_id=c.user_id and h.house_id=c.house_id  and c.house_id=#{houseId}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from comment
     where comment_id = #{commentId,jdbcType=INTEGER}
@@ -27,6 +78,7 @@
     values (#{commentId,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, #{commentDate,jdbcType=TIMESTAMP}, 
       #{userId,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" parameterType="org.lanqiao.entity.Comment" >
     insert into comment
     <trim prefix="(" suffix=")" suffixOverrides="," >
