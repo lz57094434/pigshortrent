@@ -1,21 +1,8 @@
 package org.lanqiao.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.springframework.format.annotation.DateTimeFormat;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.Time;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.util.Date;
 

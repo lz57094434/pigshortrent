@@ -87,7 +87,8 @@
         })
 
         //更新
-        $(#chang).click(function () {
+        $("input[name='t']").click(function () {
+
             $.ajax({
                 type: "post",
                 url: "http://localhost:8080/usermsg",
@@ -129,7 +130,7 @@
                     <input type="text" id="uy_name" style="width: 130px;border: 0">
                     <div class="i"><input name="u_name" type="text"
                                           style="width:200px;height:20px;border:1px solid #666666;">
-                    </div>
+                        </div>
                 </div>
                 <div class="m">
                     <div class="g">密码:</div>
