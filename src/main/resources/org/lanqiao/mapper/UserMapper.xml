@@ -161,17 +161,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.User" >
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
+    set
       real_name = #{realName,jdbcType=VARCHAR},
-      card_id = #{cardId,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=DATE},
-      user_address = #{userAddress,jdbcType=VARCHAR},
-      work = #{work,jdbcType=VARCHAR},
-      user_note = #{userNote,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
+      card_id =  #{cardId,jdbcType=VARCHAR}
+    where user_id=#{userId,jdbcType=INTEGER}
   </update>
 </mapper>

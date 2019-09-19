@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>真实信息</title>
+</head>
+<script src="js/jquery-3.4.1.js" ></script>
+<link href="css/userReally.css" rel="stylesheet">
+<script>
+    $(function () {
+
+        $("#contactInfoBtn").click(function () {
+
+            $.ajax({
+                url: "/really",
+                data: {
+                    "userId": 1, "realName": $("input[name='name']").val(), "cardId": $("input[name='id_card']").val()
+                },
+                type: "post",
+                dataType: "Json",
+                success: function (data) {
+                }
+            }),
+                $.ajax({
+                    url: "/payInsert",
+                    data: {"payName": $("input[name=name]").val(), "payCount": $("input[name=pay_id]").val()},
+                    type: "post",
+                    dataType: "Json",
+                    success: function (data) {
+                    }
+                })
+        })
+          })
+</script>
+<body>
+<div class="top">
+    <div class="top-one">
+        <a class="logo_v2 logo_black" href="#"></a>
+        <span class="slogan"></span>
+        <ul class="nav">
+            <li>
+                <a href="#" >vl等待</a>
+            </li>
+            <li><span class="line_index"></span></li>
+            <li>
+                <a  href="#">我的订单</a>
+            </li>
+            <li>
+                <span class="line_index"></span>
+            </li>
+            <li>
+                <a class="active" href="#">短租指南</a>
+            </li>
+            <li>
+                <a href="#" class="icon iphone">手机小猪</a>
+            </li>
+            <li>
+                <a id="Pub_Btn" class="btn_public " href="#"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="second">
+<div class="second">
+        <div class="align">
+        <a href="#">
+            <img src="img/second.jpg">
+        </a>
+        </div>
+    </div>
+</div>
+<div class="trd">
+    <div class="publish_top">
+    <h2>在发布房间前，您还需要完善如下信息</h2>
+</div>
+    <div class="fom">
+<div class="fom-ine">
+    <h3 class="item_title">您需要填写真实姓名</h3>
+<div class="item_in">
+    <p class="item_info">填写身份信息有助于房客对您产生信任感，更好的让您接到订单。</p>
+</divc>
+    <form method="post" >
+    <div id="name">
+        <span class="input_title" >真实姓名</span>
+        <input type="text" name="name" value="" class="input_mod" placeholder="请输入真实姓名">
+</div>
+    <div id="id_card">
+        <span class="input_title ">身份证号</span>
+        <input type="text" name="id_card" value="" class="input_mod" placeholder="13位身份证号">
+    </div>
+        <div id="pay_id">
+           <span class="input_title ">支付宝账号</span>
+            <input type="text" name="pay_id" value="" class="input_mod" placeholder="支付宝号">
+            </div>
+    </form>
+    <a class="cn_btn">只支持中国大陆地区用户</a>
+</div>
+</div>
+    </div>
+    <input type="button" id="contactInfoBtn" value="保存并继续">
+</div>
+<div id="font">
+    <ul>
+        <li>
+            <a class="guide icon_fa" href="#" target="_blank">房客指南</a>
+        </li>
+        <li class="icon-d">
+            <a class="guide icon_fk" href="#" target="_blank">房东指南</a>
+        </li>
+        <li class="icon-a">
+            <span class="guide_T">关于我们</span>
+            <a href="#" target="_blank">关于小猪</a>
+            <a href="#" target="_blank">加入我们</a>
+            <a href="#" target="_blank">联系我们</a>
+        </li>
+        <li class="icon-a">
+            <a href="#" target="_blank">网站帮助</a>
+            <a href="#" target="_blank">帮助中心</a>
+            <a href="#" target="_blank">网站地图</a>
+        </li>
+        <li class="width_280">
+            <span class="guide_T">网站协议</span><br>
+            <a href="#" target="_blank">服务协议</a>
+            <a href="#" target="_blank">房东规则</a>
+            <a href="#" target="_blank">房客规则</a>
+            <a href="#" target="_blank">房源上线标准</a>
+            <a href="#" target="_blank">隐私保护</a>
+            <a href="#" target="_blank">版权声明</a>
+            <a href="#" target="_blank">免责声明</a>
+            <a href="#" target="_blank">知识产权声明</a>
+            <a href="#" target="_blank">点评发布规则</a>
+            <a href="#" target="_blank">日本标准住宅宿泊仲介业约款</a>
+        </li>
+        <li class="bigFont">
+            <span><a href="#">在线客服</a></span>
+            <p>客服电话  400 - 010 - 7890</p>
+            <p>客服邮箱  service@xiaozhu.com</p>
+        </li>
+    </ul>
+</div>
+<dl class="link_dl">
+    <dt>城市导航</dt>
+    <dd>
+        <a target="_blank" href="#">北京短租房</a>
+        <a target="_blank" href="#">上海短租房</a>
+        <a target="_blank" href="#">南京短租房</a>
+        <a target="_blank" href="#">成都短租房</a>
+        <a target="_blank" href="#">广州短租房</a>
+        <a target="_blank" href="#">重庆短租房</a>
+        <a target="_blank" href="#">武汉短租房</a>
+        <a target="_blank" href="#">大连短租房</a>
+        <a target="_blank" href="#">三亚短租房</a>
+        <a target="_blank" href="#">丽江短租房</a>
+        <a target="_blank" href="#">天津短租房</a>
+        <a target="_blank" href="#">香港短租房</a>
+        <a target="_blank" href="#">长沙短租房</a>
+        <a target="_blank" href="#">无锡短租房</a>
+        <a target="_blank" href="#">昆明短租房</a>
+        <a target="_blank" href="#">济南短租房</a>
+        <a target="_blank" href="#">厦门短租房</a>
+        <a target="_blank" href="#">青岛短租房</a>
+        <a target="_blank" href="#">郑州短租房</a>
+        <a target="_blank" href="#">西安短租房</a>
+        <a target="_blank" href="#">杭州短租房</a>
+        <a target="_blank" href="#">深圳短租房</a>
+        <a target="_blank" href="#">沈阳短租房</a>
+        <a target="_blank" href="#">苏州短租房</a>
+    </dd>
+</dl>
+</body>
+</html>

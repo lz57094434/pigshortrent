@@ -1,5 +1,8 @@
 package org.lanqiao.entity;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class House {
     private Integer houseId;
 
@@ -180,4 +183,5 @@ public class House {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
 }

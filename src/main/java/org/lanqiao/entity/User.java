@@ -1,5 +1,7 @@
 package org.lanqiao.entity;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class User {
@@ -12,9 +14,10 @@ public class User {
     private String phone;
 
     private String email;
-
+    @NotEmpty(message="用户名不能为空")
     private String realName;
-
+    @NotEmpty(message="身份证不能为空")
+    @Pattern(regexp = "^(\\d{18,18}|\\d{15,15}|(\\d{17,17}[x|X]))$", message = "身份证格式错误")
     private String cardId;
 
     private String sex;

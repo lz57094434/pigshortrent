@@ -1,0 +1,239 @@
+/*1*/
+.top{
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    width: 1309px;
+    background: #333;
+}
+.top-one{
+    margin-left: 150px;
+}
+.logo_black {
+    background: url(../img/pig.png)no-repeat;
+}
+.logo_v2 {
+    width: 120px;
+    height: 40px;
+    display: block;
+    float: left;
+    margin-top: 10px;
+}
+.slogan {
+    background: url(../img/luge.png) no-repeat;
+    display: inline-block;
+    float: left;
+    height: 40px;
+    margin-top: 5px;
+    width: 140px;
+}
+.nav{
+    float: right;
+    margin-right: 100px;
+}
+.nav li {
+    color: white;
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+}
+.nav li a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+.line_index {
+    background: url(//jci.xiaozhustatic2.com/e19080801/images/icon_header.png) no-repeat;
+}
+.line_index {
+    background-position: -265px -60px;
+    height: 21px;
+    width: 1px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.nav li .btn_public {
+    width: 126px;
+    height: 31px;
+    display: inline-block;
+}
+.nav li .btn_public {
+    background: url(../img/fabu.png) no-repeat;
+}
+
+.nav li a.iphone {
+    background-position: 0 -125px;
+    padding-left: 24px;
+    margin-left: 10px;
+}
+.nav li a.icon {
+    background:
+        /*url(//jci.xiaozhustatic2.com/e19080801/images/icon_head.png);*/
+            url(../img/phone.png)no-repeat;
+}
+/*2*/
+body{
+    padding: 0;
+    margin: 0;
+    /*background: darkgrey;*/
+}
+div{
+    padding: 0;
+    margin: 0;
+}
+#house{
+    margin-top: 5px;
+    width: 800px;
+    height: 1400px;
+    margin-left: 250px;
+    padding: 0;
+    background: white;
+    border: 1px solid #333333;
+    float: left;
+}
+.house-name{
+    margin-top: 10px;
+    width: 100px;
+    height: 38px;
+    border: 1px solid #d1d1d1;
+    padding-left: 10px;
+    padding-right: 26px;
+    color: #2c3e50;
+    vertical-align: middle;
+    border-radius: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.input_mod {
+    width: 350px;
+    height: 38px;
+    border: 1px solid #d1d1d1;
+    padding-left: 10px;
+    padding-right: 26px;
+    color: #2c3e50;
+    vertical-align: middle;
+    border-radius: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+.input_area{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d1d1d1;
+    padding-left: 10px;
+    padding-right: 26px;
+    color: #2c3e50;
+    border-radius: 1px;
+    white-space: nowrap;
+}
+#house-thing{
+width:1002px;
+height: 60px;
+}
+#area{
+    width: 250px;
+    float: left;
+}
+#number, #live-people{
+    width: 200px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+#address-three,#address-two,#address-four,#area,#kind,#kind-house,.kind{
+    margin-top: 20px;
+}
+.input-size {
+    width: 200px;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+/*img*/
+.img{
+    float: left;
+}
+.bar {
+    margin-top: 10px;
+    height: 10px;
+    max-width: 370px;
+    background: green;
+}
+
+.snow-container {
+    position: fixed;
+    top:0;
+    left:0;
+    right: 0;
+    bottom:0;
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+
+}
+
+.snow {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    -webkit-animation: snow linear infinite;
+    animation: snow linear infinite;
+}
+.snow.foreground {
+    background-image: url("https://dl6rt3mwcjzxg.cloudfront.net/assets/snow/snow-large-075d267ecbc42e3564c8ed43516dd557.png");
+    -webkit-animation-duration: 15s;
+    animation-duration: 15s;
+}
+.snow.foreground.layered {
+    -webkit-animation-delay: 7.5s;
+    animation-delay: 7.5s;
+}
+.snow.middleground {
+    background-image: url(https://dl6rt3mwcjzxg.cloudfront.net/assets/snow/snow-medium-0b8a5e0732315b68e1f54185be7a1ad9.png);
+    -webkit-animation-duration: 20s;
+    animation-duration: 20s;
+}
+.snow.middleground.layered {
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+}
+.snow.background {
+    background-image: url(https://dl6rt3mwcjzxg.cloudfront.net/assets/snow/snow-small-1ecd03b1fce08c24e064ff8c0a72c519.png);
+    -webkit-animation-duration: 30s;
+    animation-duration: 30s;
+}
+.snow.background.layered {
+    -webkit-animation-delay: 15s;
+    animation-delay: 15s;
+}
+
+@-webkit-keyframes snow {
+    0% {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(15%, 100%, 0);
+        transform: translate3d(15%, 100%, 0);
+    }
+}
+
+@keyframes snow {
+    0% {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(15%, 100%, 0);
+        transform: translate3d(15%, 100%, 0);
+    }
+}
