@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/usermsg.css" type="text/css">
 <script src="js/jquery-3.4.1.js"></script>
 <script>
-    var userId = 2;
+    var userId = 3;
     var username;
     var password;
     var phone;
@@ -19,11 +19,11 @@
     var u_sex;
     $(function () {
         //查询个人信息
-        $(".i_i").click(function () {
+        // $(".i_i").click(function () {
             $.ajax({
                 url: "/s",
                 type: "post",
-                data: {"userId": 2},
+                data: {"userId": 3},
                 dataType: "json",
                 success: function (data) {
                     $("#uy_name").val(data.userName);
@@ -36,58 +36,58 @@
                     $("#uy_birth").val(data.birthday);
                     $("#uy_address").val(data.userAddress);
 
-                    if ($("input[name='u_name']").val() == "") {
-                        username = data.userName;
-                    } else {
-                        username = $("input[name='u_name']").val();
-                    }
 
-                    if ($("input[name='u_pass']").val() == "") {
-                        password = data.password;
-                    } else {
-                        password = $("input[name='u_pass']").val();
-                    }
-                    if ($("input[name='u_tell']").val() == "") {
-                        phone = data.phone;
-                    } else {
-                        phone = $("input[name='u_tell']").val();
-                    }
-                    if ($("input[name='u_email']").val() == "") {
-                        email = data.email;
-                    } else {
-                        email = $("input[name='u_email']").val();
-                    }
-                    if ($("input[name='u_rail']").val() == "") {
-                        realName = data.realName;
-                    } else {
-                        realName = $("input[name='u_rail']").val();
-                    }
-                    if ($("input[name='u_card']").val() == "") {
-                        cardId = data.cardId;
-                    } else {
-                        cardId = $("input[name='u_card']").val();
-                    }
-                    if ($("input[name='u_address']").val() == "") {
-                        userAddress = data.userAddress;
-                    } else {
-                        userAddress = $("input[name='u_address']").val();
-                    }
-                    if ($("input[name='u_birth']").val() == "") {
-                        birthday = data.birthday;
-                    } else {
-                        birthday = $("input[name='u_birth']").val();
-                    }
-                    if ($("input[name='u_sex']").val() == "") {
-                        u_sex = data.sex;
-                    } else {
-                        u_sex = $("input[name='u_sex']").val();
-                    }
                 }
-            })
+            // })
         })
 
         //更新
         $("input[name='t']").click(function () {
+            if ($("input[name='u_name']").val() == "") {
+                username = $("#uy_name").val();
+            } else {
+                username = $("input[name='u_name']").val();
+            }
+            if ($("input[name='u_pass']").val() == "") {
+                password = $("#uy_pass").val();
+            } else {
+                password = $("input[name='u_pass']").val();
+            }
+            if ($("input[name='u_tell']").val() == "") {
+                phone =  $("#uy_tell").val();
+            } else {
+                phone = $("input[name='u_tell']").val();
+            }
+            if ($("input[name='u_email']").val() == "") {
+                email = $("#uy_email").val();
+            } else {
+                email = $("input[name='u_email']").val();
+            }
+            if ($("input[name='u_rail']").val() == "") {
+                realName = $("#uy_rail").val();
+            } else {
+                realName = $("input[name='u_rail']").val();
+            }
+            if ($("input[name='u_card']").val() == "") {
+                cardId = $("#uy_card").val();
+            } else {
+                cardId = $("input[name='u_card']").val();
+            }
+            if ($("input[name='u_address']").val() == "") {
+                userAddress = $("#uy_address").val();
+            } else {
+                userAddress = $("input[name='u_address']").val();
+            }
+            if ($("input[name='u_birth']").val() == "") {
+                birthday = $("#uy_birth").val();
+            } else {
+                birthday = $("input[name='u_birth']").val();
+            }
+            if ($("input[name='u_sex']").val() == "") {
+                u_sex = $("#uy_sex").val();
+            } else {
+                u_sex = $("input[name='u_sex']").val();
+            }
 
             $.ajax({
                 type: "post",
@@ -104,6 +104,9 @@
                     "cardId": cardId,
                     "birthday": birthday,
                     "userAddress": userAddress
+                },
+                success:function () {
+                    window.location.href="http://localhost:8080/usermsg.html"
                 }
             })
         });
