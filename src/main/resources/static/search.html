@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>搜索</title>
+    <style type="text/css">
+        #allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=pjcU0VGeUeqvYdtOmFcDBIvNaKfffgbZ"></script>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/search.css">
+    <script type="text/javascript">
+        //填充省份
+        $(function () {
+            // 滚动到一定位置显示
+            $(document).scroll(function () {
+                var scroH = $(this).scrollTop();
+                if(scroH>=200){
+                    $(".suspension").fadeIn(500);
+                }else{
+                    $(".suspension").fadeOut(500);
+                }
+            });
+            $.ajax({
+                //OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77
+                type: 'GET',//请求类型
+                url: 'http://apis.map.qq.com/ws/district/v1/list?key=RAMBZ-2VWWK-CO4JM-AKPLK-7CE3T-AYBZG&output=jsonp&callback=?',//请求地址，这里的key参数需要自行注册获取应用key，注册地址（http://lbs.qq.com/webservice_v1/guide-region.html）
+                data: '',//请求数据，String型
+                async: true,//是否为异步
+                cache: false,//是否缓存
+                dataType: 'jsonp',//指定jsonp类型
+                success: function (data) {
+                    var json = data['result'][0];
+                    var provinceHtml = "<option value=''>请选择省份</option>";
+                    $.each(json, function (idx, obj) {
+                        provinceHtml += "<option value=" + obj.fullname + " province-id=" + obj.id + ">" + obj.fullname + "</option>";
+                    });
+                    $('#province').html(provinceHtml);
+                }
+            });
+
+            //点击省份填充城市
+            $('#province').click(function () {
+                var provinceId = $('#province').find("option:selected").attr('province-id');
+                $.ajax({
+                    type: 'GET',//请求类型
+                    url: 'https://apis.map.qq.com/ws/district/v1/getchildren?key=RAMBZ-2VWWK-CO4JM-AKPLK-7CE3T-AYBZG&id=' + provinceId + '&output=jsonp&callback=?',//请求地址
+                    data: '',//请求数据，String型
+                    async: true,//是否为异步
+                    cache: false,//是否缓存
+                    dataType: 'jsonp',//指定jsonp类型
+                    success: function (data) {
+                        console.log(data);
+                        var json = data['result'][0];
+                        var provinceHtml;
+                        $.each(json, function (idx, obj) {
+                            provinceHtml += "<option value=" + obj.fullname + ">" + obj.fullname + "</option>";
+                        });
+                        $('#city').html(provinceHtml);
+                    }
+                });
+            });
+            // 百度地图API功能
+            var map = new BMap.Map("allmap");  // 创建Map实例
+            map.centerAndZoom("北京",10);      // 初始化地图,用城市名设置地图中心点
+            var point=[];
+            var marker=[];
+            map.enableScrollWheelZoom(true);  //开启鼠标滚轮缩放
+            //房间信息
+            var houses = new Vue({
+                el:"#body2_right_xinxi",
+                data:{
+                    infos:[],//显示房子信息
+                    page:0,//总页数
+                    pageNum:1,//当前页数
+                    fenyes:[],//从1排到总页数
+                },
+                methods:{
+                    nextPage:function () {
+                        if(houses.pageNum==houses.page){
+                            alert("当前为最后一页");
+                        }else{
+                            houses.pageNum++;
+                            housesPage();
+                        }
+                    },
+                    prePage:function () {
+                        if(houses.pageNum==1){
+                            alert("当前为第一页");
+                        }else{
+                            houses.pageNum--;
+                            housesPage();
+                        }
+                    },
+                    fenyePage:function (index) {
+                        houses.pageNum=index+1;
+                        housesPage();
+                    },
+                    fenyeJump:function () {
+                        if(houses.pageNum>houses.page){
+                            alert("超过最大页数");
+                            houses.pageNum=houses.page;
+                        }
+                        housesPage();
+                    },
+                    houseJump:function (index) {
+                        $.cookie('houseId',houses.infos[index].houseId);
+                    }
+                }
+            });
+            //面包条的信息
+            var bread = new Vue({
+                el:"#bread",
+                data:{
+                    province:'请选择省份',
+                    city:'请选择城市',
+                    count:0,//房子数量
+                    deposit:0//价格排序
+                }
+            });
+            //出租类型
+            var rent = new Vue({
+                el:"#body1_left_four_chuzuleixing",
+                data:{
+                    type:'默认'
+                }
+            });
+            //人数
+            var live = new Vue({
+                el:"#body1_left_four_chuzuleixing",
+                data:{
+                    number:0
+                }
+            });
+            //价格
+            var price= new Vue({
+                el:"#body1_right_four_jiage",
+                data:{
+                    min:0,
+                    max:0
+                }
+            });
+            //位置
+            var weizhi = new Vue({
+                el:"#body1_right_four_weizhi",
+                data:{
+                    address:'默认'
+                }
+            });
+            //户型
+            var huxing = new Vue({
+                el:"#body1_right_four_huxing",
+                data:{
+                    type:[]
+                }
+            });
+            //设施
+            var sheshi = new Vue({
+                el:"#body1_right_four_sheshi",
+                data:{
+                    type:[]
+                }
+            });
+            //百度地图图片
+            var baidu = new Vue({
+                el:"#body2_left_baiduditu",
+                data:{
+                    houseName:'',
+                    houseImgurl:'',
+                    housePrice:'',
+                    houseInformationrentType:'',
+                    houseModel:'',
+                    liveNubmer:'',
+                    houseCommentCount:'',
+                    houseId:''
+                }
+            });
+
+            housesPage();
+            //省份城市搜索
+            $("#province").click(function(){
+                bread.province=$("#province option:selected").text();
+                bread.city=$("#city option:selected").text();
+                map.centerAndZoom($("#province option:selected").text(),10);      // 改变地图,用城市名设置地图中心点
+                map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+            });
+            $("#city").click(function(){
+                bread.province=$("#province option:selected").text();
+                bread.city=$("#city option:selected").text();
+                houses.pageNum=1;
+                housesPage();
+            });
+            //出租类型搜索
+            $("#moren").click(function(){
+                rent.type='默认';
+                $("#body1_left_four_chuzuleixing li").removeAttr("style","color:red");
+                $(this).attr("style","color:red");
+                houses.pageNum=1;
+                housesPage();
+                // alert(rent.type)
+            });
+            $("#zhengtaochuzu").click(function(){
+                rent.type='整套出租';
+                // $(this).css("color","red");
+                $("#body1_left_four_chuzuleixing li").removeAttr("style","color:red");
+                $(this).attr("style","color:red");
+                houses.pageNum=1;
+                housesPage();
+                // alert(rent.type)
+            });
+            $("#dulidanjian").click(function(){
+                rent.type='独立单间';
+                $("#body1_left_four_chuzuleixing li").removeAttr("style","color:red");
+                $(this).attr("style","color:red");
+                houses.pageNum=1;
+                housesPage();
+                // alert(rent.type)
+            });
+            //人数搜索
+            $("#zuiduoyiju").change(function(){
+                if ($("#zuiduoyiju option:selected").text()=='任意') {
+                    live.number=0;
+                } else {
+                    live.number=$("#zuiduoyiju option:selected").text();
+                }
+                houses.pageNum=1;
+                housesPage();
+            });
+            //价格搜索
+            $("#zuidijiage").change(function(){
+                // alert($(this).val());
+                price.min=$(this).val();
+                houses.pageNum=1;
+                housesPage();
+            });
+            $("#zuigaojiage").change(function(){
+                // alert($(this).val());
+                price.max=$(this).val();
+                houses.pageNum=1;
+                housesPage();
+            });
+            //位置搜索
+            $("#body1_right_four_weizhi li span").click(function(){
+                // alert($(this).text());
+                weizhi.address=$(this).text();
+                $("#body1_right_four_weizhi li span").removeAttr("style","color:red");
+                $(this).attr("style","color:red");
+                houses.pageNum=1;
+                housesPage();
+            });
+            //户型搜索
+            $("#body1_right_four_huxing input").click(function () {
+                huxing.type.splice(0,huxing.type.length)//数组
+                // huxing.type[0]='默认'
+                $("input[name='huxing']:checked").each(function (i) {//把所有被选中的复选框的值存入数组
+                    huxing.type[i+1] = $(this).val();
+                });
+                houses.pageNum=1;
+                housesPage();
+            });
+            //设施搜索
+            $("#body1_right_four_sheshi input").click(function () {
+                sheshi.type.splice(0,sheshi.type.length)//数组
+                $("input[name='sheshi']:checked").each(function (i) {//把所有被选中的复选框的值存入数组
+                    sheshi.type[i+1] = $(this).val();
+                });
+                houses.pageNum=1;
+                housesPage();
+            });
+            //价格排序
+            $("#bread_right li").click(function () {
+                $("#bread_right li").removeAttr("style","color:red");
+                $(this).attr("style","color:red");
+                if($(this).text()=='正常排序'){
+                    bread.deposit=0;
+                }else if($(this).text()=='价格'){
+                    bread.deposit=1;
+                }
+                houses.pageNum=1;
+                housesPage();
+            });
+
+            //solr
+            var solr=[0];
+            $("#body1_left_four_guanjianci input").change(function () {
+                // alert($(this).val());
+                if($(this).val()==''){
+                    alert($(this).val())
+                    solr.splice(0,solr.length);//清空solr查询数组
+                    solr.push(0);
+                } else{
+                    $.ajax({
+                        url:'http://localhost:8080/searchsolr',
+                        type:"post",
+                        dataType:"json",
+                        data:{"de":$(this).val()},
+                        success:function (data) {
+                            solr.splice(0,solr.length);//清空solr查询数组
+                            if(data.length==0){
+                                // alert("无法找到房源，请重新输入");
+                                $("#wufazhaodaofangyuan").css("display","block");
+                                solr.push(0);
+                            }else{
+                                // alert("找到房源");
+                                $("#wufazhaodaofangyuan").css("display","none");
+                                for(var i=0;i<data.length;i++){
+                                    solr.push(data[i].houseId);
+                                }
+                            }
+                            housesPage();
+                        }
+                    });
+                }
+            });
+
+
+            //函数
+            //房间信息展示
+            function housesPage() {
+                $.ajax({
+                    url:'http://localhost:8080/gethousepage',
+                    type:"post",
+                    dataType:"json",
+                    data:{"pageNum":houses.pageNum,"pageSize":4,
+                        "province":bread.province,"city":bread.city,"rentType":rent.type,"houseInformationAddress":weizhi.address,
+                        "liveNubmer":live.number,"deposit":bread.deposit,
+                        "minPrice":price.min,"maxPrice":price.max,
+                        "huxing":JSON.stringify(huxing.type),"sheshi":JSON.stringify(sheshi.type),
+                        "solr":JSON.stringify(solr)},
+                    success:function (data) {
+                        houses.infos.splice(0,houses.infos.length);//清空房子信息数组
+                        houses.fenyes.splice(0,houses.fenyes.length);//清空分页数组
+                        //清除图标
+                        for(var i=0;i<point.length;i++){
+                            map.removeOverlay(marker[i]);
+                        }
+                        point.splice(0,point.length);//清空地图数组
+                        var pageHouse = data.pageHouse;
+                        var houseList = pageHouse.list;//得到分页以后的所有pageHouse信息
+                        bread.count=pageHouse.total;//得到房子的数量
+                        var page=pageHouse.pages;//分页总数
+                        houses.page=page;//分页总数
+                        // alert(houseList.length);
+                        for(var i=0;i<houseList.length;i++){
+                            houses.infos.push({houseName:houseList[i].houseName,
+                                houseImgurl:"img/"+houseList[i].houseImgurl,
+                                housePrice:houseList[i].housePrice,
+                                houseInformationrentType:houseList[i].houseInformation.rentType,
+                                houseModel:houseList[i].houseModel,
+                                liveNubmer:houseList[i].liveNubmer,
+                                houseCommentCount:houseList[i].houseCommentCount,
+                                houseId:houseList[i].houseId,
+                                longitude:houseList[i].longitude,
+                                latitude:houseList[i].latitude});
+                            // alert(houseList[i].longitude);
+                            // alert(houseList[i].latitude);
+                            // point.push({longitude:houseList[i].longitude, latitude:houseList[i].latitude});
+                            point[i]=new BMap.Point(houseList[i].longitude,houseList[i].latitude);
+                        }
+                        for(var i=0;i<page;i++){
+                            houses.fenyes.push({page:i+1});
+                        }
+                        var houseId=[];
+                        for(var i=0;i<houseList.length;i++){
+                            houseId.push(houseList[i].houseId);
+                        }
+                        //地图实例
+                        for(var i=0;i<point.length;i++){
+                            map.centerAndZoom(point[i], 10);
+                            marker[i] = new BMap.Marker(point[i]);
+                            marker[i].addEventListener("click", attribute);
+                            map.addOverlay(marker[i]);
+                        }
+                        //地图图标点击事件
+
+                    }
+                });
+            }
+            function attribute(e){
+                var p = e.target;
+                $("#body2_left_baiduditu").css("display","block");
+                // alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
+                alert(houses.infos.length);
+                for(var i=0;i<houses.infos.length;i++){
+                    if(p.getPosition().lng==houses.infos[i].longitude && p.getPosition().lat==houses.infos[i].latitude){
+                        baidu.houseName=houses.infos[i].houseName;
+                        baidu.houseImgurl=houses.infos[i].houseImgurl;
+                        baidu.housePrice=houses.infos[i].housePrice;
+                        baidu.houseInformationrentType=houses.infos[i].houseInformationrentType;
+                        baidu.houseModel=houses.infos[i].houseModel;
+                        baidu.liveNubmer=houses.infos[i].liveNubmer;
+                        baidu.houseCommentCount=houses.infos[i].houseCommentCount;
+                        baidu.houseId=houses.infos[i].houseId;
+                        break;
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <!--头部-->
+    <div id="head">
+        <div id="xiaozhu"></div>
+        <div id="jiudiaoxiaozhu"></div>
+        <div id="head_right">
+            <ul>
+                <li id="mianfeifabu"><a>免费发布房间</a></li>
+                <li id="shoujixiaozhu"><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;手机小猪</a></li>
+                <li><a>短租指南</a></li>
+                <li>·</li>
+                <li><a>登录</a></li>
+                <li>·</li>
+                <li><a>注册</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--主体1-->
+    <div id="body1">
+        <!--主体1左部-->
+        <div id="body1_left">
+            <div class="body1_left_four">
+                <form name="shengshi">
+                    <select name="province" id="province">
+                        <option value="">请选择省份</option>
+                    </select>
+                    <select name="city" id="city">
+                        <option value="">请选择城市</option>
+                    </select>
+                </form>
+            </div>
+            <div class="body1_left_four">
+                <div id="body1_left_four_chuzuleixing">
+                    <span>出租类型</span>
+                    <ul>
+                        <li id="moren" style="color: red">默认</li>
+                        <li id="zhengtaochuzu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整套出租</li>
+                        <li id="dulidanjian">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;独立单间</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="body1_left_four">
+                <div id="body1_left_four_zuiduoyiju">
+                    <span>最多宜居</span>
+                    <select name="zuiduoyiju" id="zuiduoyiju" style="width: 440px;border: 0">
+                        <option value="">任意</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                        <option value="">5</option>
+                        <option value="">6</option>
+                        <option value="">7</option>
+                        <option value="">8</option>
+                        <option value="">9</option>
+                        <option value="">10</option>
+                    </select>
+                </div>
+            </div>
+            <div class="body1_left_four">
+                <div id="body1_left_four_guanjianci">
+                    <span>关键词</span>
+                    <input type="text" style="width: 440px;border: 0;" placeholder="请输入关键信息">
+                    <div id="wufazhaodaofangyuan">无法找到相关房源，请重新输入</div>
+                </div>
+            </div>
+        </div>
+        <!--主体1右部-->
+        <div id="body1_right">
+            <div class="body1_right_four">
+                <div id="body1_right_four_jiage">
+                    <span>价格</span>
+                    <ul>
+                        <li>
+                            <span>最低价格</span>
+                            <input type="text" id="zuidijiage">
+                        </li>
+                        <li>
+                            <span>最高价格</span>
+                            <input type="text" id="zuigaojiage">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="body1_right_four">
+                <div id="body1_right_four_weizhi">
+                    <span>位置</span>
+                    <ul>
+                        <li>
+                            <span style="color:red;">默认</span>
+                        </li>
+                        <li>
+                            <span>行政区</span>
+                        </li>
+                        <li>
+                            <span>动车站机场</span>
+                        </li>
+                        <li>
+                            <span>地铁</span>
+                        </li>
+                        <li>
+                            <span>公交车站</span>
+                        </li>
+                        <li>
+                            <span>医院</span>
+                        </li>
+                        <li>
+                            <span>高校</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="body1_right_four">
+                <div id="body1_right_four_huxing">
+                    <span>户型</span>
+                    <input type="checkbox" name="huxing"  value="一居"/><b class="huxing">一居</b>
+                    <input type="checkbox" name="huxing"  value="二居"/><b class="huxing">二居</b>
+                    <input type="checkbox" name="huxing"  value="三居"/><b class="huxing">三居</b>
+                    <input type="checkbox" name="huxing"  value="四居"/><b class="huxing">四居</b>
+                        <input type="checkbox" name="huxing"  value="其他"/><b class="huxing">其他</b>
+                </div>
+            </div>
+            <div class="body1_right_four">
+                <div id="body1_right_four_sheshi">
+                    <span>设施</span>
+                    <input type="checkbox" name="sheshi"  value="淋浴"/><b class="huxing">淋浴</b>
+                    <input type="checkbox" name="sheshi"  value="空调"/><b class="huxing">空调</b>
+                    <input type="checkbox" name="sheshi"  value="电视"/><b class="huxing">电视</b>
+                    <input type="checkbox" name="sheshi"  value="网络"/><b class="huxing">网络</b>
+                    <input type="checkbox" name="sheshi"  value="厨房"/><b class="huxing">厨房</b>
+                    <input type="checkbox" name="sheshi"  value="暖气"/><b class="huxing">暖气</b>
+                    <input type="checkbox" name="sheshi"  value="其他"/><b class="huxing">其他</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--主体2-->
+    <div id="body2">
+        <!--主体2左部-->
+        <div id="body2_left">
+            <div id="allmap">
+            </div>
+            <div id="body2_left_baiduditu">
+                <ul style="padding: 0;margin: 0">
+                    <li>
+                        <img v-bind:src="houseImgurl">
+                        <span>
+                            <p>
+                                ￥<i>{{housePrice}}</i>
+                            </p>
+                        </span>
+                        <p>{{houseName}}</p>
+                        <p class="body2_right_xinxi2">{{houseInformationrentType}}/{{houseModel}}/{{liveNubmer}} - {{houseCommentCount}}点评</p>
+                        <p class="body2_right_xinxi3"><img src="img/body2_right_xinxi3.png">速订</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!--主体2右部-->
+        <div id="body2_right">
+            <!--面包条-->
+            <div id="bread">
+                <div id="bread_left">小猪 > {{province}}{{city}}短租 {{count}}</div>
+                <div id="bread_right">
+                    <ul>
+                        <li style="color: red">正常排序</li>
+                        <li>价格</li>
+                    </ul>
+                </div>
+            </div>
+            <!--图片信息-->
+            <div id="body2_right_xinxi">
+                <ul style="padding: 0;margin: 0">
+                    <li v-for="(info,index) in infos" @click="houseJump(index)">
+                        <img v-bind:src="info.houseImgurl">
+                        <span>
+                            ￥
+                            <i>{{info.housePrice}}</i>
+                        </span>
+                        <p>{{info.houseName}}</p>
+                        <p class="body2_right_xinxi2">{{info.houseInformationrentType}}/{{info.houseModel}}/{{info.liveNubmer}} - {{info.houseCommentCount}}点评</p>
+                        <p class="body2_right_xinxi3"><img src="img/body2_right_xinxi3.png">速订</p>
+                    </li>
+                </ul>
+                <div id="body2_right_fenye">
+                    <div id="fenye">
+                        <a @click="prePage">上一页</a>
+                        <a v-for="(fenye,index) in fenyes" v-bind:id="pageNum === index+1 ? 'fenye_red' : ''" @click="fenyePage(index)">{{fenye.page}}</a>
+                        <a @click="nextPage">下一页</a>
+                        共{{page}}页
+                        到第<input type="text" size="1px" v-model="pageNum">页<input type="button" value="确定" @click="fenyeJump">
+                    </div>
+                </div>
+            </div>
+            <!--主体2右部的尾部-->
+            <div id="body2_right_tail">
+                <div id="body2_right_tail_xiazaixiaozhuapp">
+                    <img src="img/xiazaixiaozhuapp.jpg">
+                </div>
+                <div id="body2_right_tail_chengshidaohang">
+                    城市导航
+                </div>
+                <div id="body2_right_tail_zufang">
+                    <p>北京短租房 上海短租房 南京短租房 成都短租房 广州短租房 重庆短租房 武汉短租房 大连短租房 三亚短租房</p>
+                    <p>丽江短租房 天津短租房 香港短租房 长沙短租房 无锡短租房 昆明短租房 济南短租房 厦门短租房 青岛短租房</p>
+                    <p>郑州短租房 西安短租房 杭州短租房 深圳短租房 沈阳短租房 苏州短租房</p>
+                    <p id="body2_right_tail_xukezheng">许可证号：京ICP证140510号    安全联盟   北京快跑信息科技有限公司</p>
+                </div>
+                <div id="body2_right_tail_jinggongwang">
+                    <img src="img/jinggongwang.png"/>
+                    <p>
+                        京公网安备 11010802020380号 违法和不良信息举报电话：40001078901 举报邮箱：jubao@xiaozhu.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--返回顶部-->
+    <div class="suspension" style="display: none">
+        <ul class="suspension_lf">
+            <li class="sus_list1" id="im_chat_btn" title="在线消息">
+                <span style="position: relative"></span>
+            </li>
+            <li class="sus_list2" id="im_collection_btn" title="收藏">
+                <span></span>
+            </li>
+            <li class="sus_list3" id="im_noticeAndNotification_btn" title="提醒和系统消息">
+                <span></span>
+            </li>
+            <li class="sus_list4" id="im_feedBack_btn" title="反馈">
+                <span></span>
+            </li>
+            <li class="sus_list5" id="im_qrCode_btn" title="二维码">
+                <span></span>
+            </li>
+        </ul>
+        <div class="suspension_rg" id="to_go">
+            <a href="#head"></a>
+        </div>
+    </div>
+</body>
+</html>
+<!--<script type="text/javascript">-->
+    <!--// 百度地图API功能-->
+    <!--var map = new BMap.Map("allmap");  // 创建Map实例-->
+    <!--map.centerAndZoom("北京",15);      // 初始化地图,用城市名设置地图中心点-->
+<!--</script>-->

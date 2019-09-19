@@ -11,7 +11,15 @@ public class HouseInformation {
 
     private String houseInformationAddress;
 
-    private Integer houseId;
+    private House house;
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
 
     public Integer getHouseInformationId() {
         return houseInformationId;
@@ -53,11 +61,4 @@ public class HouseInformation {
         this.houseInformationAddress = houseInformationAddress == null ? null : houseInformationAddress.trim();
     }
 
-    public Integer getHouseId() {
-        return houseId;
-    }
-
-    public void setHouseId(Integer houseId) {
-        this.houseId = houseId;
-    }
 }

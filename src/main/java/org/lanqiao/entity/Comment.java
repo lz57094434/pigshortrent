@@ -9,9 +9,25 @@ public class Comment {
 
     private Date commentDate;
 
-    private Integer userId;
+    private House house;
 
-    private Integer houseId;
+    private Float score;
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
 
     public Integer getCommentId() {
         return commentId;
@@ -37,19 +53,4 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getHouseId() {
-        return houseId;
-    }
-
-    public void setHouseId(Integer houseId) {
-        this.houseId = houseId;
-    }
 }

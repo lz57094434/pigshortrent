@@ -17,7 +17,15 @@ public class Facility {
 
     private String facilityOrther;
 
-    private Integer houseId;
+    private House house;
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
 
     public Integer getFacilityId() {
         return facilityId;
@@ -83,11 +91,4 @@ public class Facility {
         this.facilityOrther = facilityOrther == null ? null : facilityOrther.trim();
     }
 
-    public Integer getHouseId() {
-        return houseId;
-    }
-
-    public void setHouseId(Integer houseId) {
-        this.houseId = houseId;
-    }
 }

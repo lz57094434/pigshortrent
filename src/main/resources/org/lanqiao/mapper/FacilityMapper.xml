@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.FacilityMapper" >
-  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Facility" >
+  <resultMap id="FacilityStyleResultMap" type="org.lanqiao.entity.Facility" >
     <id column="facility_id" property="facilityId" jdbcType="INTEGER" />
     <result column="facility_one" property="facilityOne" jdbcType="VARCHAR" />
     <result column="facility_two" property="facilityTwo" jdbcType="VARCHAR" />
@@ -10,13 +10,33 @@
     <result column="facility_five" property="facilityFive" jdbcType="VARCHAR" />
     <result column="facility_six" property="facilitySix" jdbcType="VARCHAR" />
     <result column="facility_orther" property="facilityOrther" jdbcType="VARCHAR" />
-    <result column="house_id" property="houseId" jdbcType="INTEGER" />
+    <association property="house" resultMap="HouseResultMap"></association>
   </resultMap>
+  <resultMap id="HouseResultMap" type="org.lanqiao.entity.House" >
+    <id column="house_id" property="houseId" jdbcType="INTEGER" />
+    <result column="house_name" property="houseName" jdbcType="VARCHAR" />
+    <result column="house_price" property="housePrice" jdbcType="INTEGER" />
+    <result column="deposit" property="deposit" jdbcType="INTEGER" />
+    <result column="house_number" property="houseNumber" jdbcType="INTEGER" />
+    <result column="house_address" property="houseAddress" jdbcType="VARCHAR" />
+    <result column="house_area" property="houseArea" jdbcType="VARCHAR" />
+    <result column="house_model" property="houseModel" jdbcType="VARCHAR" />
+    <result column="live_nubmer" property="liveNubmer" jdbcType="INTEGER" />
+    <result column="character_des" property="characterDes" jdbcType="VARCHAR" />
+    <result column="internal_sit" property="internalSit" jdbcType="VARCHAR" />
+    <result column="traffic_sit" property="trafficSit" jdbcType="VARCHAR" />
+    <result column="surrounding_sit" property="surroundingSit" jdbcType="VARCHAR" />
+    <result column="house_imgurl" property="houseImgurl" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="REAL" />
+    <result column="latitude" property="latitude" jdbcType="REAL" />
+  </resultMap>
+
+
   <sql id="Base_Column_List" >
     facility_id, facility_one, facility_two, facility_three, facility_four, facility_five, 
     facility_six, facility_orther, house_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="FacilityStyleResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from facility

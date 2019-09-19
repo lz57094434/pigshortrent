@@ -1,41 +1,103 @@
 package org.lanqiao.entity;
 
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.mapping.SolrDocument;
+
+import java.util.Set;
+
+@SolrDocument(solrCoreName = "articles")
 public class House {
+    @Id
+    @Field
     private Integer houseId;
 
+    @Field
     private String houseName;
 
+    @Field
     private Integer housePrice;
 
+    @Field
     private Integer deposit;
 
+    @Field
     private Integer houseNumber;
 
+    @Field
     private String houseAddress;
 
+    @Field
     private String houseArea;
-
+    @Field
     private String houseModel;
 
+    @Field
     private Integer liveNubmer;
 
+    @Field
     private String characterDes;
 
+    @Field
     private String internalSit;
 
+    @Field
     private String trafficSit;
 
+    @Field
     private String surroundingSit;
 
+    @Field
     private String houseImgurl;
 
+    @Field
     private Float longitude;
 
+    @Field
     private Float latitude;
 
-    private Integer publisherId;
+    @Field
+    private Facility facility;
 
-    private Integer userId;
+    @Field
+    private HouseInformation houseInformation;
+
+    @Field
+    private Set<Comment> commentSet;
+
+    private Integer houseCommentCount;//额外加的评论数
+
+    public Integer getHouseCommentCount() {
+        return houseCommentCount;
+    }
+
+    public void setHouseCommentCount(Integer houseCommentCount) {
+        this.houseCommentCount = houseCommentCount;
+    }
+
+    public Facility getFacility() {
+        return facility;
+    }
+
+    public void setFacility(Facility facility) {
+        this.facility = facility;
+    }
+
+    public HouseInformation getHouseInformation() {
+        return houseInformation;
+    }
+
+    public void setHouseInformation(HouseInformation houseInformation) {
+        this.houseInformation = houseInformation;
+    }
+
+    public Set<Comment> getCommentSet() {
+        return commentSet;
+    }
+
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
+    }
 
     public Integer getHouseId() {
         return houseId;
@@ -165,19 +227,4 @@ public class House {
         this.latitude = latitude;
     }
 
-    public Integer getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(Integer publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 }
