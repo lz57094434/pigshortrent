@@ -20,7 +20,7 @@ ul li {
     width: 1366px;
     height: 57px;
     float: left;
-    background: linear-gradient(black,black);
+    background: linear-gradient(black, black);
     font: 12px/1.5 Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -163,13 +163,14 @@ ul li {
 }
 
 
-
-.top-one{
+.top-one {
     margin-left: 150px;
 }
+
 .logo_black {
-    background: url(../img/pig.png)no-repeat;
+    background: url(../img/pig.png) no-repeat;
 }
+
 .logo_v2 {
     width: 120px;
     height: 40px;
@@ -177,6 +178,7 @@ ul li {
     float: left;
     margin-top: 8px;
 }
+
 .slogan {
     background: url(../img/luge.png) no-repeat;
     display: inline-block;
@@ -185,26 +187,31 @@ ul li {
     margin-top: 8px;
     width: 140px;
 }
-.nav{
+
+.nav {
     float: right;
-margin-top: 13px;
+    margin-top: 13px;
     width: 600px;
 }
+
 .nav li {
     color: white;
     float: left;
     list-style: none;
     margin-left: 20px;
 }
-.nav li a{
+
+.nav li a {
     float: left;
     text-decoration: none;
     color: white;
     font-size: 15px;
 }
+
 .line_index {
     background: url(//jci.xiaozhustatic2.com/e19080801/images/icon_header.png) no-repeat;
 }
+
 .line_index {
     background-position: -265px -60px;
     height: 21px;
@@ -212,11 +219,13 @@ margin-top: 13px;
     display: inline-block;
     vertical-align: middle;
 }
+
 .nav li .btn_public {
     width: 126px;
     height: 31px;
     display: inline-block;
 }
+
 .nav li .btn_public {
     background: url(../img/fabu.png) no-repeat;
 }
@@ -226,8 +235,15 @@ margin-top: 13px;
     padding-left: 24px;
     margin-left: 10px;
 }
+
 .nav li a.icon {
-    background:
-        /*url(//jci.xiaozhustatic2.com/e19080801/images/icon_head.png);*/
-            url(../img/phone.png)no-repeat;
+    background: /*url(//jci.xiaozhustatic2.com/e19080801/images/icon_head.png);*/ url(../img/phone.png) no-repeat;
+}
+
+#qwqw {
+    margin-top: 4px;
+    color: white;
+    background-color: black;
+    width: 80px;
+    border: 0;
 }
