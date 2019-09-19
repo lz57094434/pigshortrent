@@ -32,9 +32,11 @@
                     "houseModel":$("input[name=house_model]").val(),
                     "houseAddress":$("input[name=house_address]").val()+$("input[name=address_three]").val(),
                     "latitude":$("input[name=latitude]").val(),"longitude":$("input[name=longitude]").val()
-                     "houseImgUrl":$("input[name=logo]").val()},
+
+                },
                 dataType: "Json",
                 success:function(data) {
+
                 }
             })
            window.location="";
@@ -165,10 +167,9 @@
             <span class="input-size">纬度:</span>
             <input type="text" name="latitude" value="" class="house-name">
         </div>
+        <input type="file" name="lg" multiple="multiple">
         <input type="button" name="button" value="提交">
     </form>
-
-    <input type="hidden" name="logo1" value="" >
     logo:<input type="file" class="fileupload" name="logo" multiple="multiple">
     <button id="logo">上传</button> <div id="image">预览：</div>
 
