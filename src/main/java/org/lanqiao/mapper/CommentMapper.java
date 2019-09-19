@@ -19,5 +19,10 @@ public interface CommentMapper {
 
     int updateByPrimaryKey(Comment record);
 
+    /**
+     * mmp就这破玩意还不好使
+     */
+
+
 
 }
