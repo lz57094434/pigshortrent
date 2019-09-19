@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.lanqiao.entity.House;
 import org.lanqiao.entity.HouseInformation;
 import org.springframework.stereotype.Repository;
+import org.lanqiao.entity.HouseImg;
 
 import java.util.List;
 
@@ -37,4 +38,8 @@ public interface HouseMapper {
     int updateByPrimaryKeySelective(House record);
 
     int updateByPrimaryKey(House record);
+
+    List<House> getAll();
+     House getImg(Integer houseId);
+
 }

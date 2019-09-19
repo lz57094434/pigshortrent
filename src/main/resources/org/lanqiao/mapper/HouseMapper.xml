@@ -22,6 +22,7 @@
         <association property="facility" resultMap="FacilityStyleResultMap"></association>
         <association property="houseInformation" resultMap="HouseInformationResultMap"></association>
         <collection property="commentSet" resultMap="CommentResultMap"></collection>
+        <collection property="houseImgSet" resultMap="HouseImgResultMap"></collection>
     </resultMap>
     <resultMap id="CommentResultMap" type="org.lanqiao.entity.Comment">
         <id column="comment_id" property="commentId" jdbcType="INTEGER"/>
@@ -46,6 +47,18 @@
         <result column="rent_type" property="rentType" jdbcType="VARCHAR"/>
         <result column="house_information_address" property="houseInformationAddress" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="HouseImgResultMap" type="org.lanqiao.entity.HouseImg">
+        <id column="house_img_id" property="houseImgId" jdbcType="INTEGER"/>
+        <result column="house_img_url" property="houseImgUrl" jdbcType="VARCHAR"/>
+        <result column="house_id" property="houseId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="HouseResultMap">
+    select * from house
+  </select>
+    <select id="getImg" resultMap="HouseResultMap" parameterType="java.lang.Integer">
+        SELECT *  from house h,houseimg t WHERE t.house_id=h.house_id and h.house_id=#{houseId} ORDER BY t.house_img_id
+    </select>
 
     <select id="getAllHouse" resultMap="HouseResultMap">
         SELECT *

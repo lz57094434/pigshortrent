@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+    <title id="title">房间详情</title>
+    <script type="text/javascript" src="js/jquery.1.4.2-min.js"></script>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=MDADUUfnQyH07nKM0kT66gGg0FjooXlS"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/houseitem.css">
+    <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="imag/favicon.ico">
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script>
+        // body...
+        $(function () {
+            $(document).scroll(function () {
+                var scroH = $(this).scrollTop();
+                if(scroH>=300){
+                    $("#mscrollHeader").fadeIn(500);
+                    $("#floatRightBox").css("position","fixed");
+                    $("#pricePart").css("display","none");
+                    // $("#title").val("马卡龙");
+                }else{
+                    $("#mscrollHeader").fadeOut(500);
+                    $("#floatRightBox").css("position","static");
+                    $("#pricePart").css("display","block")
+                }
+                // if(scroH>=1000){
+                //     $("#scorllFather").children().eq(1).css("background","#3e5871");
+                //     // $("#scorllFather").children().eq(0).css("background","")
+                //
+                //
+                //
+                // }
+        });
+            // $(".order_btn_container").click(function () {
+            //     alert("点击成功")
+
+/*取房子数据的ajax*/
+            $.ajax({
+                url:"http://localhost:8080/get",
+                type:"post",
+                dataType:"json",
+                data:{'id':$.cookie('houseId')},
+                success : function (data){
+                    // alert("经度"+data.longitude);
+                    // alert("纬度"+data.latitude);
+                    HouseMsg1.houseAddress=data.houseAddress;
+                    Addr.houseAddress=data.houseAddress;
+                    HouseArea.houseArea=data.houseArea;
+                    HouseModel.houseModel=data.houseModel;
+                    liveNumber.liveNubmer=data.liveNubmer;
+                    CharacterDes.characterDes=data.characterDes;
+                    InternalSit.internalSit=data.characterDes;
+                    TrafficSit.trafficSit=data.trafficSit;
+                    SurroundingSit.surroundingSit=data.surroundingSit;
+                    HouseImgurl.houseImgurl="img/"+data.houseImgurl;
+                    HouseImgurl01.houseImgurl="img/"+data.houseImgurl;
+                    // alert(HouseImgurl.houseImgurl);
+                    HousePrice.housePrice=data.housePrice;
+                    HousePrice1.housePrice=data.housePrice;
+                    Deposit.deposit=data.deposit;
+                    yajin.deposit=data.deposit;
+                    //百度地图APi
+                    //百度地图APi
+                    var jingdu=data.longitude;
+                    var weidu=data.latitude;
+                    var map = new BMap.Map('allMap');
+                    var poi = new BMap.Point(jingdu,weidu);
+                    map.centerAndZoom(poi, 16)
+                    map.enableScrollWheelZoom();
+                    var marker = new BMap.Marker(poi); //创建marker对象
+                    marker.enableDragging(); //marker可拖拽
+                    map.addOverlay(marker); //在地图中添加marker
+                    //添加比例尺
+                    var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+                    var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+                    var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL});
+                    map.addControl(top_left_control);
+                    map.addControl(top_left_navigation);
+                    map.addControl(top_right_navigation);
+
+
+                }
+            });
+            /*地址*/
+            var HouseMsg1 = new Vue({
+                el:".pr5",
+                data:{
+                    houseAddress:'',
+                }
+
+            });
+            var Addr = new Vue({
+                el:"#Addr",
+                data:{
+                    houseAddress:'',
+                }
+
+            });
+            /*面积*/
+            var HouseArea = new Vue({
+                el:"#housearea",
+                data:{
+                    houseArea:'',
+                }
+
+            });
+            /*户型*/
+            var HouseModel = new Vue({
+                el:"#HouseModel",
+                data:{
+                    houseModel:'',
+                }
+
+            });
+            /*居住人数*/
+            var liveNumber = new Vue({
+                el:"#LiveNumber",
+                data:{
+                    liveNubmer:'',
+                }
+
+            });
+            /*个性描述*/
+            var CharacterDes = new Vue({
+                el:"#characterDes",
+                data:{
+                    characterDes:'',
+                }
+
+            });
+            /*内部情况*/
+            var InternalSit = new Vue({
+                el:"#internalSit",
+                data:{
+                    internalSit:'',
+                }
+
+            });
+            /*交通情况*/
+            var TrafficSit = new Vue({
+                el:"#trafficSit",
+                data:{
+                    trafficSit:'',
+                }
+
+            });
+            /*周边情况*/
+            var SurroundingSit = new Vue({
+                el:"#surroundingSit",
+                data:{
+                    surroundingSit:'',
+                }
+
+            });
+            /*房间主图*/
+            var HouseImgurl = new Vue({
+                el:".mainImg",
+                data:{
+                    houseImgurl:'',
+                }
+
+            });
+            var HouseImgurl01 = new Vue({
+                el:".mainImg01",
+                data:{
+                    houseImgurl:'',
+                }
+
+            });
+            /*房屋每天价格*/
+            var HousePrice = new Vue({
+                el:"#housePrice",
+                data:{
+                    housePrice:'',
+                }
+
+            });
+            var HousePrice1 = new Vue({
+                el:"#housePrice1",
+                data:{
+                    housePrice:'',
+                }
+
+            });
+
+
+            /*押金*/
+            var Deposit = new Vue({
+                el:"#deposit",
+                data:{
+                    deposit:'',
+                }
+
+            });
+            var yajin = new Vue({
+                el:"#yajin",
+                data:{
+                    deposit:'',
+                }
+
+            });
+            /*取图片的Ajax*/
+            $.ajax({
+                url:"http://localhost:8080/getImg",
+                type:"post",
+                data:{'id':$.cookie('houseId')},
+                dataType:"json",
+                success:function (data) {
+                    // alert("图片取成功");
+                    // alert(data.houseImgSet[0].houseImgUrl);
+                    ImgA01.houseImgUrl="img/"+data.houseImgSet[0].houseImgUrl;
+                    // alert(ImgA01.houseImgUrl);
+                    // HouseImgurl.houseImgurl="img/"+data.houseImgurl+".jpg";
+                    ImgA02.houseImgUrl="img/"+data.houseImgSet[1].houseImgUrl;
+                    // alert(ImgA02.houseImgUrl);
+                    ImgA03.houseImgUrl="img/"+data.houseImgSet[2].houseImgUrl;
+                    ImgB01.houseImgUrl="img/"+data.houseImgSet[0].houseImgUrl;
+                    ImgB02.houseImgUrl="img/"+data.houseImgSet[1].houseImgUrl;
+                    ImgB03.houseImgUrl="img/"+data.houseImgSet[2].houseImgUrl;
+
+
+
+
+                }
+
+            });
+            /*图片1*/
+            var ImgA01 = new Vue({
+                el:".ImgA01",
+                data:{
+                    houseImgUrl:'',
+                }
+
+            });
+            var ImgA02 = new Vue({
+                el:".ImgA02",
+                data:{
+                    houseImgUrl:'',
+                }
+
+            });
+            var ImgA03 = new Vue({
+                el:".ImgA03",
+                data:{
+                    houseImgUrl:'',
+                }
+
+            });
+            var ImgB01 = new Vue({
+                el:"#ImgB01",
+                data:{
+                    houseImgUrl:'',
+                }
+
+            });
+            var ImgB02 = new Vue({
+                el:"#ImgB02",
+                data:{
+                    houseImgUrl:'',
+                }
+
+            })
+            var ImgB03 = new Vue({
+                el:"#ImgB03",
+                data:{
+                    houseImgUrl:'',
+                }
+
+            });
+        /*百度地图功能*/
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+            // var HouseMsg1 = new Vue({
+            //     el:".pr5",
+            //     data:{
+            //         houseAddress:'',
+            //     }
+            // });
+
+        // });
+
+
+    </script>
+
+
+</head>
+<body>
+<script type="text/javascript" src="js/jq.Slide.js"></script>
+<script type="text/javascript">
+    $(function(){
+
+        $("#temp1").Slide({
+            effect : "scroolY",
+            speed : "normal",
+            timer : 3000
+        });
+
+        $("#temp2").Slide({
+            effect : "scroolX",
+            speed : "normal",
+            timer : 3000
+        });
+
+        $("#temp3").Slide({
+            effect : "fade",
+            speed : "normal",
+            timer : 3000
+        });
+
+        $("#temp4").Slide({
+            effect : "scroolLoop",
+            autoPlay:false,
+            speed : "normal",
+            timer : 3000,
+            steps:2
+        });
+
+        $("#temp5").Slide({
+            effect : "scroolTxt",
+            speed : "normal",
+            timer : 3000,
+            steps:1
+        });
+
+        $("#temp6").Slide({
+            effect : "scroolY",
+            speed : "normal",
+            timer : 3000
+        });
+
+    });
+</script>
+
+<div class="detail_wrapper">
+    <div class="detail_head clearfix">
+        <a href="http://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>
+        <ul class="nav_R nav_commen">
+            <li><a rel="nofollow" title="" class="show-register-box" href="http://www.xiaozhu.com/register?next=http%3A%2F%2Fsh.xiaozhu.com%2Ffangzi%2F25053341903.html">注册</a></li>
+            <li>·</li>
+            <li><a rel="nofollow" class="logindialog" href="http://www.xiaozhu.com/login?next=http%3A%2F%2Fsh.xiaozhu.com%2Ffangzi%2F25053341903.html">登录</a></li>
+            <li>·</li>
+            <li class="current">
+                <a href="#ongo" class="openTri_R">短租指南</a>
+                <div class="head_pop width_58 top40">
+                    <div class="pop_column">
+                        <span><a class="fl" href="http://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=tenant">房客指南</a><a class="fr" href="http://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=landlord">房东指南</a></span>
+                    </div></div>
+            </li>
+            <li>
+                <a href="#ongo" class="icon_iphone">手机小猪</a>
+                <div class="head_pop w_120 top40">
+                    <div>
+                        <img src="img/code_pic.png" alt="小猪" title="小猪">
+                    </div>
+                    <a href="http://www.xiaozhu.com/appdownload/fk" target="_blank">了解更多</a>
+                </div>
+            </li>
+            <li><a rel="nofollow" data-href="http://www.xiaozhu.com/publish" class="btn_free show-register-box" id="Pub_Btn">免费发布房源</a></li>
+        </ul></div>
+
+</div>
+<div class="header_bg" style="position: fixed; width: 100%;     top: 0px; left: 0px; z-index: 999; display: none;"         id="mscrollHeader">
+    <div class="detail_header clearfix">
+        <div class="nav_l">
+            <a class="xz_logo" href="#">小猪</a>
+            <ul id="scorllFather">
+                <li class="cur">
+                    <a href="#ongo">实拍照片</a>
+                </li>
+                <li class="">
+                    <a href="#ongo">详细介绍</a>
+                </li>
+                <li>
+                    <a href="#ongo">位置地图</a>
+                </li>
+                <li>
+                    <a href="#ongo">预订须知</a>
+                </li>
+                <li>
+                    <a href="#ongo">入住点评</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav_r clearfix" id="scrollPrice">
+            <div class="fl">¥<span class="detail_avgprice"id="housePrice1">{{housePrice}}</span><em>起</em></div>
+            <div class="time_r">每晚</div>
+        </div>
+    </div>
+</div>
+<div class="wrap clearfix con_bg">
+    <div class="con_l">
+        <div class="pho_info">
+            <h4>
+                <em>马卡龙/底楼幽静独院清新洋房loft</em>
+            </h4>
+            <p title="上海市徐汇区乌鲁木齐南路145号">
+                <em class="col_pink">
+                    <a href="http://www.xiaozhu.com">小猪</a>
+                    &gt;
+                    <a href="http://sh.xiaozhu.com/">上海</a>
+                    &gt;
+                </em>
+                <span class="pr5">{{houseAddress}}
+                                  </span>
+            </p>
+
+            <div class="labels">
+                <span class="col_slogn" title="下单即可入住，无需房东确认"><i class="new_ico"></i>速订</span>
+                <span class="col_slogn" title="周租月租有折扣，长期入住更实惠"><i class="new_ico"></i>长租优惠</span>
+                <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
+                        <i class="new_ico"></i>优品
+                </span>
+                <span class="col_slogn" title="随时入住、交通便利、适合办公">
+                 <i class="new_ico"></i>商旅首选
+                 </span>
+
+
+
+
+                &nbsp;
+            </div>
+
+        </div>
+        <!-- 轮播图 -->
+        <div class="pho_show clearfix" id="detailImageBox">
+            <div class="pho_show_l">
+                <div id="temp1">
+                    <div class="JQ-content-box">
+                        <ul class="JQ-slide-content1"></ul>
+                        <ul class="JQ-slide-content">
+                            <li><a href="#" target="_blank"><img height="289"  class="mainImg" v-bind:src="houseImgurl"  width="549" /></a></li>
+                            <li><a href="#" target="_blank"><img height="289"  class="ImgA01" v-bind:src="houseImgUrl" width="549"></a></li>
+                            <li><a href="#" target="_blank"><img height="289" class="ImgA02" v-bind:src="houseImgUrl" width="549"></a></li>
+                            <li><a href="#" target="_blank"><img height="289" class="ImgA03" v-bind:src="houseImgUrl" width="549"></a></li>
+
+                        </ul>
+                    </div>
+                    <ul class="JQ-slide-nav">
+                        <li class="on"><a href="#" class="next"><img  class="mainImg01" v-bind:src="houseImgurl" ></a></li>
+                        <li><a href="#"><img  id="ImgB01" v-bind:src="houseImgUrl"></a></li>
+                        <li><a href="#"><img  id="ImgB02" v-bind:src="houseImgUrl"></a></li>
+                        <li><a href="#"><img  id="ImgB03"v-bind:src="houseImgUrl"></a></li>
+                    </ul>
+
+                </div><!--temp1 end-->
+
+            </div>
+            <div class="pho_show_r">
+                <ul class="JQ-slide-nav">
+                    <li class="on"><a href="#" class="next"><img src="img/guangg1.jpg"></a></li>
+                    <li><a href="#"><img src="img/guangg2.jpg"></a></li>
+                    <li><a href="#"><img src="img/guangg3.jpg"></a></li>
+                    <li><a href="#"><img src="img/guangg4.jpg"></a></li>
+                </ul>
+
+            </div>
+
+        </div>
+<!--       房屋介绍 -->
+        <div id="introducePart">
+            <ul class="house_info clearfix" id="introduce">
+                <li class="border_none">
+                    <h6 class="h_ico1">整套出租</h6>
+                    <p id="housearea">房屋面积：{{houseArea}}</p>
+                    <p id="HouseModel">房屋户型：{{houseModel}}</p>                 </li>
+                <li>
+                    <h6 class="h_ico2" id="LiveNumber">宜住{{liveNubmer}}人</h6>
+                    <p>
+                        房客独享整套房屋
+                    </p>
+                </li>
+                <li>
+                    <h6 class="h_ico3">共1张</h6>
+                    <p>
+
+                        双人床：1.4m宽 × 2m长 ×1张<br>
+                    </p>
+                </li>
+            </ul>
+            <div class="box_white clearfix detail_intro_item" hideheight="135" showheight="120">
+                <div class="info_l">
+                    <span class="info_ico1"></span>
+                    <p>个性描述</p>
+                </div>
+                <div class="info_r">
+                    <div class="info_text_mid">
+                        <p id="characterDes">{{characterDes}}</p>
+                    </div>
+                    <div class="open" style="display:none;">查看全部<span></span></div>
+                    <div class="stop" style="display:none;">收起<span></span></div>
+                </div>
+            </div>
+            <div class="box_gray clearfix detail_intro_item" hideheight="135" showheight="120">
+                <div class="info_l">
+                    <span class="info_ico2"></span>
+                    <p>内部情况</p>
+                </div>
+                <div class="info_r">
+                    <div class="info_text_mid">
+                        <p id="internalSit">{{internalSit}}</p>
+                    </div>
+                    <div class="open" style="display:none;">查看全部<span></span></div>
+                    <div class="stop" style="display:none;">收起<span></span></div>
+                </div>
+            </div>
+            <div class="box_white clearfix detail_intro_item" hideheight="135" showheight="120">
+                <div class="info_l">
+                    <span class="info_ico3"></span>
+                    <p>交通情况</p>
+                </div>
+                <div class="info_r">
+                    <div class="info_text_mid">
+                        <p id="trafficSit">{{trafficSit}}</p>
+                    </div>
+                    <div class="open" style="display:none;">查看全部<span></span></div>
+                    <div class="stop" style="display:none;">收起<span></span></div>
+                </div>
+            </div>
+            <div class=" box_gray  clearfix detail_intro_item" hideheight="135" showheight="120">
+                <div class="info_l">
+                    <span class="info_ico4"></span>
+                    <p>周边情况</p>
+                </div>
+                <div class="info_r">
+                    <div class="info_text_mid">
+                        <p id="surroundingSit">{{surroundingSit}}</p>
+                    </div>
+                    <div class="open" style="display:none;">查看全部<span></span></div>
+                    <div class="stop" style="display:none;">收起<span></span></div>
+                </div>
+            </div>
+            <div class="box_white clearfix detail_intro_item" hideheight="134" showheight="130">
+                <div class="info_l">
+                    <span class="info_ico5"></span>
+                    <p>配套设施</p>
+                </div>
+                <div class="info_r">
+                    <div class="intro_item_content" style="height: 130px; overflow: hidden;">
+                        <ul class="pt_list clearfix">
+                            <li class="s_ico_shower">热水淋浴                                </li>
+                            <li class="s_ico_wirelessnetwork">无线网络                                </li>
+                            <li class="s_ico_aircondition">空调                                </li>
+                            <li class="s_ico_tv">电视                                </li>
+                            <li class="s_ico_accesssys">门禁系统                                </li>
+                            <li class="s_ico_washer">洗衣机                                </li>
+                            <li class="s_ico_icebox">冰箱                                </li>
+                            <li class="s_ico_slippers">拖鞋                                </li>
+                            <li class="s_ico_toiletpaper">手纸                                </li>
+                            <li class="s_ico_brush">牙具                                </li>
+                            <li class="s_ico_towel">毛巾                                </li>
+                            <li class="s_ico_toiletries">浴液 洗发水                                </li>
+                            <li class="s_ico_soap">香皂                                </li>
+                            <li class="s_ico_iscook">允许做饭                                </li>
+                            <li class="s_ico_smoke">允许吸烟                                </li>
+                            <li class="s_ico_no">电梯</li>
+                            <li class="s_ico_no">停车位</li>
+                            <li class="s_ico_no">饮水设备</li>
+                            <li class="s_ico_no">浴缸</li>
+                            <li class="s_ico_no">暖气</li>
+                            <li class="s_ico_no">有线网络</li>
+                            <li class="s_ico_no">允许聚会</li>
+                            <li class="s_ico_no">允许带宠物</li>
+<!--                            <li class="s_ico_no">适宜儿童<i title="为儿童提供保护安全、便于就寝的设施" style="display: inline-block;width:12px;height:12px;background:url(../images/icon_wenhaogrey.png) no-repeat; background-size: 100% 100%;margin-left: 5px;"></i></li>-->
+<!--                            <li class="s_ico_no">适宜老人<i title="为老人提供方便进出和日常使用的设施" style="display: inline-block;width:12px;height:12px;background:url(../images/icon_wenhaogrey.png) no-repeat; background-size: 100% 100%;margin-left: 5px;"></i></li>-->
+<!--                            <li class="s_ico_no">适宜残疾人<i title="为残疾人提供无障碍通行和活动的设施" style="display: inline-block;width:12px;height:12px;background:url(../images/icon_wenhaogrey.png) no-repeat; background-size: 100% 100%;margin-left: 5px;"></i></li>-->
+                        </ul>
+                    </div>
+                    <div class="open" style="display: block;">查看全部<span></span></div>
+                    <div class="stop" style="display: none;">收起<span></span></div>
+                </div>
+            </div>
+            <div class="box_gray clearfix detail_intro_item" hideheight="135" showheight="120">
+                <div class="info_l">
+                    <span class="info_ico6"></span>
+                    <p>入住须知</p>
+                </div>
+                <div class="info_r">
+                    <div class="info_text_mid">
+
+                        <ul class="check_con clearfix">
+                            <li>卫生间：独立卫生间</li>
+                            <li>最少入住天数：1天</li>
+                            <li>最多入住天数：无限制</li>
+                            <li>是否接待境外人士：接待</li>                             <!--<li>被单更换：每客一换</li>-->
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="xq_map" id="MAP">
+<!--            <iframe src="houseMap.html" frameborder="0" height="500px" width="920px" scrolling="yes"></iframe>-->
+<!--            百度地图-->
+            <div id="allMap"></div>
+            <div class="map_text">
+                <table>
+                    <tbody><tr>
+                        <td id="Addr">
+
+                            房源位置：{{houseAddress}}
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </div>
+        </div>
+        <div class="bg_box" id="rulesPart">
+            <div class="clause_box">
+                <h5>押金、清洁费及其他费用</h5>
+                <p id="yajin">押金：
+
+                    {{deposit}}元                                                               <a href="http://www.xiaozhu.com/yunying/cashPledgeFree"><span class="zhima_deposit_noico">小猪担保免押 &gt;</span></a>
+                    <br>
+                    在线收取清洁费：100元 <br>
+                    加客：不允许加客<br></p>
+                <div class="clearfix">
+                    其他额外费用：无                 </div>
+            </div>
+            <div class="clause_box">
+                <h5>房东对房客的要求</h5>
+                <div>
+                    【节假日两天起订】【入住时间15:00后；退房时间12:00前】 <br>
+                    【早住晚退(包括行李寄存)需提前商量并需支付100元/小时的费用】 <br>
+                    【本房标准入住人数为2人以内，不接受加人或加床】 <br>
+                    【门外有探头，请勿超人数】<br>
+                    【请自觉进行垃圾分类并及时清理，若过于脏乱需加收清洁费100元】 <br>
+                    【请勿往马桶或下水道丢杂物，造成堵塞需承担疏通费用】 <br>
+                    【拍摄】【派对】【代订】请勿直接预订,请先联系房东,谢谢合作! <br>
+                    【请勿大声喧哗】【遵纪守法】【爱护房屋设施】【抽烟请在室外】 <br>
+                    【房间内配有驱蚊虫用品，但夏天仍有可能开窗从窗外飞入虫子等】 <br>
+                    【开发票需要自己承担税点】 <br>
+                    【民宿不是五星级民宿 **主义吹毛求疵者请去民宿】
+                </div>
+            </div>
+            <div class="clause_box">
+                <h5>预订方式</h5>
+                <p>
+                    下单即可入住，无需房东确认。<br>
+                    订单确认后，在线支付总房款的100%。<br>
+                    额外的服务费用不包含在总房租内，由房东线下收取。<br>
+                </p>
+            </div>
+<!--            预定规则，没预定之前不显示-->
+            <div class="clause_box border_none1 new_order_h old_rule_wrap" style="display: none;">
+                <h5>退订规则
+                </h5>
+                <div class="order_h " style="display: block;">
+                    <div class="order_bar">
+                        <ul class="clearfix">
+                            <li></li>
+                        </ul>
+                        <div class="order_tip1 pos_1">如取消订单，订金全部退还</div>
+                        <div class="order_tip2 pos_2">如取消订单，扣除前3天的订金</div>
+                        <div class="order_tip2 pos_3">如提前退房，扣除之后 3天的订金。</div>
+                        <div class="day_tip">
+                            <span class="point1"></span>
+                            <p id="pos_n_1">预订成功</p>
+                        </div>
+                        <div class="day_tip pos_4">
+                            <span class="point1"></span>
+                            <p id="pos_n_2">入住前7天14:00前</p>
+                        </div>
+                        <div class="day_tip pos_5">
+                            <span class="point2"></span>
+                            <p id="pos_n_3">入住当天14:00前</p>
+                        </div>
+                        <div class="day_tip pos_6">
+                            <span class="point3"></span>
+                            <p id="pos_n_4">退房当天12:00前</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="new_pos_notice">
+                    根据房东设置的交易规则未早于<span class="new_pos_n2">入住日14：00 7天</span>退订视为有责取消
+                    ，应扣除取消订单时间点后<span class="new_pos_n3"> 3</span>天订金作为违约金，剩余钱款将被原路退还
+                </div>
+            </div>
+<!--            退订说明-->
+            <div class="clause_box border_none1 new_order_h new_rule_wrap">
+                <h5>退订说明
+                </h5>
+                <div class="rule_wrap" id="newCancelRule">
+                    <ul class="rule_detail"><li id="shugang"><h3>09月28日14:00前取消，所有金额全部退还</h3></li>
+                        <li><h3>09月28日14:00后取消，扣除未入住首日房费，以及剩余房费的50%</h3></li></ul>
+                    <ul class="rule_tips_wrap"></ul>
+                </div>
+                <ul class="rule_tips"></ul>
+            </div>
+        </div>
+<!--        房屋评论-->
+        <div id="load_Ajax_GetDetalCommentAndOtherComment" class="commentlist bg_box mt_10">
+            房间评论
+
+            </div>
+
+
+
+
+
+    </div>
+    <div class="con_r">
+        <div class="top_bar clearfix">
+            <ul class="collection_ul" style="display:none;">
+                <li class="top_bar_w1 col_pink tl_text collection_btn_full">
+                    <a href="#ongo" class="ysc_ico un_collection_btn" id="unCollectionBtn">已收藏</a>
+                </li>
+                <li class="top_bar_w3 tl_text collection_btn_short" style="display:none;">
+                    <a class="sc_ico ysc_ico un_collection_btn"></a>
+                </li>
+            </ul>
+            <ul class="collection_ul">
+                <li class="top_bar_w1 tl_text collection_btn_full">
+                    <a href="#ongo" class="sc_ico collection_btn" id="collectionBtn">收藏</a>
+                </li>
+                <li class="top_bar_w3 tl_text collection_btn_short" style="display:none;">
+                    <a href="#ongo" class="sc_ico collection_btn"></a>
+                </li>
+            </ul>
+            <ul>
+                <li class="top_bar_w1 detail-default-share">
+                    <a href="#ongo" class="share_ico">分享</a>
+                </li>
+                <li class="top_bar_w4 pr detail-icon-share" style="display:none;">
+
+                </li>
+                <li class="top_bar_w2 border_right_none">评分：<em class="score-rate">5分</em></li>
+            </ul>
+        </div>
+<!--        预定-->
+        <div class="bg_box" id="floatRightBox" style="position: static;top: 56px;left: 1062.8px;z-index: 989;">
+            <div class="day_top clearfix" id="pricePart" style="display: block;">
+                <div class="day_l">¥<span id="housePrice">{{housePrice}}</span><em></em></div>
+                <div class="day_r">每晚</div>
+            </div>
+
+            <!--预定start-->
+            <div id="detailBookArea"><div class="reserve_box">
+                <input type="hidden" name="newfiexdPrice" id="newfiexdPrice" value="0">
+                <script>
+
+                    var isHideOrderNotice = document.getElementById('newfiexdPrice').value;
+                    var order_hh = document.getElementsByClassName('order_h');
+                    var orderNoticeText = '已参与特价活动，不可退订';
+                    var orderNotice = document.getElementsByClassName('new_pos_notice');
+                    if (isHideOrderNotice == '1') {
+                        orderNotice.innerHTML = orderNoticeText;
+                        order_hh[0].style.display = 'none';
+                    } else {
+                        order_hh[0].style.display = 'block';
+                    }
+
+                </script>
+
+
+                <div class="reserve_space">
+                    <div class="clearfix">
+                        <div class="reserve_date">
+                            <div class="reserve_ico" id="detailCalendarIco"></div>
+                            <input type="text" class="date_input" id="startenddate" readonly="" value="2019-10-5至2019-10-6">
+                            <input type="hidden" name="startdate" id="startdate" value="2019-10-05">
+                            <input type="hidden" name="enddate" id="enddate" value="2019-10-06">
+                            <div id="calendar-box" style="display:none" class="calendar_box clearfix"> </div>
+                        </div>
+                        <div class="select_box">
+                            <div class="select_arrow"></div>
+                            <input id="sameRoomNum" readonly="readOnly" data-bookroomnum="" type="text" value="1套">
+                            <ul class="select_con room_num_select limit10" id="detailRoomNumSelect" style="display: none;">
+                                <li data-num="1">1套</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="price_top">
+
+                        <div class="reserve_text">在线收取押金￥<span id="deposit">{{deposit}}</span></div>
+                    </div>
+                    <div class="order_btn_container">
+                        <a class="order_btn" href="#ongo" id="day_yuding">立即预订<span class="f14">（总计￥1133）</span></a>
+                    </div>
+                </div>
+                <div class="white_bg">
+                    <input type="hidden" id="avgprice" value="633">
+                    <input type="hidden" id="priceTip" value="">
+                    <ul class="cal_box clearfix">
+                        <li>05<br>¥633</li>
+                        <li>06<br>¥633</li>
+                        <li>07<br>¥422</li>
+                        <li>08<br>¥422</li>
+                        <li>09<br>¥422</li>
+                        <li class="line_none_r"><a id="showMoreCalendar" href="#">全部<br>日历</a> </li>
+                    </ul>
+                </div>
+            </div></div>
+            <!--预定end-->
+
+            <!--landlord info start-->
+
+            <div class="js_box clearfix">
+                <div class="member_pic">
+                    <div class="member_ico"></div>
+                    <a href="http://www.xiaozhu.com/fangdong/25036390101/" target="_blank">
+                        <img src="https://image.xiaozhustatic1.com/21/12,0,97,18159,329,329,fbdd957b.jpg" alt="">
+                    </a>
+                </div>
+                <div class="w_240" style="width: 215px;">
+                    <h6>
+                        <a class="lorder_name" href="http://www.xiaozhu.com/fangdong/25036390101/" title="alexssj" target="_blank">alexssj</a>
+                        <span class="member_boy_ico"></span>
+                    </h6>
+                    <p class="col_green">
+                        <span class="pl10" title="">实名认证</span>
+                        <!---->
+                        <!--<span class="zm_ico zm_credit">789</span>-->
+                        <!---->
+                    </p>
+
+                    <div id="alipay-trust-box" class="zhima_layer add4" style="display: none">
+                        <div class="zhima_box_top">
+                            <div class="zhima_jh">
+                                <h4 class="zhima_score_tit">芝麻分</h4>
+                                <h4 class="zhima_score">789</h4>
+                                <h4 class="zhima_score_result">信用极好</h4>
+                            </div>
+                            <p class="zhima_score_text">优秀的信用评分也在一定程度上体现出，这是一位身份可靠、重诺守信的房东，值得向您推荐！<a class="col_pink" href="http://www.xiaozhu.com/yunying/AlipayTrust" target="_blank">了解更多&gt;&gt;</a></p>
+                        </div>
+                        <div class="zhima_box_bottom">
+                            <em class="xz_zm_logov2"></em>
+                            <h4 class="f12">有信用，免押金</h4>
+                            <p class="f12">授权芝麻信用，芝麻分满600</p>
+                            <p class="f12">可在全国范围享受免押金入住</p>
+                            <a href="http://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo" target="_blank" class="look_score">查看我的芝麻分&gt;&gt;</a>
+                        </div>
+                    </div>                                      </div>
+                <div class="on_line col_pink">
+                    <span></span>
+                    <a class="btn_chat  show-register-box " href="#ongo" id="webim-chat-user" userid="25036390101" roomid="25053341903">在线聊天</a>
+                </div>
+            </div>
+            <!--landlord info end-->
+        </div>
+
+    </div>
+
+
+</div>
+<!--底部-->
+<div class="foot_v2">
+    <ul class="foot_ul">
+        <li><a class="guide" href="http://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=tenant" target="_blank">房客指南</a></li>
+        <li><a class="guide icon_fk" href="http://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=landlord" target="_blank">房东指南</a></li>
+        <li>
+            <span class="guide_T">关于我们</span>
+            <a href="http://www.xiaozhu.com/aboutus" target="_blank">关于小猪</a>
+            <a href="http://app.mokahr.com/apply/xiaozhu/4514" target="_blank">加入我们</a>
+            <a href="http://www.xiaozhu.com/contactus" target="_blank">联系我们</a>
+        </li>
+        <li>
+            <span class="guide_T">网站帮助</span>
+            <a href="http://www.xiaozhu.com/help/index" target="_blank">帮助中心</a>
+            <a href="http://www.xiaozhu.com/sitemap.html" target="_blank">网站地图</a>
+        </li>
+        <li class="width_280">
+            <span class="guide_T">网站协议</span><br>
+            <a href="http://www.xiaozhu.com/help/service" target="_blank">服务协议</a>
+            <a href="http://www.xiaozhu.com/help/landlordRule" target="_blank">房东规则</a>
+            <a href="http://www.xiaozhu.com/help/tenantRule" target="_blank">房客规则</a>
+            <a href="http://www.xiaozhu.com/help/auditRule" target="_blank">房源上线标准</a>
+            <a href="http://www.xiaozhu.com/help/privacy" target="_blank">隐私保护</a>
+            <a href="http://www.xiaozhu.com/help/copyright" target="_blank">版权声明</a>
+            <a href="http://www.xiaozhu.com/help/disclaimer" target="_blank">免责声明</a>
+            <a href="http://www.xiaozhu.com/help/intellectualProperty" target="_blank">知识产权声明</a>
+            <a href="http://www.xiaozhu.com/help/commentRule" target="_blank">点评发布规则</a>
+            <a href="http://www.xiaozhu.com/help/japanReservationRule" target="_blank">日本标准住宅宿泊仲介业约款</a>
+        </li>
+        <li class="bigFont online_kf">
+            <span class="logindialog"><i></i>在线客服</span>
+            <p>客服电话  400 - 010 - 7890</p>
+            <p>客服邮箱  service@xiaozhu.com</p>
+        </li>
+    </ul>
+    <dl class="link_dl">
+        <dt>城市导航</dt>
+        <dd>
+            <a target="_blank" href="//bj.xiaozhu.com/">北京短租房</a>
+            <a target="_blank" href="//sh.xiaozhu.com/">上海短租房</a>
+            <a target="_blank" href="//nj.xiaozhu.com/">南京短租房</a>
+            <a target="_blank" href="//cd.xiaozhu.com/">成都短租房</a>
+            <a target="_blank" href="//gz.xiaozhu.com/">广州短租房</a>
+            <a target="_blank" href="//cq.xiaozhu.com/">重庆短租房</a>
+            <a target="_blank" href="//wh.xiaozhu.com/">武汉短租房</a>
+            <a target="_blank" href="//dl.xiaozhu.com/">大连短租房</a>
+            <a target="_blank" href="//sanya.xiaozhu.com/">三亚短租房</a>
+            <a target="_blank" href="//lijiang.xiaozhu.com/">丽江短租房</a>
+            <a target="_blank" href="//tj.xiaozhu.com/">天津短租房</a>
+            <a target="_blank" href="//xianggang.xiaozhu.com/">香港短租房</a>
+            <a target="_blank" href="//cs.xiaozhu.com/">长沙短租房</a>
+            <a target="_blank" href="//wx.xiaozhu.com/">无锡短租房</a>
+            <a target="_blank" href="//km.xiaozhu.com/">昆明短租房</a>
+            <a target="_blank" href="//jn.xiaozhu.com/">济南短租房</a>
+            <a target="_blank" href="//xm.xiaozhu.com/">厦门短租房</a>
+            <a target="_blank" href="//qd.xiaozhu.com/">青岛短租房</a>
+            <a target="_blank" href="//zz.xiaozhu.com/">郑州短租房</a>
+            <a target="_blank" href="//xa.xiaozhu.com/">西安短租房</a>
+            <a target="_blank" href="//hz.xiaozhu.com/">杭州短租房</a>
+            <a target="_blank" href="//sz.xiaozhu.com/">深圳短租房</a>
+            <a target="_blank" href="//sy.xiaozhu.com/">沈阳短租房</a>
+            <a target="_blank" href="//su.xiaozhu.com/">苏州短租房</a>
+        </dd>
+    </dl>
+    <dl class="link_dl">
+
+    </dl>
+    <div class="foot_btm">京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp; <a href="//www.anquan.org/s/www.xiaozhu.com" |="" name="mt8SMvYyRDI92b06nuDs8dPFapllCJYidqhM1WlOoGRZ9DWpbo" rel="nofollow" target="_blank">安全联盟</a> &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp; <a href="http://www.xiaozhu.com/images/yingye.jpg" |="" name="yingyezhizhao" rel="nofollow" target="_blank">营业执照号 103613118</a> <span style="display:none">  &nbsp;&nbsp; 地址：北京市海淀区知春路56号   &nbsp;&nbsp;电话：010-62961978</span>
+    </div>
+    <div style="margin:0 auto;color:#bdc3c7;">
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020380" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="img/govRecord_icon.png"><p style="display:inline-block;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#bdc3c7;">京公网安备 11010802020380号</p></a>
+        &nbsp;&nbsp; 违法和不良信息举报电话：4000107890（1号转6号） &nbsp;&nbsp; 举报邮箱：jubao@xiaozhu.com
+    </div>
+</div>
+
+<!--悬浮快-->
+<div class="suspension" style="display: block">
+    <ul class="suspension_lf">
+        <li class="sus_list1" id="im_chat_btn" title="在线消息">
+            <span style="position: relative"></span>
+        </li>
+        <li class="sus_list2" id="im_collection_btn" title="收藏">
+            <span></span>
+        </li>
+        <li class="sus_list3" id="im_noticeAndNotification_btn" title="提醒和系统消息">
+            <span></span>
+        </li>
+        <li class="sus_list4" id="im_feedBack_btn" title="反馈">
+            <span></span>
+        </li>
+        <li class="sus_list5" id="im_qrCode_btn" title="二维码">
+            <span></span>
+        </li>
+    </ul>
+    <div class="suspension_rg" id="to_go">
+        <a href="#"></a>
+    </div>
+</div>
+
+
+</body>
+</html>

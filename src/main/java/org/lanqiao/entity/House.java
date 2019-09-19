@@ -11,6 +11,7 @@ public class House {
     @Id
     @Field
     private Integer houseId;
+    private Set<HouseImg> houseImgSet;
 
     @Field
     private String houseName;
@@ -105,6 +106,14 @@ public class House {
 
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
+    }
+
+    public Set<HouseImg> getHouseImgSet() {
+        return houseImgSet;
+    }
+
+    public void setHouseImgSet(Set<HouseImg> houseImgSet) {
+        this.houseImgSet = houseImgSet;
     }
 
     public String getHouseName() {
