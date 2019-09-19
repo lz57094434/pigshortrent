@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/base.css">
+    <script src="js/md5.js"></script>
+</head>
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    var canin = 0;
+    var code = 000000;
+
+    // 发送验证码
+    function getMsgNum(that) {
+        var phonenum = $('#phone').val();
+        console.log(phonenum);
+        $.ajax({
+            url: "http://localhost:8080/sms/smsXxs?phone=" + phonenum, // 后台短信发送接口
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            contentType: "application/json",
+            data: {phone: phonenum},
+            success: function (json) {
+                var all = eval(json);
+                console.log(all.verifyCode);
+                code = all.verifyCode;
+            },
+            error: function () {
+            }
+        });
+    }
+
+    //登陆切换
+    function fir(that) {
+        $("#generalLogin").css("display", "block");
+        $("#generalLi").attr("class", "percent_50 tc cur underL1");
+        code2 = 1
+        $("#mobileLogin").css("display", "none");
+        $("#mobileLi").attr("class", "percent_50 tc cur ");
+    }
+
+    //手机号验证
+    function check(that) {
+        $("#help").text("");
+        $.ajax({
+            url: "/select3",
+            type: 'post',
+            data: {'phone': $("#phone").val()},
+            success: function (data) {
+                if (data == "") {
+                    $("#help").text("手机号可以使用");
+                    canin = 1;
+                } else {
+                    $("#help").text("您的手机号已经存在");
+                    canin = 0;
+                }
+            }
+        })
+    }
+
+    function sec(that) {
+        code2 = 2;
+        $("#generalLogin").css("display", "none");
+        $("#generalLi").attr("class", "percent_50 tc cur");
+        $("#mobileLogin").css("display", "block");
+        $("#mobileLi").attr("class", "percent_50 tc cur underL1");
+    }
+
+    //登陆
+    function submit(that) {
+        var hash = hex_md5("#password");
+        $.ajax({
+            url: "/select2",
+            type: 'post',
+            data: {
+                'userName': $("#input-username").val(),
+                'password': hash,
+            },
+            success: function (data) {
+                if (data == "") {
+                    alert("密码错误");
+                    canin = 0;
+                } else {
+
+                    javascript:location.href = 'index.html';
+                }
+            }
+        })
+    }
+
+    //验证码验证
+    function submit2(that) {
+        $('#error1').remove();
+        $('#error2').remove();
+        var pass = $('#code').val();
+        if (pass == code) {
+            javascript:location.href = 'index.html';
+        } else {
+            $('#code').after("<span style='color: red' id='error2'>验证码错误</span>");
+        }
+    }
+
+    function remove(that) {
+        $("#error2").remove();
+    }
+</script>
+<body>
+<div id="allpage">
+    <div id="logo"></div>
+    <div id="wenzi">居住自由主义</div>
+    <div class="w_698">
+        <div class="clearfix">
+            <div class="r_main_l">
+                <ul class="r_tab clearfix">
+                    <li class="percent_50 tc cur underL1" id="generalLi" onclick="fir(this)">普通登录</li>
+                    <li class="percent_50 tc cur" id="mobileLi" onclick="sec(this)">短信快捷登录</li>
+                </ul>
+                <div id="generalLogin" style="display: block;">
+                    <ul class="register_list">
+                        <li>
+                            <div class="h_30">&nbsp;
+                            </div>
+                            <div class="pr">
+                                <div class="r_tel_ico"></div>
+                                <input type="text" class="r_input_1" id="input-username" autocomplete="off"
+                                       placeholder="账号">
+                                <div id="nation-code" class="region nation-num" style="display: none;">
+                                </div>
+                            </div>
+                        </li>
+                        <li><span id="help" style="color: red; font-size: 8px"></span></li>
+                        <li>
+                            <div class="h_30">
+                                <div class="r_error_tip" id="input-username-tip" style="display: none;"><span
+                                        class="icon-wrong" id=""></span>手机号未注册
+                                </div>
+                            </div>
+                            <div class="pr">
+                                <div class="r_password_ico"></div>
+                                <input type="password" class="r_input_1" id="password" autocomplete="off"
+                                       placeholder="密码">
+                                <div class="h_30">
+                                    <div class="r_error_tip" id="password-tip" style="display: none;"><span
+                                            class="ipt-text-pass"></span></div>
+                                </div>
+                            </div>
+                        </li>
+                        <span style="display:none" id="verify-show"></span>
+                    </ul>
+                    <a class="r_input mt_10" id="orgBtn" onclick="submit(this)">登录</a>
+                </div>
+                <div id="mobileLogin" style="display: none;">
+                    <ul class="register_list">
+                        <li>
+                            <div class="h_30">&nbsp;</div>
+                            <div class="pr">
+                                <div class="r_telepho_ico"></div>
+                                <input type="text" class="r_input_small" id="phone" autocomplete="off"
+                                       value="15860303073" placeholder="手机号" onblur="check(this)">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="h_30">
+                                <div class="r_error_tip" id="quick-input-mobile-tip" style="display: none;"><span
+                                        class="icon-ok"></span></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="pr">
+                                <div class="r_vali_ico"></div>
+                                <input type="text" class="r_input_small" id="code" autocomplete="off"
+                                       placeholder="动态验证码">
+                                <span class="btn have-nb" id="quick-get-code-btn"
+                                      onclick="getMsgNum(this)">获取动态验证码</span>
+                                <div class="h_30">
+                                    <div class="r_error_tip" id="quick-activate-code-tip" style="display: none;"><span
+                                            class="icon-ok"></span></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a class="r_input mt_10" id="orgBtnMobile" onclick="submit2(this)" onmousemove="remove(this)">登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

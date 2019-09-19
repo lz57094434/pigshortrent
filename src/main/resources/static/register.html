@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<script src="js/jquery-3.3.1.js"></script>
+<script type="text/ecmascript" src="js/md5.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script>
+    var caninsert = null;
+    var code = 000000;
+
+    /**
+     * 获取验证码
+     * @param that
+     */
+    function getMsgNum(that) {
+        var phonenum = $('#input-mobile').val();
+        console.log(phonenum);
+        $.ajax({
+            url: "http://localhost:8080/sms/smsXxs?phone=" + phonenum, // 后台短信发送接口
+            type: 'POST',
+            dataType: 'json',
+            async: false,
+            contentType: "application/json",
+            data: {phone: phonenum},
+            success: function (data) {
+                var all = eval(data);
+                code = all.verifyCode;
+            },
+        });
+    }
+    // 检测手机号
+    function check(that) {
+        $("#help").text("");
+        $.ajax({
+            url: "/select3",
+            type: 'post',
+            data: {'phone': $("#input-mobile").val()},
+            success: function (data) {
+                if($("#input-mobile").val()==""){
+                    $("#help").text("手机号为空")
+                    caninsert=0;
+                }
+                else if($("#input-mobile").val().length!=11){
+                    $("#help").text("手机号违法")
+                    caninsert=0;
+                }
+                else {
+                    if (data == "") {
+                        $("#help").text("手机号可以使用")
+                        caninsert = 1;
+                    } else {
+                        $("#help").text("您的手机号已经存在");
+                        caninsert = 0;
+                    }
+                }
+            }
+        })
+    }
+    function checkname(that) {
+        $.ajax({
+            url:"/select",
+            type:"post",
+            data:{"userName":$("#username").val()},
+            success:function (data) {
+                if($("#username").val()==""){
+                    caninsert=0;
+                }
+                else{
+                    if(data==""){
+                        caninsert=1
+                    }
+                    else{
+                        caninsert=0;
+                    }
+                }
+
+            }
+        })
+    }
+    function insertUser(that) {
+        var hash = hex_md5("#password");
+        console.log(hash);
+        if(caninsert==1){
+            $.ajax({
+                url:"/insert",
+                type: 'POST',
+                data:{
+                    "phone":$("#input-mobile").val(),
+                    "userName":$("#username").val(),
+                    "password":hash,
+                },
+                success:function (data) {
+                    javascript:location.href = 'login.html';
+
+                }
+            })
+        }
+
+    }
+</script>
+<body>
+<div class="xz-bg"
+     style="background-image:url(https://image.xiaozhustatic1.com/00,1600,700/21,0,93,37501,1600,700,3320225b.jpg)">
+    <img src="https://image.xiaozhustatic1.com/00,1600,700/21,0,93,37501,1600,700,3320225b.jpg"
+         style="height: auto; width: 1519px; margin-top: -148px;">
+</div>
+<div id="logo"></div>
+<div id="wenzi">居住自由主义</div>
+<div class="w_698 login_register_box " style="" id="registerDialog">
+    <div class="clearfix">
+        <div class="r_main_l">
+            <ul class="r_tab1 clearfix">
+                <li class="fl cur">注册小猪账号</li>
+            </ul>
+            <ul class="register_list">
+                <li>
+                    <div class="h_30">&nbsp;</div>
+                    <div class="pr red-border" id="reg">
+                        <div class=" r_telepho_ico"></div>
+                        <input type="text" id="input-mobile" autocomplete="off" placeholder="手机号" class="r_input_small col_input" value="" onmouseout="check(this)" ><div id="nation-code" class="region nation-num">
+                        <div class="nation-cont">
+                            <img src="image/China.jpg">
+                            <i tag="CN" code="86">+86</i>
+                        </div>
+                    </div>
+                    </div>
+                </li>
+                <li>
+                    <span id="help" style="color: red; font-size: 8px"></span>
+                </li>
+                <div class="pr">
+                    <div class="r_num_ico"></div>
+                    <input id="invitecode" type="text" autocomplete="off" placeholder="验证码" class="r_input_1">
+                </div>
+                <br>
+            </ul>
+            <a href="#" id="" class="r_input" onclick="getMsgNum(this)">发送验证码</a>
+            <br>
+            <a href="#" id="reg-btn" class="r_input" onclick="insertUser(this)">立即注册</a>
+            <p class="mt_20">
+                <span class="check_css3 agreeResBox">
+                    <input type="checkbox" class="input_check" id="check3">
+                    <label for="check3"></label>
+                </span>
+                我同意 <a href="http://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a
+                    href="http://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
+            </p>
+        </div>
+        <div class="r_main_r">
+            <input id="username" placeholder="请输入用户名" class="r_input_1" style="width: 150px" onmouseout="checkname(this)">
+            <br><br><br>
+            <input id="password" placeholder="请输入密码" class="r_input_1">
+        </div>
+    </div>
+</div>
+</body>
+</html>
