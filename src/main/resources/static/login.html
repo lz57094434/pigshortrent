@@ -51,6 +51,8 @@
             type: 'post',
             data: {'phone': $("#phone").val()},
             success: function (data) {
+                $.cookie('userId',data.userId);
+                $.cookie('realName',data.realName);
                 if (data == "") {
                     $("#help").text("手机号可以使用");
                     canin = 1;

@@ -26,7 +26,7 @@
     select * from user where user_name=#{userName,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
   </select>
   <select id="selectuser3" resultMap="BaseResultMap" >
-    select phone from user where phone=#{phone,jdbcType=VARCHAR}
+    select * from user where phone=#{phone,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select *
