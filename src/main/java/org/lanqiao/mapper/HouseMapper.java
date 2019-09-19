@@ -24,7 +24,7 @@ public interface HouseMapper {
 
     int updateByPrimaryKey(House record);
 
-
+    //显示房间订单页房间信息
     List<House> OrderMessage();
 
 }

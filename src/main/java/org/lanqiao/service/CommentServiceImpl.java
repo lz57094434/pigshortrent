@@ -16,7 +16,6 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     CommentMapper commentMapper;
 
-
     @Override
     public int insert(Comment record) {
         return commentMapper.insert(record);
