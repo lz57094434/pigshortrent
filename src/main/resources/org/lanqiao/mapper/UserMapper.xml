@@ -20,10 +20,10 @@
     work, user_note
   </sql>
   <select id="selectuser" resultMap="BaseResultMap" >
-    select user_name from user where user_name=#{userName,jdbcType=VARCHAR}
+    select * from user where user_name=#{userName,jdbcType=VARCHAR}
   </select>
   <select id="selectuser2" resultMap="BaseResultMap" >
-    select user_name,password from user where user_name=#{userName,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+    select * from user where user_name=#{userName,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
   </select>
   <select id="selectuser3" resultMap="BaseResultMap" >
     select phone from user where phone=#{phone,jdbcType=VARCHAR}

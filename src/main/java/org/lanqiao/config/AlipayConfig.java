@@ -27,7 +27,7 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu/vajmE4VqUDgwD7HhCpNLGPg/E7uMD1lA93uQE2CqStmGU1xrsHtsyIRiyg60PArYcOyZiytcXF4fDKRvpCSZ8qhf/XiHE8WP6m6S+9v/sr46sinkjdt2J0tgfQJp6Ys5ZjF5QEqQEIJfjZIuYpzTf+LVGMl6ZKyn2yLBVgstkZDX/KQD96a+kp4l3r3khiwMEYIYgpp2hbjmz9GkBG1p7mUEovl6Ar0Y5j6dyG2RUMk+jRzKQgQzkavQvfUFbNl3HWWz/IoBJznmi9k+Lqv9FPG728HxHUjbYfZ+y0MtU0kaeMtpNI7wPJkUphKGLxLae8AwI+6+N48jEfz09aFQIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://6z2ypg.natappfree.cc/1.html";
+	public static String notify_url = "http://iw7d8k.natappfree.cc/1.html";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
 	public static String return_url = "http://6z2ypg.natappfree.cc/2.html";
