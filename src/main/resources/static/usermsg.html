@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人资料</title>
+</head>
+<link rel="stylesheet" href="css/usermsg.css" type="text/css">
+<script src="js/jquery-3.4.1.js"></script>
+<script>
+    var userId = 3;
+    var username;
+    var password;
+    var phone;
+    var email;
+    var realName;
+    var cardId;
+    var birthday;
+    var userAddress;
+    var u_sex;
+    $(function () {
+        //查询个人信息
+        // $(".i_i").click(function () {
+        $.ajax({
+            url: "/s",
+            type: "post",
+            data: {"userId": 3},
+            dataType: "json",
+            success: function (data) {
+                $("#uy_name").val(data.userName);
+                $("#uy_pass").val(data.password);
+                $("#uy_tell").val(data.phone);
+                $("#uy_email").val(data.email);
+                $("#uy_rail").val(data.realName);
+                $("#uy_card").val(data.cardId);
+                $("#uy_sex").val(data.sex);
+                $("#uy_birth").val(data.birthday);
+                $("#uy_address").val(data.userAddress);
+                $("#qwqw").val(data.userName);
+            }
+            // })
+        })
+
+        //更新
+        $("input[name='t']").click(function () {
+            if ($("input[name='u_name']").val() == "") {
+                username = $("#uy_name").val();
+            } else {
+                username = $("input[name='u_name']").val();
+            }
+            if ($("input[name='u_pass']").val() == "") {
+                password = $("#uy_pass").val();
+            } else {
+                password = $("input[name='u_pass']").val();
+            }
+            if ($("input[name='u_tell']").val() == "") {
+                phone = $("#uy_tell").val();
+            } else {
+                phone = $("input[name='u_tell']").val();
+            }
+            if ($("input[name='u_email']").val() == "") {
+                email = $("#uy_email").val();
+            } else {
+                email = $("input[name='u_email']").val();
+            }
+            if ($("input[name='u_rail']").val() == "") {
+                realName = $("#uy_rail").val();
+            } else {
+                realName = $("input[name='u_rail']").val();
+            }
+            if ($("input[name='u_card']").val() == "") {
+                cardId = $("#uy_card").val();
+            } else {
+                cardId = $("input[name='u_card']").val();
+            }
+            if ($("input[name='u_address']").val() == "") {
+                userAddress = $("#uy_address").val();
+            } else {
+                userAddress = $("input[name='u_address']").val();
+            }
+            if ($("input[name='u_birth']").val() == "") {
+                birthday = $("#uy_birth").val();
+            } else {
+                birthday = $("input[name='u_birth']").val();
+            }
+            if ($("input[name='u_sex']").val() == "") {
+                u_sex = $("#uy_sex").val();
+            } else {
+                u_sex = $("input[name='u_sex']").val();
+            }
+
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8080/usermsg",
+                dataType: "json",
+                data: {
+                    "userName": username,
+                    "userId": userId,
+                    "sex": u_sex,
+                    "password": password,
+                    "phone": phone,
+                    "email": email,
+                    "realName": realName,
+                    "cardId": cardId,
+                    "birthday": birthday,
+                    "userAddress": userAddress
+                },
+                success: function () {
+                    window.location.href = "http://localhost:8080/usermsg.html"
+                }
+            })
+        });
+    })
+</script>
+<body>
+<div id="top">
+    <div class="top">
+        <div class="top-one">
+            <a class="logo_v2 logo_black" href="#"></a>
+            <span class="slogan"></span>
+
+            <ul class="nav">
+                <li>
+                    <input type="text" id="qwqw">
+                </li>
+                <li>
+                    <span class="line_index"></span></li>
+                <li>
+                    <a href="#">我的订单</a>
+                </li>
+                <li>
+                    <span class="line_index"></span>
+                </li>
+                <li>
+                    <a class="active" href="#">短租指南</a>
+                </li>
+                <li>
+                    <a href="#" class="icon iphone">手机小猪</a>
+                </li>
+                <li>
+                    <a id="Pub_Btn" class="btn_public " href="#"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="main">
+    <div id="cent1"><img src="img/img1.jpg"></div>
+    <div id="cent2">我是房客>个人资料</div>
+    <div id="cent3">
+        <div id="index">
+            <ul>
+                <li>
+                    <div class="i_i"><a>个人资料</a></div>
+                </li>
+            </ul>
+        </div>
+        <div id="msg_main">
+            <form method="post">
+                <div class="l_t">基本信息</div>
+                <div class="m">
+                    <div class="g">用户名:</div>
+                    <input type="text" id="uy_name" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_name" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">密码:</div>
+                    <input type="text" id="uy_pass" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_pass" type="password"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">手机号码:</div>
+                    <input type="text" id="uy_tell" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_tell" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">邮箱:</div>
+                    <input type="text" id="uy_email" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_email" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">出生日期:</div>
+                    <input type="text" id="uy_birth" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_birth" type="date"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">地址:</div>
+                    <input type="text" id="uy_address" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_address" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="l_t">个人信息</div>
+                <div class="note">仅用于必要的安全环节，其他情况我们将严格为您保密</div>
+                <div class="m">
+                    <div class="g">真实姓名:</div>
+                    <input type="text" id="uy_rail" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_rail" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">身份证:</div>
+                    <input type="text" id="uy_card" style="width: 180px;border: 0">
+                    <div class="i"><input name="u_card" type="text"
+                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    </div>
+                </div>
+                <div class="m">
+                    <div class="g">性别:</div>
+                    <input type="text" id="uy_sex" style="width: 130px;border: 0">
+                    <div class="i"><input name="u_sex" type="radio" value="" style="width: 40px">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            name="c"
+                            type="radio"
+                            value=""
+                            style="width: 40px">女
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+            </form>
+            <div id="chang"><input name="t" id="baocun" type="button" value="一键保存"></div>
+        </div>
+    </div>
+    <div id="foot">
+
+        <div class="foot_btm">京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp; <a |=""
+                                                                                             name="mt8SMvYyRDI92b06nuDs8dPFapllCJYidqhM1WlOoGRZ9DWpbo"
+                                                                                             rel="nofollow"
+                                                                                             target="_blank">安全联盟</a>
+            &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp; <a |="" name="yingyezhizhao" rel="nofollow" target="_blank">营业执照号
+                103613118</a> <span
+                    style="display:none">  &nbsp;&nbsp; 地址：北京市海淀区知春路56号   &nbsp;&nbsp;电话：010-62961978</span>
+            <div style="margin:0 auto;color:#bdc3c7;">
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020380"
+                   style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
+                        src="img/govRecord_icon.png">
+                    <p style="display:inline-block;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#bdc3c7;">
+                        京公网安备 11010802020380号</p></a>
+                &nbsp;&nbsp; 违法和不良信息举报电话：4000107890（1号转6号） &nbsp;&nbsp; 举报邮箱：jubao@xiaozhu.com
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

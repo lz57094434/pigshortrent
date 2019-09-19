@@ -1,5 +1,9 @@
 package org.lanqiao.entity;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 import java.util.Date;
 
 public class User {
@@ -18,7 +22,7 @@ public class User {
     private String cardId;
 
     private String sex;
-
+    @DateTimeFormat (pattern= "yyyy-MM-dd")
     private Date birthday;
 
     private String userAddress;
@@ -122,4 +126,6 @@ public class User {
     public void setUserNote(String userNote) {
         this.userNote = userNote == null ? null : userNote.trim();
     }
+
+
 }

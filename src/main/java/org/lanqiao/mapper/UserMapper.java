@@ -25,4 +25,5 @@ public interface UserMapper {
     User selectuser2(@Param("userName") String userName, @Param("password") String password);
     User selectuser3(@Param("phone") String phone);
 
+    int updatetest(String userName);
 }
