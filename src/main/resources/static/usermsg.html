@@ -87,8 +87,7 @@
         })
 
         //更新
-        $("input[name='t']").click(function () {
-            username = $("input[name='u_name']").val();
+        $(#chang).click(function () {
             $.ajax({
                 type: "post",
                 url: "http://localhost:8080/usermsg",
@@ -130,7 +129,7 @@
                     <input type="text" id="uy_name" style="width: 130px;border: 0">
                     <div class="i"><input name="u_name" type="text"
                                           style="width:200px;height:20px;border:1px solid #666666;">
-                        <input name="t" type="button" value="保存" style="background-color: #ffffff;border: 0"></div>
+                    </div>
                 </div>
                 <div class="m">
                     <div class="g">密码:</div>
@@ -195,6 +194,7 @@
                     </div>
                 </div>
             </form>
+            <div id="chang"><input name="t" id="baocun" type="button" value="一键保存"></div>
         </div>
     </div>
     <div id="foot">
