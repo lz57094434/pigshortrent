@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.HouseMapper" >
-  <resultMap id="BaseResultMap" type="org.lanqiao.entity.House" >
+  <resultMap id="HouseResultMap" type="org.lanqiao.entity.House" >
     <id column="house_id" property="houseId" jdbcType="INTEGER" />
     <result column="house_name" property="houseName" jdbcType="VARCHAR" />
     <result column="house_price" property="housePrice" jdbcType="INTEGER" />
@@ -20,13 +20,27 @@
     <result column="latitude" property="latitude" jdbcType="REAL" />
     <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <collection property="houseImgSet" resultMap="HouseImgResultMap"></collection>
   </resultMap>
+    <resultMap id="HouseImgResultMap" type="org.lanqiao.entity.HouseImg" >
+        <id column="house_img_id" property="houseImgId" jdbcType="INTEGER" />
+        <result column="house_img_url" property="houseImgUrl" jdbcType="VARCHAR" />
+        <result column="house_id" property="houseId" jdbcType="INTEGER" />
+    </resultMap>
   <sql id="Base_Column_List" >
     house_id, house_name, house_price, deposit, house_number, house_address, house_area, 
     house_model, live_nubmer, character_des, internal_sit, traffic_sit, surrounding_sit, 
     house_imgurl, longitude, latitude, publisher_id, user_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+  <select id="getAll" resultMap="HouseResultMap">
+    select * from house
+  </select>
+    <select id="getImg" resultMap="HouseResultMap" parameterType="java.lang.Integer">
+        SELECT *  from house h,houseimg t WHERE t.house_id=h.house_id and h.house_id=#{houseId} ORDER BY t.house_img_id
+    </select>
+
+  <select id="selectByPrimaryKey" resultMap="HouseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from house

@@ -2,6 +2,8 @@ package org.lanqiao.entity;
 
 public class HouseImg {
     private Integer houseImgId;
+    private House house;
+
 
     private String houseImgUrl;
 
@@ -9,6 +11,14 @@ public class HouseImg {
 
     public Integer getHouseImgId() {
         return houseImgId;
+    }
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
     }
 
     public void setHouseImgId(Integer houseImgId) {
@@ -29,5 +39,15 @@ public class HouseImg {
 
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
+    }
+
+    @Override
+    public String toString() {
+        return "HouseImg{" +
+                "houseImgId=" + houseImgId +
+                ", house=" + house +
+                ", houseImgUrl='" + houseImgUrl + '\'' +
+                ", houseId=" + houseId +
+                '}';
     }
 }

@@ -30,23 +30,23 @@
 	<title>Warm heart map</title>
 </head>
 <body>
-	<div id="nav">
-		<div id="mapsearch">			
-			<div style="font-size: 16px; padding-top: 8px; padding-left: 15px; color: #FF3030;">热搜词：
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">天安门</a> 
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">桂林山水</a> 
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">天涯海角</a> 
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">世界之窗</a>
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">希尔顿酒店</a>
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">KTV</a>
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">美食街</a>
-				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">景点</a>				
-				<input type="text" id ="searchinput" name="weatherinput" placeholder="请输入要查询的地名或景点，如：厦门大学" style="width:400px; height:32px;background:rgba(242,242,242,0.5);	margin-left:120px;  font-size: 16px;color: #330000;"></input>
-				<button id="searchbtn" οnmοuseοver="mouseon(this)" style="width:80px; height:32px; background: #CFE2F3; font-size: 16px;">Search</button>
-			</div>		
- 
-		</div>
-	</div>
+<!--	<div id="nav">-->
+<!--		<div id="mapsearch">			-->
+<!--			<div style="font-size: 16px; padding-top: 8px; padding-left: 15px; color: #FF3030;">热搜词：-->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">天安门</a> -->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">桂林山水</a> -->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">天涯海角</a> -->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">世界之窗</a>-->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">希尔顿酒店</a>-->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">KTV</a>-->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">美食街</a>-->
+<!--				<a href="#" οnclick="hotcityclick(this)" style="text-decoration:none; margin-left: 5px;">景点</a>				-->
+<!--				<input type="text" id ="searchinput" name="weatherinput" placeholder="请输入要查询的地名或景点，如：厦门大学" style="width:400px; height:32px;background:rgba(242,242,242,0.5);	margin-left:120px;  font-size: 16px;color: #330000;"></input>-->
+<!--				<button id="searchbtn" οnmοuseοver="mouseon(this)" style="width:80px; height:32px; background: #CFE2F3; font-size: 16px;">Search</button>-->
+<!--			</div>		-->
+<!-- -->
+<!--		</div>-->
+<!--	</div>-->
 	<div id="allmap"></div>
  
 </body>
@@ -63,7 +63,9 @@
             BMAP_HYBRID_MAP
         ]}));	  
 	map.setCurrentCity("厦门");          // 设置地图显示的城市 此项是必须设置的
-	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	map.enableScrollWheelZoom(true);
+	//开启鼠标滚轮缩放
+
 	var local = new BMap.LocalSearch(map, {
 		renderOptions:{map: map}
 	});
