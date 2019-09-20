@@ -246,4 +246,22 @@ public class House {
         this.latitude = latitude;
     }
 
+    private Integer publisherId;
+
+    private Integer userId;
+    public Integer getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(Integer publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

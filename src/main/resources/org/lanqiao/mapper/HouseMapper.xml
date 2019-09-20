@@ -191,18 +191,18 @@
     where house_id = #{houseId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.lanqiao.entity.House" >
-    insert into house (house_id, house_name, house_price, 
-      deposit, house_number, house_address, 
-      house_area, house_model, live_nubmer, 
-      character_des, internal_sit, traffic_sit, 
-      surrounding_sit, house_imgurl, longitude, 
+    insert into house (house_id, house_name, house_price,
+      deposit, house_number, house_address,
+      house_area, house_model, live_nubmer,
+      character_des, internal_sit, traffic_sit,
+      surrounding_sit, house_imgurl, longitude,
       latitude, publisher_id, user_id
       )
-    values (#{houseId,jdbcType=INTEGER}, #{houseName,jdbcType=VARCHAR}, #{housePrice,jdbcType=INTEGER}, 
-      #{deposit,jdbcType=INTEGER}, #{houseNumber,jdbcType=INTEGER}, #{houseAddress,jdbcType=VARCHAR}, 
-      #{houseArea,jdbcType=VARCHAR}, #{houseModel,jdbcType=VARCHAR}, #{liveNubmer,jdbcType=INTEGER}, 
-      #{characterDes,jdbcType=VARCHAR}, #{internalSit,jdbcType=VARCHAR}, #{trafficSit,jdbcType=VARCHAR}, 
-      #{surroundingSit,jdbcType=VARCHAR}, #{houseImgurl,jdbcType=VARCHAR}, #{longitude,jdbcType=REAL}, 
+    values (#{houseId,jdbcType=INTEGER}, #{houseName,jdbcType=VARCHAR}, #{housePrice,jdbcType=INTEGER},
+      #{deposit,jdbcType=INTEGER}, #{houseNumber,jdbcType=INTEGER}, #{houseAddress,jdbcType=VARCHAR},
+      #{houseArea,jdbcType=VARCHAR}, #{houseModel,jdbcType=VARCHAR}, #{liveNubmer,jdbcType=INTEGER},
+      #{characterDes,jdbcType=VARCHAR}, #{internalSit,jdbcType=VARCHAR}, #{trafficSit,jdbcType=VARCHAR},
+      #{surroundingSit,jdbcType=VARCHAR}, #{houseImgurl,jdbcType=VARCHAR}, #{longitude,jdbcType=REAL},
       #{latitude,jdbcType=REAL}, #{publisherId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
       )
   </insert>

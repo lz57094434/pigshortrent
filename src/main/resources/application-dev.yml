@@ -7,8 +7,13 @@ spring:
   data:
     solr:
       host: http://localhost:8983/solr/articles
+file:
+  location:
+    path: D:/upload
+
 
 mybatis:
+#  mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: org.lanqiao.entity
 
 pagehelper:
@@ -23,7 +28,3 @@ logging:
     org:
       lanqiao:
         mapper: debug
-#solr配置
-#  data:
-#    solr:
-#      host: http://127.0.0.1:8983/solr/articles

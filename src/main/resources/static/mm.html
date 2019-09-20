@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="css/mm.css" rel="stylesheet">
+<script src="js/jquery-3.4.1.js"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script>
+<script src="js/jquery.fileupload-process.js"></script>
+<script src="js/jquery.fileupload-validate.js"></script>
+<script src="js/img.js"></script>
+<script>
+    $(function() {
+        $("input[name=butt]").click(function () {
+            // alert($("input[name=housename]").val());
+            $.ajax({
+                url: "/house",
+                type:"post",
+                data:{"houseName":$("input[name=housename]").val()
+                    ,"housePrice":$("input[name=houseprice]").val(),
+                    "houseNumber;":$("input[name=house_number]").val(),
+                    "houseArea":$("input[name=house_area]").val(),
+                    "liveNubmer":$("input[name=live_number]").val(),
+                    "characterDes":$("input[name=character_des]").val(),
+                    "internalSit":$("input[name=internal_sit]").val(),
+                    "trafficSit":$("input[name=traffic_sit]").val(),
+                    "surroundingSit":$("input[name=surrounding_sit]").val()
+                    ,"deposit":$("input[name=house_deposit]").val(),
+                    "houseModel":$("input[name=house_model]").val(),
+                    "houseAddress":$("input[name=house_address]").val()+$("input[name=address_three]").val(),
+                    "latitude":$("input[name=latitude]").val(),"longitude":$("input[name=longitude]").val()
+                    // "houseImgUrl": getUrl(data.files[0]),
+                    ,"publisherId":userId
+                },
+                dataType: "Json",
+                success:function(data) {
+
+                }
+            })
+           window.location="";
+        });
+
+
+        //     $.ajax({
+        //         url: "/s",
+        //         type:"post",
+        //         data:{
+        //             "userId":userId},
+        //     dataType: "json",
+        //         success:function(data) {
+        //
+        //     }
+        // })
+
+        $("input[name=butto]").click(function () {
+            $.ajax({
+                type: "post",
+                url: "/insert",
+                data: {"houseImgUrl":$("input[name=file]").val()},
+                contentType: false, // 注意这里应设为false
+                processData: false,    //false
+                cache: false,    //缓存
+                success: function(data){
+                    console.log(data);
+                }
+            })
+        })
+
+
+    })
+</script>
+<body>
+<div class="top">
+    <div class="top-one">
+        <a class="logo_v2 logo_black" href="#"></a>
+        <span class="slogan"></span>
+        <ul class="nav">
+            <li>
+                <a href="#" >vl等待</a>
+            </li>
+            <li><span class="line_index"></span></li>
+            <li>
+                <a  href="#">我的订单</a>
+            </li>
+            <li>
+                <span class="line_index"></span>
+            </li>
+            <li>
+                <a class="active" href="#">短租指南</a>
+            </li>
+            <li>
+                <a href="#" class="icon iphone">手机小猪</a>
+            </li>
+            <li>
+                <a id="Pub_Btn" class="btn_public " href="#"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="house">
+    <form method="post">
+    <div class="kind">
+        <span class="input-size">房子名字:</span>
+        <input type="text" name="housename" value="" class="house-name">
+    </div>
+    <div id="address-two">
+        <span class="input-size">省市地址:</span>
+        <input type="text" name="house_address" value="" class="input_mod" placeholder="例如：山东省青岛市">
+    </div>
+    <div id="address-three">
+    <span class="input-size">详细地址:</span>
+    <input type="text" name="address_three" value="" class="input_mod" placeholder="具体至门牌">
+    </div>
+<!---->
+    <div id="kind-house">
+        <span class="input-size">房屋类型:</span>
+        <input type="text" name="house_model" value="" class="input_mod" placeholder="">
+    </div>
+    <div id="house-thing">
+    <div id="area">
+    <span class="input-size">出租面积:</span>
+    <input type="text" name="house_area" value="" class="input_area">平方米
+</div>
+    <div id="number">
+        <span class="input-size">居住人数:</span>
+        <input type="text" name="live_nubmer" value="" class="input_area">
+    </div>
+    <div id="live-people">
+        <span class="input-size">房子数量:</span>
+        <input type="text" name="house_number" value="" class="input_area">
+    </div>
+    </div>
+    <div class="kind">
+    <span class="input-size">房屋户型:</span>
+    <input type="text" name="house_model" value="" class="input_mod">
+</div>
+    <div class="kind">
+        <span class="input-size">个性描述:</span>
+        <input type="text" name="character_des" value="" class="input_mod">
+    </div>
+    <div class="kind">
+        <span class="input-size">内部情况:</span>
+        <input type="text" name="internal_sit" value="" class="input_mod">
+    </div>
+    <div class="kind">
+        <span class="input-size">交通情况:</span>
+        <input type="text" name="traffic_sit" value="" class="input_mod">
+    </div>
+    <div class="kind">
+        <span class="input-size">周边情况:</span>
+        <input type="text" name="surrounding_sit" value="" class="input_mod">
+    </div>
+    <div class="kind">
+        <span class="input-size">房子价格:</span>
+        <input type="text" name="houseprice" value="" class="house-name">元/天
+    </div>
+        <div class="kind">
+            <span class="input-size">房子押金:</span>
+            <input type="text" name="house_deposit" value="" class="house-name">元
+        </div>
+        <div class="kind">
+            <span class="input-size">经度:</span>
+            <input type="text" name="longitude" value="" class="house-name">
+        </div>
+        <div class="kind">
+            <span class="input-size">纬度:</span>
+            <input type="text" name="latitude" value="" class="house-name">
+        </div>
+        <input type="file" name="lg" multiple="multiple">
+        <input type="button" name="butt" value="提交">
+    </form>
+    logo:<input type="file" class="fileupload" name="logo" multiple="multiple">
+    <button id="logo">上传</button> <div id="image">预览：</div>
+
+</div>
+<div class="snow-container">
+    <div class="snow foreground"></div>
+    <div class="snow foreground layered"></div>
+    <div class="snow middleground"></div>
+    <div class="snow middleground layered"></div>
+    <div class="snow background"></div>
+    <div class="snow background layered"></div>
+</div>
+</body>
+</html>

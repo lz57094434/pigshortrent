@@ -1,0 +1,366 @@
+.top{
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    width: 1309px;
+    background: #333;
+}
+body{
+    padding: 0;
+    margin: 0;
+    background: #f5f5f5;
+}
+.top-one{
+    margin-left: 150px;
+}
+.logo_black {
+    background: url(../img/pig.png)no-repeat;
+}
+.logo_v2 {
+    width: 120px;
+    height: 40px;
+    display: block;
+    float: left;
+margin-top: 10px;
+}
+.slogan {
+    background: url(../img/luge.png) no-repeat;
+    display: inline-block;
+    float: left;
+    height: 40px;
+    margin-top: 5px;
+    width: 140px;
+}
+.nav{
+    float: right;
+    margin-right: 100px;
+}
+.nav li {
+    color: white;
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+}
+.nav li a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+.line_index {
+    background: url(//jci.xiaozhustatic2.com/e19080801/images/icon_header.png) no-repeat;
+}
+.line_index {
+      background-position: -265px -60px;
+    height: 21px;
+    width: 1px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.nav li .btn_public {
+    width: 126px;
+    height: 31px;
+    display: inline-block;
+}
+.nav li .btn_public {
+    background: url(../img/fabu.png) no-repeat;
+}
+
+.nav li a.iphone {
+    background-position: 0 -125px;
+    padding-left: 24px;
+    margin-left: 10px;
+}
+.nav li a.icon {
+    background:
+    /*url(//jci.xiaozhustatic2.com/e19080801/images/icon_head.png);*/
+    url(../img/phone.png)no-repeat;
+}
+/*2*/
+#second{
+    width: 1309px;
+    height: 100px;
+    background: #f5f5f5;
+}
+.second{
+    width: 1309px;
+    height: 100px;
+}
+.align{
+    margin-top: 1px;
+    margin-left: 150px;
+}
+
+
+/*3*/
+.publish_top {
+    background: #fff;
+    margin-bottom: 20px;
+
+}
+.publish_top h2 {
+    width: 960px;
+    margin: 0 auto;
+    padding-left: 20px;
+    font-size: 20px;
+    color: #2c3e50;
+    font-weight: bold;
+    height: 100px;
+    line-height: 100px;
+    font-family: '微软雅黑';
+}
+.trd{
+    width: 1309px;
+    height: 550px;
+    background: #f5f5f5;
+}
+.fom{
+    width: 850px;
+    height: 370px;
+    margin-left: 180px;
+    background: #ffffff;
+}
+.fom-ine{
+    height: 200px;
+    width: 305px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 14px;
+}
+.fom-in{
+    height: 200px;
+    width: 305px;
+    margin-left: 20px;
+    font-size: 14px;
+}
+.item_title {
+    color: #30c3a6;
+    height: 54px;
+    line-height: 54px;
+    border-bottom: 1px solid #eeeeee;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.item_in{
+    margin-left: 10px;
+    font-size: 14px;
+}
+.item_info {
+    line-height: 62px;
+    margin-top: 7px;
+    width: 918px;
+}
+#id_card,#name,#pay_id{
+    float: left;
+    height: 40px;
+    width: 900px;
+    margin-bottom: 10px;
+}
+span.input_title {
+    display: inline-block;
+    width: 74px;
+    color: #959ea7;
+    white-space: nowrap;
+    font-weight: bold;
+    vertical-align: top;
+    height: 100%;
+    line-height: 40px;
+}
+
+.input_mod {
+    width: 244px;
+    height: 38px;
+    border: 1px solid #d1d1d1;
+    padding-left: 10px;
+    padding-right: 26px;
+    color: #959ea7;
+    vertical-align: middle;
+    border-radius: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+#pay_id{
+    margin-top: 10px;
+}
+.cn_btn {
+    font-size: 14px;
+    color: #f05b72;
+    margin: 70px 0 10px 0;
+    display: inline-block;
+}
+#contactInfoBtn{
+    font-size: 16px;
+    text-align: center;
+    background: #f05b72;
+    color: #fff;
+    width: 180px;
+    height: 44px;
+    line-height: 44px;
+    display: block;
+    border-radius: 1px;
+    text-decoration: none;
+    margin-left: 180px;
+}
+/*4*/
+#font{
+    margin-left: 180px;
+    width: 960px;
+    height: 100px;
+    background: #f5f5f5;
+}
+
+#font ul li{
+    list-style: none;
+    float: left;
+    color: #959ea7;
+    line-height: 24px;
+}
+#font ul li a {
+    color: #959ea7;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.icon-d{
+    margin-left: 30px;
+}
+.guide {
+    padding-top: 50px;
+    display: inline-block;
+    color: #959ea7;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    background: url(../img/icon_head.png) no-repeat;
+}
+
+.icon_fa{
+    background-position: 8px -258px;
+}
+.icon_fk {
+    background-position: -44px -258px;
+}
+.icon-a{
+    margin-left: 40px;
+    width: 58px;
+    font-size: 14px;
+}
+.width_280{
+    width: 280px;
+    margin-left: 40px;
+}
+.width_280 span{
+    font-size: 14px;
+}
+.width_280 a{
+    font-size: 12px;
+}
+.bigFont{
+    font-size: 12px;
+}
+/*底部*/
+.link_dl {
+    color: #bdc3c7;
+    text-align: left;
+    margin-left: 180px;
+    width: 960px;
+    margin-top: 30px;
+}
+dl {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+.link_dl {
+    color: #bdc3c7;
+    text-align: left;
+    font-size: 12px;
+}
+.link_dl dt{
+    float: left;
+    height: 50px;
+}
+dl dd a{
+    color: #bdc3c7;
+    text-align: left;
+    text-decoration: none;
+    font-size: 10px;
+    margin-left: 12px;
+}
+/**/
+.snow-container {
+    position: fixed;
+    top:0;
+    left:0;
+    right: 0;
+    bottom:0;
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+
+}
+
+.snow {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    -webkit-animation: snow linear infinite;
+    animation: snow linear infinite;
+}
+.snow.foreground {
+    background-image: url("https://dl6rt3mwcjzxg.cloudfront.net/assets/snow/snow-large-075d267ecbc42e3564c8ed43516dd557.png");
+    -webkit-animation-duration: 15s;
+    animation-duration: 15s;
+}
+.snow.foreground.layered {
+    -webkit-animation-delay: 7.5s;
+    animation-delay: 7.5s;
+}
+.snow.middleground {
+    background-image: url(https://dl6rt3mwcjzxg.cloudfront.net/assets/snow/snow-medium-0b8a5e0732315b68e1f54185be7a1ad9.png);
+    -webkit-animation-duration: 20s;
+    animation-duration: 20s;
+}
+.snow.middleground.layered {
+    -webkit-animation-delay: 10s;
+    animation-delay: 10s;
+}
+.snow.background {
+    background-image: url(https://dl6rt3mwcjzxg.cloudfront.net/assets/snow/snow-small-1ecd03b1fce08c24e064ff8c0a72c519.png);
+    -webkit-animation-duration: 30s;
+    animation-duration: 30s;
+}
+.snow.background.layered {
+    -webkit-animation-delay: 15s;
+    animation-delay: 15s;
+}
+
+@-webkit-keyframes snow {
+    0% {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(15%, 100%, 0);
+        transform: translate3d(15%, 100%, 0);
+    }
+}
+
+@keyframes snow {
+    0% {
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(15%, 100%, 0);
+        transform: translate3d(15%, 100%, 0);
+    }
+}

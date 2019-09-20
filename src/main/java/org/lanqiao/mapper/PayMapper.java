@@ -1,7 +1,9 @@
 package org.lanqiao.mapper;
 
 import org.lanqiao.entity.Pay;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PayMapper {
     int deleteByPrimaryKey(Integer payId);
 
