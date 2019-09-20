@@ -44,20 +44,7 @@
                     $(".order_right_img").append("<img class=\"house_img\"" + "src="+data.houseImg.houseImgUrl+">")
                     $(".house_title").append("<h3>" + data.house.houseName  + "</h3>\n")
                     $(".date_text").append(data.houseUse.stayinDate + " - " +data.houseUse.leaveDate)
-                }
-            })
-        })
-
-        //预订人
-        $(function () {
-            $.ajax({
-                url: "/getuser",
-                type: "post",
-                data: {"userId": 1},
-                dataType: "json",
-                success: function (data) {
-                    $(".h_right_e1").append(data.user.userName)
-                    $(".order_info_msg").append("<h3>" + 预订人信息 + "</h3>\n" +
+                    $(".order_info_msg").append("<h3>预订人信息</h3>\n" +
                         "                <div class=\"order_box\">\n" +
                         "                    <div class=\"name\">\n" +
                         "                        <label>昵称：</label>\n" +
@@ -68,13 +55,41 @@
                         "                    <div class=\"phone\">\n" +
                         "                        <label>手机号：</label>\n" +
                         "                        <span>\n" +
-                        data.user.phone  +
+                         data.user.phone                             +
                         "                        </span>\n" +
                         "                    </div>\n" +
                         "                </div>")
                 }
             })
         })
+
+        //预订人
+        // $(function () {
+        //     $.ajax({
+        //         url: "/getuser",
+        //         type: "post",
+        //         data: {"userId": 1},
+        //         dataType: "json",
+        //         success: function (data) {
+        //             $(".h_right_e1").append(data.user.userName)
+        //             $(".order_info_msg").append("<h3>" + 预订人信息 + "</h3>\n" +
+        //                 "                <div class=\"order_box\">\n" +
+        //                 "                    <div class=\"name\">\n" +
+        //                 "                        <label>昵称：</label>\n" +
+        //                 "                        <span>" +
+        //                 data.user.userName +
+        //                 "</span>\n" +
+        //                 "                    </div>\n" +
+        //                 "                    <div class=\"phone\">\n" +
+        //                 "                        <label>手机号：</label>\n" +
+        //                 "                        <span>\n" +
+        //                 data.user.phone  +
+        //                 "                        </span>\n" +
+        //                 "                    </div>\n" +
+        //                 "                </div>")
+        //         }
+        //     })
+        // })
         //总价格
         $(function () {
             $.ajax({
