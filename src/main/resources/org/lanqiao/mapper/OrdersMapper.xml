@@ -24,6 +24,12 @@
           <result column="user_note" property="userNote" jdbcType="VARCHAR" />
       </association>
 
+      <association property="houseImg" javaType="org.lanqiao.entity.HouseImg">
+      <id column="house_img_id" property="houseImgId" jdbcType="INTEGER" />
+      <result column="house_img_url" property="houseImgUrl" jdbcType="VARCHAR" />
+      <result column="house_id" property="houseId" jdbcType="INTEGER" />
+      </association>
+
       <association property="house" javaType="org.lanqiao.entity.House">
 
           <id column="house_id" property="houseId" jdbcType="INTEGER" />
@@ -55,7 +61,7 @@
     where orders_id = #{ordersId,jdbcType=INTEGER}
   </select>
   <select id="getAllOrders" resultMap="OrderResultMap" parameterType="java.lang.Integer">
-    select * from orders o,user u,house h where u.user_id=o.user_id and h.house_id=o.house_id and o.user_id=#{userId}
+    select * from orders o,user u,house h ,houseImg i where u.user_id=o.user_id and h.house_id=o.house_id and  i.house_id=h.house_id and o.user_id=#{userId}
   </select>
 
 
@@ -77,7 +83,10 @@
       #{userId,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.lanqiao.entity.Orders" >
-    insert into orders
+    insert into orders (orders_id, orders_price, orders_date,
+      user_id, house_id)
+      values (#{ordersId,jdbcType=INTEGER}, #{ordersPrice,jdbcType=INTEGER}, #{ordersDate,jdbcType=TIMESTAMP},
+      #{userId,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER})
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ordersId != null" >
         orders_id,

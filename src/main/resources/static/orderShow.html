@@ -32,11 +32,16 @@
         //     )
         //     })
         // })
-        // 取消
+        //图片
         $(function () {
-            $(".kk_cancle").click(function () {
-
-                $(".kk").siblings().remove();
+            $.ajax({
+                url: "/getuser",
+                type: "post",
+                data: {"userId": 1},
+                dataType: "json",
+                success: function (data) {
+                    $(".order_right_img").append("<img class=\"house_img\"" + "src="+data.houseImg.houseImgUrl+">")
+                }
             })
         })
 
@@ -85,17 +90,16 @@
         })
         //提交订单
         $(function () {
-            $("input[name=sub]").click(function () {
+            $("input[name='sub']").click(function () {
                 $.ajax({
                     url:"/insert",
                     type:"post",
-                    data:{"userName":$("input[name=userName]").val(),
-                        "cardId":$("input[name=cardId]").val(),
-                        "phone":$("input[name=phone]").val()
-                    },
                     dataType:"json",
-                    success: function f(data) {
-                        alert("提交成功");
+                    data:{
+                        "ordersPrice":$("#orderpricea").val()
+                    },
+
+                    success: function (data) {
                     }
                 })
             })
@@ -253,7 +257,9 @@
         <!--</form>-->
     </div>
     <div class="order_right">
-        <img class="house_img" src="image/house.png">
+        <div class="order_right_img">
+            <!--<img class="house_img" src="image/house.png">-->
+        </div>
         <div class="house_title">
             <h3>西涌（西冲） 舒适宜居宽敞双床房近沙滩</h3>
         </div>
@@ -278,7 +284,7 @@
             </div>
             <div class="totalfee_money">
                 <div class="totalfee_text">订单总额</div>
-                <div class="totalfee_count"></div>
+                <div id="orderpricea" class="totalfee_count"></div>
             </div>
         </div>
     </div>

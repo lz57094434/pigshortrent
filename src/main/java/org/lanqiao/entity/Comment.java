@@ -12,7 +12,7 @@ public class Comment {
     private String message;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date commentDate;
+    private String commentDate;
 
     private Integer userId;
 
@@ -50,11 +50,11 @@ public class Comment {
         this.message = message == null ? null : message.trim();
     }
 
-    public Date getCommentDate() {
+    public String getCommentDate() {
         return commentDate;
     }
 
-    public void setCommentDate(Date commentDate) {
+    public void setCommentDate(String commentDate) {
         this.commentDate = commentDate;
     }
 

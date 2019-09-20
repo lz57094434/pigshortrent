@@ -3,6 +3,7 @@ package org.lanqiao.entity;
 import java.util.Date;
 
 public class Orders {
+    private HouseImg houseImg;
     private User user;
     private House house;
     private Integer ordersId;
@@ -29,6 +30,14 @@ public class Orders {
 
     public void setHouse(House house) {
         this.house = house;
+    }
+
+    public HouseImg getHouseImg() {
+        return houseImg;
+    }
+
+    public void setHouseImg(HouseImg houseImg) {
+        this.houseImg = houseImg;
     }
 
     public Integer getOrdersId() {
@@ -74,7 +83,8 @@ public class Orders {
     @Override
     public String toString() {
         return "Orders{" +
-                "user=" + user +
+                "houseImg=" + houseImg +
+                ", user=" + user +
                 ", house=" + house +
                 ", ordersId=" + ordersId +
                 ", ordersPrice=" + ordersPrice +
