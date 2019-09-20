@@ -624,13 +624,19 @@
     height: 45px;
     line-height: 45px;
     text-align: center;
-    color: #fff;
     font-size: 18px;
     background: #ff4081;
     margin: 30px 0;
-    cursor: pointer;
     display: block;
 }
+.push_order_sub{
+    border: 0;
+    font-size: 18px;
+    background: #ff4081;
+    cursor: pointer;
+    color: #fff;
+}
+
 /*右侧图片部分*/
 .order_right{
     float: right;
