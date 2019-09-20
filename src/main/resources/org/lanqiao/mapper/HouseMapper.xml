@@ -21,6 +21,10 @@
         <result column="houseCommentCount" property="houseCommentCount" jdbcType="INTEGER"/>
         <association property="facility" resultMap="FacilityStyleResultMap"></association>
         <association property="houseInformation" resultMap="HouseInformationResultMap"></association>
+        <association property="comment" javaType="org.lanqiao.entity.Comment">
+            <id column="house_id" property="houseId"></id>
+            <result column="score" property="score"/>
+        </association>
         <collection property="commentSet" resultMap="CommentResultMap"></collection>
         <collection property="houseImgSet" resultMap="HouseImgResultMap"></collection>
     </resultMap>
@@ -167,6 +171,15 @@
     <select id="houseAllCommentCount" resultMap="HouseResultMap">
     select c.house_id,count(*) as houseCommentCount from house h,comment c where h.house_id=c.house_id GROUP BY c.house_id
   </select>
+    <select id="OrderMessage" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.House">
+        select c.score,h.*
+        from comment c,house h
+        where c.house_id=h.house_id
+    </select>
+
+    <select id="getHouseMsg" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.House">
+    select * from house
+  </select>
 
 
     <select id="selectByPrimaryKey" resultMap="HouseResultMap" parameterType="java.lang.Integer">
@@ -174,11 +187,11 @@
     from house
     where house_id = #{houseId,jdbcType=INTEGER}
   </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from house
     where house_id = #{houseId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="org.lanqiao.entity.House">
+  <insert id="insert" parameterType="org.lanqiao.entity.House" >
     insert into house (house_id, house_name, house_price, 
       deposit, house_number, house_address, 
       house_area, house_model, live_nubmer, 
@@ -194,179 +207,179 @@
       #{latitude,jdbcType=REAL}, #{publisherId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
       )
   </insert>
-    <insert id="insertSelective" parameterType="org.lanqiao.entity.House">
-        insert into house
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="houseId != null">
-                house_id,
-            </if>
-            <if test="houseName != null">
-                house_name,
-            </if>
-            <if test="housePrice != null">
-                house_price,
-            </if>
-            <if test="deposit != null">
-                deposit,
-            </if>
-            <if test="houseNumber != null">
-                house_number,
-            </if>
-            <if test="houseAddress != null">
-                house_address,
-            </if>
-            <if test="houseArea != null">
-                house_area,
-            </if>
-            <if test="houseModel != null">
-                house_model,
-            </if>
-            <if test="liveNubmer != null">
-                live_nubmer,
-            </if>
-            <if test="characterDes != null">
-                character_des,
-            </if>
-            <if test="internalSit != null">
-                internal_sit,
-            </if>
-            <if test="trafficSit != null">
-                traffic_sit,
-            </if>
-            <if test="surroundingSit != null">
-                surrounding_sit,
-            </if>
-            <if test="houseImgurl != null">
-                house_imgurl,
-            </if>
-            <if test="longitude != null">
-                longitude,
-            </if>
-            <if test="latitude != null">
-                latitude,
-            </if>
-            <if test="publisherId != null">
-                publisher_id,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="houseId != null">
-                #{houseId,jdbcType=INTEGER},
-            </if>
-            <if test="houseName != null">
-                #{houseName,jdbcType=VARCHAR},
-            </if>
-            <if test="housePrice != null">
-                #{housePrice,jdbcType=INTEGER},
-            </if>
-            <if test="deposit != null">
-                #{deposit,jdbcType=INTEGER},
-            </if>
-            <if test="houseNumber != null">
-                #{houseNumber,jdbcType=INTEGER},
-            </if>
-            <if test="houseAddress != null">
-                #{houseAddress,jdbcType=VARCHAR},
-            </if>
-            <if test="houseArea != null">
-                #{houseArea,jdbcType=VARCHAR},
-            </if>
-            <if test="houseModel != null">
-                #{houseModel,jdbcType=VARCHAR},
-            </if>
-            <if test="liveNubmer != null">
-                #{liveNubmer,jdbcType=INTEGER},
-            </if>
-            <if test="characterDes != null">
-                #{characterDes,jdbcType=VARCHAR},
-            </if>
-            <if test="internalSit != null">
-                #{internalSit,jdbcType=VARCHAR},
-            </if>
-            <if test="trafficSit != null">
-                #{trafficSit,jdbcType=VARCHAR},
-            </if>
-            <if test="surroundingSit != null">
-                #{surroundingSit,jdbcType=VARCHAR},
-            </if>
-            <if test="houseImgurl != null">
-                #{houseImgurl,jdbcType=VARCHAR},
-            </if>
-            <if test="longitude != null">
-                #{longitude,jdbcType=REAL},
-            </if>
-            <if test="latitude != null">
-                #{latitude,jdbcType=REAL},
-            </if>
-            <if test="publisherId != null">
-                #{publisherId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.House">
-        update house
-        <set>
-            <if test="houseName != null">
-                house_name = #{houseName,jdbcType=VARCHAR},
-            </if>
-            <if test="housePrice != null">
-                house_price = #{housePrice,jdbcType=INTEGER},
-            </if>
-            <if test="deposit != null">
-                deposit = #{deposit,jdbcType=INTEGER},
-            </if>
-            <if test="houseNumber != null">
-                house_number = #{houseNumber,jdbcType=INTEGER},
-            </if>
-            <if test="houseAddress != null">
-                house_address = #{houseAddress,jdbcType=VARCHAR},
-            </if>
-            <if test="houseArea != null">
-                house_area = #{houseArea,jdbcType=VARCHAR},
-            </if>
-            <if test="houseModel != null">
-                house_model = #{houseModel,jdbcType=VARCHAR},
-            </if>
-            <if test="liveNubmer != null">
-                live_nubmer = #{liveNubmer,jdbcType=INTEGER},
-            </if>
-            <if test="characterDes != null">
-                character_des = #{characterDes,jdbcType=VARCHAR},
-            </if>
-            <if test="internalSit != null">
-                internal_sit = #{internalSit,jdbcType=VARCHAR},
-            </if>
-            <if test="trafficSit != null">
-                traffic_sit = #{trafficSit,jdbcType=VARCHAR},
-            </if>
-            <if test="surroundingSit != null">
-                surrounding_sit = #{surroundingSit,jdbcType=VARCHAR},
-            </if>
-            <if test="houseImgurl != null">
-                house_imgurl = #{houseImgurl,jdbcType=VARCHAR},
-            </if>
-            <if test="longitude != null">
-                longitude = #{longitude,jdbcType=REAL},
-            </if>
-            <if test="latitude != null">
-                latitude = #{latitude,jdbcType=REAL},
-            </if>
-            <if test="publisherId != null">
-                publisher_id = #{publisherId,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
-            </if>
-        </set>
-        where house_id = #{houseId,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.House">
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.House" >
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="houseName != null" >
+        house_name,
+      </if>
+      <if test="housePrice != null" >
+        house_price,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="houseNumber != null" >
+        house_number,
+      </if>
+      <if test="houseAddress != null" >
+        house_address,
+      </if>
+      <if test="houseArea != null" >
+        house_area,
+      </if>
+      <if test="houseModel != null" >
+        house_model,
+      </if>
+      <if test="liveNubmer != null" >
+        live_nubmer,
+      </if>
+      <if test="characterDes != null" >
+        character_des,
+      </if>
+      <if test="internalSit != null" >
+        internal_sit,
+      </if>
+      <if test="trafficSit != null" >
+        traffic_sit,
+      </if>
+      <if test="surroundingSit != null" >
+        surrounding_sit,
+      </if>
+      <if test="houseImgurl != null" >
+        house_imgurl,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="publisherId != null" >
+        publisher_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="houseId != null" >
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="houseName != null" >
+        #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="housePrice != null" >
+        #{housePrice,jdbcType=INTEGER},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=INTEGER},
+      </if>
+      <if test="houseNumber != null" >
+        #{houseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="houseAddress != null" >
+        #{houseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="houseArea != null" >
+        #{houseArea,jdbcType=VARCHAR},
+      </if>
+      <if test="houseModel != null" >
+        #{houseModel,jdbcType=VARCHAR},
+      </if>
+      <if test="liveNubmer != null" >
+        #{liveNubmer,jdbcType=INTEGER},
+      </if>
+      <if test="characterDes != null" >
+        #{characterDes,jdbcType=VARCHAR},
+      </if>
+      <if test="internalSit != null" >
+        #{internalSit,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficSit != null" >
+        #{trafficSit,jdbcType=VARCHAR},
+      </if>
+      <if test="surroundingSit != null" >
+        #{surroundingSit,jdbcType=VARCHAR},
+      </if>
+      <if test="houseImgurl != null" >
+        #{houseImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=REAL},
+      </if>
+      <if test="publisherId != null" >
+        #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.House" >
+    update house
+    <set >
+      <if test="houseName != null" >
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="housePrice != null" >
+        house_price = #{housePrice,jdbcType=INTEGER},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=INTEGER},
+      </if>
+      <if test="houseNumber != null" >
+        house_number = #{houseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="houseAddress != null" >
+        house_address = #{houseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="houseArea != null" >
+        house_area = #{houseArea,jdbcType=VARCHAR},
+      </if>
+      <if test="houseModel != null" >
+        house_model = #{houseModel,jdbcType=VARCHAR},
+      </if>
+      <if test="liveNubmer != null" >
+        live_nubmer = #{liveNubmer,jdbcType=INTEGER},
+      </if>
+      <if test="characterDes != null" >
+        character_des = #{characterDes,jdbcType=VARCHAR},
+      </if>
+      <if test="internalSit != null" >
+        internal_sit = #{internalSit,jdbcType=VARCHAR},
+      </if>
+      <if test="trafficSit != null" >
+        traffic_sit = #{trafficSit,jdbcType=VARCHAR},
+      </if>
+      <if test="surroundingSit != null" >
+        surrounding_sit = #{surroundingSit,jdbcType=VARCHAR},
+      </if>
+      <if test="houseImgurl != null" >
+        house_imgurl = #{houseImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=REAL},
+      </if>
+      <if test="publisherId != null" >
+        publisher_id = #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where house_id = #{houseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.House" >
     update house
     set house_name = #{houseName,jdbcType=VARCHAR},
       house_price = #{housePrice,jdbcType=INTEGER},

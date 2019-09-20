@@ -1,0 +1,1048 @@
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/*title*/
+.head_bar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 94px;
+    /*background-color: red;*/
+    z-index: 99999;
+}
+
+.head_bar_con {
+    height: 63px;
+    padding: 31px 20px 0;
+}
+
+/*小猪+logo*/
+.logo_index {
+    width: 128px;
+    height: 61px;
+    text-indent: -9999px;
+    display: block;
+    float: left;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+}
+
+/*酒店之外，就住小猪*/
+.slogan_v2 {
+    background-position: 0px -440px;
+    display: inline-block;
+    float: left;
+    width: 129px;
+    height: 17px;
+    margin: 17px 0 0 20px;
+    text-indent: -9999px;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+}
+
+.nav_R {
+    height: 44px;
+    width: 451px;
+    /*background-color: yellow;*/
+    float: right;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+}
+
+/*右侧title*/
+.login, .registered {
+    padding: 0px 10px;
+    float: left;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    height: 44px;
+    line-height: 44px;
+    position: relative;
+    z-index: 999;
+}
+
+.registered:hover, .login:hover, .f1:hover, .f2:hover, .learnMore:hover {
+    color: #f05b72;
+}
+
+.rent {
+    background-position: right -118px;
+    margin-left: 10px;
+    padding-right: 14px;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+    /*padding: 0px 10px;*/
+    float: left;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    height: 44px;
+    line-height: 44px;
+    position: relative;
+    z-index: 999;
+
+}
+
+.rent:hover {
+    color: #f05b72;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+    background-position: right -165px;
+}
+
+.rent_pop {
+    width: 58px;
+    /*height: 78px;*/
+    background-color: black;
+    position: absolute;
+    right: 280px;
+    top: 75px;
+    /*overflow: hidden;*/
+    opacity: 0.8;
+    padding: 0px 25px 0;
+}
+
+.rent_pop span {
+    display: block;
+    clear: both;
+}
+
+.phonePig:hover {
+    color: #f05b72;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+    background-position: left -154px;
+}
+
+.phonePig_pop {
+    position: absolute;
+    right: 168px;
+    background-color: #000;
+    opacity: 0.8;
+    line-height: 32px;
+    z-index: 9;
+    /*display: none;*/
+    top: 73px;
+    width: 120px !important;
+    /*height: 100px;*/
+    padding: 5px 0 !important;
+    font-family: "宋体" !important;
+    font-size: 12px;
+    text-align: center;
+}
+
+.learnMore {
+    color: white;
+    display: inline-block;
+    position: relative;
+    margin-top: 95px;
+    padding-left: 35px;
+}
+
+.f1 {
+    /*background-color: yellow;*/
+    float: left !important;
+    color: white;
+}
+
+.f2 {
+    float: left !important;
+    color: white;
+
+}
+
+.nav_R span {
+    color: white;
+    line-height: 44px;
+    float: left;
+}
+
+.phonePig {
+    background-position: 0 -119px;
+    padding-left: 24px;
+    margin-left: 20px;
+    padding-right: 20px;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+    /*padding: 0px 10px;*/
+    float: left;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    height: 44px;
+    line-height: 44px;
+    position: relative;
+    z-index: 999;
+}
+
+.btn_free {
+    padding: 0px 10px;
+    color: white;
+    width: 128px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #1abc9c;
+    /*filter: alpha(opacity=90);*/
+    /*-moz-opacity: 0.9;*/
+    opacity: 0.9;
+    display: inline-block;
+}
+
+.btn_free:hover {
+    background-color: seagreen;
+}
+
+
+/*轮播图*/
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#banner_con {
+    position: relative;
+    width: 1518px;
+    height: 644px;
+    box-shadow: 100px 2px 6px black inset;
+}
+
+img {
+    position: absolute;
+    width: 100%;
+    height: 644px;
+}
+
+#imgId1 {
+    opacity: 1;
+}
+
+#imgId2 {
+    opacity: 0;
+}
+
+#imgId3 {
+    opacity: 0;
+}
+
+#imgId4 {
+    opacity: 0;
+}
+
+#imgId5 {
+    opacity: 0;
+}
+
+ul {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    height: 40px;
+    list-style: none outside none;
+}
+
+li {
+    float: left;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    display: list-item;
+}
+
+/*左边右边点击轮播*/
+#leftArrow {
+    display: inline-block;
+    width: 50px;
+    height: 100px;
+    cursor: pointer;
+    margin-top: -50px;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    z-index: 9;
+    background-image: url(http://jci.xiaozhustatic2.com/e19080801/images/icon_index.png);
+}
+
+#rightArrow {
+    display: inline-block;
+    width: 50px;
+    height: 100px;
+    cursor: pointer;
+    margin-top: -50px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    z-index: 9;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_index.png");
+    background-position: 0 -115px;
+}
+
+/*上阴影*/
+.bg_up_shadow {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+    top: 0;
+    z-index: 9;
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/bg_repeat.png") repeat-x;
+}
+
+/*搜索框*/
+.search_index {
+    height: 60px;
+    width: 940px;
+    position: absolute;
+    left: 50%;
+    margin-left: -470px;
+    z-index: 99;
+    bottom: 40px;
+}
+
+.search_column_l {
+    background-color: white;
+    width: 375px;
+    height: 60px;
+    float: left;
+    margin-left: 2px;
+}
+
+.icon_place_box {
+    width: 55px;
+    height: 60px;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    padding-top: 8px;
+    box-sizing: border-box;
+}
+
+.iconfton_l {
+    height: 30.4px;
+    width: 30px;
+    position: absolute;
+    left: 13px;
+    bottom: 15px;
+}
+
+.ipt_search_l {
+    width: 308px;
+    margin: 15px 0;
+    padding-right: 10px;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    float: left;
+    color: #2c3e50;
+    font-size: 18px;
+    font-family: "Microsoft YaHei UI";
+}
+
+.search_column_r {
+    background-color: white;
+    width: 375px;
+    height: 60px;
+    float: left;
+    margin-left: 2px;
+}
+
+.iconfton_r {
+    height: 30.4px;
+    width: 30px;
+    position: absolute;
+    left: 392px;
+    bottom: 15px;
+}
+
+.ipt_search_r {
+    width: 308px;
+    margin: 15px 0;
+    padding-right: 10px;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    float: left;
+    color: #2c3e50;
+    font-size: 18px;
+    font-family: "Microsoft YaHei UI";
+}
+
+.index_search_box {
+    position: relative;
+    width: 180px;
+    display: inline-block;
+}
+
+.btn_pink_search {
+    background-color: #F16B80;
+    background-position: 138px -315px;
+    width: 184px;
+    height: 60px;
+    border: none;
+    font-size: 22px;
+    color: #ffffff;
+    font-family: "Microsoft YaHei UI";
+    cursor: pointer;
+    padding-left: 36px;
+    text-align: left;
+}
+
+.iconfton_right_arrow {
+    height: 20px;
+    width: 25px;
+    position: absolute;
+    right: 18px;
+    bottom: 20px;
+}
+
+.index_ad1 {
+    height: 120px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.index_ad1 a {
+    width: 100%;
+    height: 120px;
+    display: inline-block;
+}
+
+.Pic_size {
+    height: 120px;
+    width: 1000px;
+    left: 250px;
+}
+
+/*房间展示页面*/
+.room_show {
+    height: 1553px;
+    width: 1518px;
+    /*background-color: pink;*/
+}
+
+.index_T {
+    text-align: center;
+    font-family: "Microsoft YaHei UI";
+    padding: 42px 0;
+    clear: both;
+}
+
+.index_T h1 {
+    display: block;
+    font-size: 44px;
+    font-weight: normal;
+    line-height: 44px;
+    color: #445566;
+    margin-bottom: 15px;
+}
+
+.index_T span {
+    display: block;
+    font-size: 18px;
+    color: #959ea7;
+}
+
+/*内容v2*/
+.content_v2 {
+    width: 1240px;
+    height: 216px;
+    margin: 0 auto;
+    /*background-color: pink;*/
+}
+
+.room_show_div{
+    height: 1380px;
+    width: 1240px;
+    /*background-color: #f05b72;*/
+}
+
+.show_1{
+    height: 326px;
+    width: 400px;
+    position: relative;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+.show_2{
+    height: 326px;
+    width: 820px;
+    position: relative;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+.show_1:hover,.show_2:hover{
+    box-shadow: 0 5px 10px rgba(51, 51, 51, .25);
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    transform: translateY(-10px)
+}
+.noMargin{
+    margin: 0!important;
+}
+
+
+.img_room{
+    width: 400px;
+    height: 326px;
+}
+.city_big{
+    width: 820px;
+}
+
+
+.rooms_intro{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    font-family: "microsoft yahei";
+    font-size: 18px;
+    color: #fff;
+}
+.rooms_intro_big{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 820px;
+    font-family: "microsoft yahei";
+    font-size: 18px;
+    color: #fff;
+}
+.city_top{
+    top: 0;
+}
+
+.img_user_fd{
+    width: 50px;
+    height: 50px;
+    border: solid 2px #fff;
+    border-radius: 27px;
+    top: -60px;
+    left: 45%;
+}
+.room_name{
+    width: 354px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 10px 0;
+}
+.index_price{
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #000;
+    opacity: 0.6;
+    display: inline-block;
+    color: #fff;
+}
+.room_hover{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+
+
+.marginBot30 {
+    margin-bottom: 30px !important;
+}
+
+.content_show1 {
+    height: 216px;
+    width: 308px;
+    /*background-color: black;*/
+    float: left;
+}
+
+.content_show1:hover, .content_show2:hover, .content_show3:hover, .content_show4:hover {
+    box-shadow: 0 10px 50px rgba(51, 51, 51, .25);
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    transform: translateY(-10px)
+}
+
+.ads1 {
+    display: inline-block;
+    background-image: url("http://jci.xiaozhustatic1.com/images/xz_index.png");
+    width: 188px;
+    height: 152px;
+    position: relative;
+    left: 60px;
+    top: 32px;
+}
+
+.content_show2 {
+    height: 216px;
+    width: 308px;
+    float: left;
+    display: inline-block;
+}
+
+.ads2 {
+    display: inline-block;
+    background-image: url("http://jci.xiaozhustatic1.com/images/xz_index.png");
+    width: 188px;
+    height: 152px;
+    position: relative;
+    left: 60px;
+    top: 32px;
+    background-position: 0 -162px;
+}
+
+.content_show3 {
+    height: 216px;
+    width: 308px;
+    float: left;
+}
+
+.ads3 {
+    display: inline-block;
+    background-image: url("http://jci.xiaozhustatic1.com/images/xz_index.png");
+    width: 188px;
+    height: 152px;
+    position: relative;
+    left: 60px;
+    top: 32px;
+    background-position: 0 -324px;
+}
+
+.content_show4 {
+    height: 216px;
+    width: 308px;
+    float: left;
+}
+
+.ads4 {
+    display: inline-block;
+    background-image: url("http://jci.xiaozhustatic1.com/images/xz_index.png");
+    width: 188px;
+    height: 152px;
+    position: relative;
+    left: 60px;
+    top: 32px;
+    background-position: 0 -486px;
+}
+
+.index_comment {
+    background: url("http://jci.xiaozhustatic1.com/e19080801/images/bg_comment.jpg") no-repeat center top;
+    background-size: cover;
+    height: 606px;
+}
+
+.white {
+    color: #FFF !important;
+}
+
+.comment_column {
+    width: 50%;
+    height: 436px;
+    float: left;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-family: "microsoft yahei";
+    /*background-color: pink;*/
+}
+.cmt_con{
+    width: 448px;
+    padding-right: 87px;
+    float: right;
+    line-height: 24px;
+}
+.cmt_R{
+    padding-left: 87px;
+    float: left;
+}
+.comment_column span {
+    display: block;
+}
+.comment_column img{
+    width: 90px;
+    height: 90px;
+    border: solid 3px #fff;
+    border-radius: 48px;
+    margin-bottom: 15px;
+}
+.comment_W{
+    height: 163px;
+    padding-top: 15px;
+    text-align: left;
+}
+.comment_user{
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+.portrait{
+    height: 111px;
+    width: 448px;
+    /*background-color: #f05b72;*/
+}
+.cmt_ul{
+    width: 230px;
+    margin: 0 auto 50px;
+}
+
+.cmt_ul li{
+    width: 40px;
+    height: 6px;
+    background-color: #fff;
+    display: inline-block;
+    float: left;
+    position: relative;
+    right: 180px;
+    top: 60px;
+}
+.left260{
+    float: left;
+    left: 260px;
+}
+.cmt_ul li:hover{
+    background-color:#F05B72;
+}
+
+/*底部内容*/
+.foot_v2 {
+    width: 955px;
+    height: 310px;
+    margin: 20px auto;
+    text-align: center;
+    overflow: hidden;
+    /*background-color: #18B8C1;*/
+}
+
+.foot_T {
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    color: #f05b72;
+}
+
+.see_ul {
+    height: 39px;
+    width: 102px;
+    margin-left: 427px;
+    margin-bottom: 35px;
+    /*background-color: black;*/
+}
+
+.icon_l {
+    margin-top: 5px;
+    margin-right: 8px;
+    position: absolute;
+    right: 50%;
+}
+
+.icon_r {
+    margin-top: 5px;
+    margin-left: 8px;
+    position: absolute;
+    left: 50%;
+}
+
+.icon_wx {
+    background-position: 0 -208px;
+    display: inline-block;
+    width: 35px;
+    height: 36px;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+}
+
+.icon_wx:hover {
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+    background-position: -90px -208px;
+
+}
+
+.icon_wb {
+    background-position: -45px -208px;
+    display: inline-block;
+    width: 35px;
+    height: 36px;
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+}
+
+.icon_wb:hover {
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+    background-position: -135px -208px;
+}
+
+.foot_ul {
+    height: 96px;
+    width: 955px;
+    margin-bottom: 20px;
+    text-align: left;
+    /*background-color: #18B8C1;*/
+}
+
+/*房客指南*/
+.tenant_guide {
+    float: left;
+    width: 57px;
+    height: 75px;
+    margin-right: 32px;
+    color: #959ea7;
+    line-height: 24px;
+    /*background-color: yellow;*/
+}
+
+.tenant {
+    background-position: 8px -258px;
+    padding-top: 50px;
+    display: inline-block;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+}
+
+/*房东指南*/
+.landlord_guide {
+    float: left;
+    width: 57px;
+    height: 75px;
+    margin-right: 32px;
+    color: #959ea7;
+    line-height: 24px;
+    /*background-color: yellow;*/
+}
+
+.landlord {
+    background-position: -44px -258px;
+    padding-top: 50px;
+    display: inline-block;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    background-image: url("http://jci.xiaozhustatic2.com/e19080801/images/icon_head.png");
+}
+
+/*关于我们*/
+.aboutUs {
+    float: left;
+    height: 97px;
+    width: 57px;
+    /*background-color: yellow;*/
+    margin-right: 32px;
+    color: #959ea7;
+    line-height: 24px;
+}
+
+.guide_T {
+    font-size: 14px;
+    font-family: "microsoft yahei";
+}
+
+/*小字规则*/
+/*城市小字规则*/
+.little_specification {
+    color: #959ea7;
+    font-size: 12px;
+    margin-right: 9px;
+}
+
+/*网站帮助*/
+.netHelp {
+    float: left;
+    height: 97px;
+    width: 57px;
+    /*background-color: yellow;*/
+    margin-right: 32px;
+    color: #959ea7;
+    line-height: 24px;
+}
+
+/*网站协议*/
+.netAgreement {
+    float: left;
+    height: 97px;
+    width: 282px !important;
+    /*background-color: yellow;*/
+    margin-right: 32px;
+    color: #959ea7;
+    line-height: 24px;
+}
+
+/*在线客服*/
+.online_kf {
+    float: left;
+    height: 67px;
+    width: 173px !important;
+    white-space: nowrap;
+    font-size: 12px;
+    /*background-color: yellow;*/
+}
+
+.online_kf span {
+    display: inline-block;
+    color: #fff !important;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 6px;
+    background: #f05b72;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.online_kf span i {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url("http://jci.xiaozhustatic2.com/images/xz_online_kf.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.online_kf p {
+    color: #959ea7;
+    line-height: 20px;
+}
+
+/*城市导航*/
+dl {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+dd {
+    display: block;
+    margin-inline-start: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+dt {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.link_dl {
+    color: #bdc3c7;
+    text-align: left;
+}
+
+.link_dl dt {
+    float: left;
+    width: 75px;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    padding-top: 4px;
+}
+
+.link_dl dd {
+    float: left;
+    width: 865px;
+    line-height: 24px;
+
+}
+
+.link_dl dd a {
+    color: #bdc3c7;
+    margin-right: 7px;
+    white-space: nowrap;
+}
+
+/*底部信息*/
+.foot_btm {
+    text-align: center;
+    font-size: 12px;
+    color: #bdc3c7;
+    line-height: 26px;
+    clear: both;
+}
+
+.foot_btm a {
+    color: #bdc3c7;
+    /*font-size: 12px;*/
+}
+
+/*悬浮栏*/
+.suspension {
+    /*background-color: yellow;*/
+    width: 277px;
+    height: 46px;
+    position: fixed;
+    bottom: 12px;
+    right: 30px;
+    z-index: 7000;
+}
+.suspension ul{
+    bottom: 1px;
+    left: 0px;
+}
+
+.suspension_lf {
+    float: left;
+    width: 230px;
+    height: 45px;
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 -380px no-repeat;
+    overflow: hidden;
+}
+
+.suspension_lf li {
+    float: left;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    margin-top: 1px;
+    margin-left: 1px;
+    /*background-color: #f05b72;*/
+}
+.suspension_lf span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: 14px;
+}
+.sus_list1 span{
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 0 no-repeat;
+}
+.sus_list2 span{
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 -21px no-repeat;
+}
+.sus_list3 span{
+    height: 22px;
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 -42px no-repeat;
+}
+.sus_list4 span{
+     height: 22px;
+     background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 -65px no-repeat;
+}
+.sus_list5 span{
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 -86px no-repeat;
+}
+.suspension_rg{
+    float: right;
+    width: 46px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background: #bbbbbb;
+    opacity: 0.9;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 1px;
+}
+
+.suspension_rg a{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("http://jci.xiaozhustatic2.com/e19080801/images/webim/gj_icons.png") 0 -108px no-repeat;
+    margin-top: 12px;
+}

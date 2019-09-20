@@ -100,6 +100,16 @@ public class House {
         this.commentSet = commentSet;
     }
 
+    private Comment comment;
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
     public Integer getHouseId() {
         return houseId;
     }

@@ -4,6 +4,7 @@ package org.lanqiao.entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class User {
@@ -22,7 +23,7 @@ public class User {
     private String cardId;
 
     private String sex;
-    @DateTimeFormat (pattern= "yyyy-MM-dd")
+
     private Date birthday;
 
     private String userAddress;
@@ -30,6 +31,15 @@ public class User {
     private String work;
 
     private String userNote;
+
+    public User(Integer userId, String userName, String password){
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public User(){
+    }
 
     public Integer getUserId() {
         return userId;
@@ -126,6 +136,4 @@ public class User {
     public void setUserNote(String userNote) {
         this.userNote = userNote == null ? null : userNote.trim();
     }
-
-
 }

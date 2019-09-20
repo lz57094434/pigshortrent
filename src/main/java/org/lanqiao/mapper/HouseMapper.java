@@ -42,4 +42,8 @@ public interface HouseMapper {
     List<House> getAll();
      House getImg(Integer houseId);
 
+
+    //显示房间订单页房间信息
+    List<House> OrderMessage();
+
 }

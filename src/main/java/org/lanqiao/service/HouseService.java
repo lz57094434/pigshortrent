@@ -10,4 +10,9 @@ public interface HouseService {
        List<House> getAll();
        House getImg(Integer houseId);
 
+    public List<House> OrderMessage();
+
+    public List<House> OrderMessage(Integer houseId);
+
+
 }

@@ -40,14 +40,4 @@ public class HouseImg {
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
     }
-
-    @Override
-    public String toString() {
-        return "HouseImg{" +
-                "houseImgId=" + houseImgId +
-                ", house=" + house +
-                ", houseImgUrl='" + houseImgUrl + '\'' +
-                ", houseId=" + houseId +
-                '}';
-    }
 }

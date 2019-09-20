@@ -26,4 +26,16 @@ public class HouseServiceImpl implements HouseService{
     public House getImg(Integer houseId) {
         return houseMapper.getImg(houseId);
     }
+
+    @Override
+    public List<House> OrderMessage() {
+        return houseMapper.OrderMessage();
+    }
+
+    @Override
+    public List<House> OrderMessage(Integer houseId) {
+        return houseMapper.OrderMessage();
+    }
+
+
 }
