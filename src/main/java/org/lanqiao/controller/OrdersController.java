@@ -16,14 +16,14 @@ import java.util.List;
 public class OrdersController {
     @Autowired
     OrderServiceImpl orderService;
-    @RequestMapping("/insert")
+    @RequestMapping("/ordersinsert")
     public int insert(Orders orders){
         return orderService.insertOrders(orders);
 
     }
     @Autowired
     CommentService commentService;
-    @RequestMapping("/get")
+    @RequestMapping("/ordersget")
     public List<Comment> getListByPage(Integer houseId){
         return commentService.getListByPage(houseId);
 

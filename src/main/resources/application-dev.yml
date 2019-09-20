@@ -2,7 +2,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/pigshortrent?characterEncoding=utf-8
+    url: jdbc:mysql://106.15.194.229:3306/pigshortrent?characterEncoding=utf-8
     driver-class-name: com.mysql.jdbc.Driver
   data:
     solr:
@@ -28,10 +28,4 @@ logging:
     org:
       lanqiao:
         mapper: debug
-#pagehelper 分页插件
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: count=countSql
 

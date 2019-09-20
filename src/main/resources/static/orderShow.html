@@ -87,7 +87,7 @@
         $(function () {
             $("input[name=sub]").click(function () {
                 $.ajax({
-                    url:"/insert",
+                    url:"/ordersinsert",
                     type:"post",
                     data:{"userName":$("input[name=userName]").val(),
                         "cardId":$("input[name=cardId]").val(),

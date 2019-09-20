@@ -91,7 +91,7 @@
 
             $.ajax({
                 type: "post",
-                url: "http://localhost:8080/usermsg",
+                url: "/usermsg",
                 dataType: "json",
                 data: {
                     "userName": username,
@@ -106,7 +106,7 @@
                     "userAddress": userAddress
                 },
                 success: function () {
-                    window.location.href = "http://localhost:8080/usermsg.html"
+                    window.location.href = "/usermsg.html"
                 }
             })
         });

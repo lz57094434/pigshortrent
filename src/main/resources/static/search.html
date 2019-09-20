@@ -295,7 +295,7 @@
                     solr.push(0);
                 } else{
                     $.ajax({
-                        url:'http://localhost:8080/searchsolr',
+                        url:'/searchsolr',
                         type:"post",
                         dataType:"json",
                         data:{"de":$(this).val()},
@@ -323,7 +323,7 @@
             //房间信息展示
             function housesPage() {
                 $.ajax({
-                    url:'http://localhost:8080/gethousepage',
+                    url:'/gethousepage',
                     type:"post",
                     dataType:"json",
                     data:{"pageNum":houses.pageNum,"pageSize":4,

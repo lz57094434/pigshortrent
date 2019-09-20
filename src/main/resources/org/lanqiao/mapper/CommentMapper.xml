@@ -40,7 +40,7 @@
     <result column="longitude" property="longitude" jdbcType="REAL" />
     <result column="latitude" property="latitude" jdbcType="REAL" />
   </resultMap>
-    <select id="getAllComment"  resultMap="BaseResultMap">
+    <select id="getAllComment"  resultMap="CommentResultMap">
     select * from comment c,user u, house h where u.user_id=c.user_id and h.house_id=c.house_id  and c.house_id=#{houseId}
   </select>
 

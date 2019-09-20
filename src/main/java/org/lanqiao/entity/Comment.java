@@ -14,8 +14,6 @@ public class Comment {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date commentDate;
 
-    private House house;
-
     private Float score;
 
     public Float getScore() {
