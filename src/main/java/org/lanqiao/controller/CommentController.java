@@ -36,7 +36,7 @@ public class CommentController {
     }
 
     //插入数据
-    @RequestMapping("/insert")
+    @RequestMapping("/insertcomment")
     public int insert(Comment record) {
         return commentService.insert(record);
     }

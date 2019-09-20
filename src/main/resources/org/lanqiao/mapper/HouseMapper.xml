@@ -22,7 +22,6 @@
         <association property="facility" resultMap="FacilityStyleResultMap"></association>
         <association property="houseInformation" resultMap="HouseInformationResultMap"></association>
         <association property="comment" javaType="org.lanqiao.entity.Comment">
-            <id column="house_id" property="houseId"></id>
             <result column="score" property="score"/>
         </association>
         <collection property="commentSet" resultMap="CommentResultMap"></collection>
@@ -171,13 +170,13 @@
     <select id="houseAllCommentCount" resultMap="HouseResultMap">
     select c.house_id,count(*) as houseCommentCount from house h,comment c where h.house_id=c.house_id GROUP BY c.house_id
   </select>
-    <select id="OrderMessage" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.House">
+    <select id="OrderMessage" resultMap="HouseResultMap" parameterType="org.lanqiao.entity.House">
         select c.score,h.*
         from comment c,house h
         where c.house_id=h.house_id
     </select>
 
-    <select id="getHouseMsg" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.House">
+    <select id="getHouseMsg" resultMap="HouseResultMap" parameterType="org.lanqiao.entity.House">
     select * from house
   </select>
 

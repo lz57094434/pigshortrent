@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/order.css">
-<!--    <link rel="stylesheet" href="css/vueFenye.css">-->
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/vue.js"></script>
     <script>
@@ -20,7 +19,7 @@
                 //插入数据
                 $("input[type='submit']").click(function () {
                     $.ajax({
-                        url: "/insert",
+                        url: "/insertcomment",
                         type: "post",
                         data: {
                             "message": $("[name='message']").val()
@@ -38,7 +37,7 @@
                 el: "#fenye",
                 data: {
                     // infos:[],//显示订单信息
-                    page: 4,//总页数
+                    page: 0,//总页数
                     pageNum: 1,//当前页数
                     fenYes: [],//从1排到总页数
                 },
@@ -51,6 +50,7 @@
                             //    留白写方法名
                             MessagesPage();
                         }
+                        alert(FenYe.pageNum);
                     },
                     perPage: function () {
                         if (FenYe.pageNum == 1) {
@@ -84,23 +84,16 @@
                     dataType: "json",
                     data:{pageNum:FenYe.pageNum,pageSize:1},
                     success:function (data) {
-                        // FenYe.fenYes.splice(0, FenYe.fenYes.length);//清空分页数组
-                        // var page = data.page;//得到总页数
-                        // FenYe.page = page;
-                        // for (var i=0;i<page;i++){
-                        //     FenYe.fenYes.push({page:i+1})
-                        // }
                         Messages.houseInfo.splice(0, Messages.houseInfo.length)//清空数组
                         var pageInfo = data.list;
+                        FenYe.page=data.pages;
                         for (var i = 0; i < pageInfo.length; i++) {
                             Messages.houseInfo.push({
                                 houseName: pageInfo[i].houseName, housePrice: pageInfo[i].housePrice,
-                                houseNumber: pageInfo[i].houseNumber, characterDes: pageInfo[i].characterDes,
+                                houseNumber: pageInfo[i].houseNumber, houseAddress: pageInfo[i].houseAddress,
                                 houseArea: pageInfo[i].houseArea, liveNumber: pageInfo[i].liveNumber
                             });
                         }
-                        // FenYe.fenYes.splice(0,FenYe.fenYes.length);
-
                     }
                 })
                 //商品信息
@@ -277,12 +270,12 @@
                              width="340px">
                     </div>
                     <div>
-                        <ul class="main_list" v-for="houseInfo in houseInfo">
-                            <li><span>名称：{{houseInfo.houseName}}</span></li>
-                            <li style="margin-top: 20px"><span>价格：￥{{houseInfo.housePrice}}</span></li>
-                            <li style="margin-top: 20px"><span>数量：{{houseInfo.houseNumber}}间</span></li>
-                            <li style="margin-top: 20px"><span>地址：{{houseInfo.characterDes}}</span></li>
-                            <li style="margin-top: 20px"><span>占地面积：{{houseInfo.houseArea}}</span></li>
+                        <ul class="main_list" v-for="houseInfos in houseInfo">
+                            <li><span>名称：{{houseInfos.houseName}}</span></li>
+                            <li style="margin-top: 20px"><span>价格：￥{{houseInfos.housePrice}}</span></li>
+                            <li style="margin-top: 20px"><span>数量：{{houseInfos.houseNumber}}间</span></li>
+                            <li style="margin-top: 20px"><span>地址：{{houseInfos.houseAddress}}</span></li>
+                            <li style="margin-top: 20px"><span>占地面积：{{houseInfos.houseArea}}</span></li>
                             <!--                            <li style="margin-top: 20px"><span>居住人数：{{houseInfo.liveNubmer}}</span></li>-->
                         </ul>
                     </div>

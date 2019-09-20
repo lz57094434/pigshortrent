@@ -10,7 +10,6 @@ public class RegandloginImpl implements Regandlogin {
     @Autowired
     UserMapper userMapper;
 
-
     @Override
     public User selectuser(String userName) {
         return userMapper.selectuser(userName);

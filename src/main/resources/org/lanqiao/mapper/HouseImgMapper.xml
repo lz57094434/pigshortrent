@@ -15,7 +15,7 @@
     from houseimg
     where house_img_id = #{houseImgId,jdbcType=INTEGER}
   </select>
-  <select id="getHouseImg" resultMap="BaseResultMap" parameterType="org.lanqiao.entity.HouseImg">
+  <select id="getHouseImg" resultMap="HouseImgResultMap" parameterType="org.lanqiao.entity.HouseImg">
     select * from houseImg
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
