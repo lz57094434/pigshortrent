@@ -11,6 +11,7 @@
 <script src="js/jquery.fileupload.js"></script>
 <script src="js/jquery.fileupload-process.js"></script>
 <script src="js/jquery.fileupload-validate.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="js/img.js"></script>
 <script>
     $(function() {
@@ -33,7 +34,7 @@
                     "houseAddress":$("input[name=house_address]").val()+$("input[name=address_three]").val(),
                     "latitude":$("input[name=latitude]").val(),"longitude":$("input[name=longitude]").val()
                     // "houseImgUrl": getUrl(data.files[0]),
-                    ,"publisherId":userId
+                    ,"publisherId":$.cookie('houseId')
                 },
                 dataType: "Json",
                 success:function(data) {
@@ -58,7 +59,7 @@
         $("input[name=butto]").click(function () {
             $.ajax({
                 type: "post",
-                url: "/insert",
+                url: "/houseinsert",
                 data: {"houseImgUrl":$("input[name=file]").val()},
                 contentType: false, // 注意这里应设为false
                 processData: false,    //false

@@ -89,7 +89,7 @@
                 } else {
                     $.cookie('userId',data.userId);
                     $.cookie('realName',data.realName);
-                    javascript:location.href = 'dengluchenggong.html';
+                    javascript:location.href = 'index.html';
                 }
             }
         })
@@ -101,7 +101,7 @@
         $('#error2').remove();
         var pass = $('#code').val();
         if (pass == code) {
-            javascript:location.href = 'dengluchenggong.html';
+            javascript:location.href = 'index.html';
         } else {
             $('#code').after("<span style='color: red' id='error2'>验证码错误</span>");
         }

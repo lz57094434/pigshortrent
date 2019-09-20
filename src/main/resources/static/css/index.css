@@ -44,7 +44,6 @@ a {
 
 .nav_R {
     height: 44px;
-    width: 451px;
     /*background-color: yellow;*/
     float: right;
     font-family: "microsoft yahei";
@@ -52,7 +51,7 @@ a {
 }
 
 /*右侧title*/
-.login, .registered {
+.login, .registered,.dengdan,.gerenxinxi {
     padding: 0px 10px;
     float: left;
     text-align: center;
@@ -64,7 +63,7 @@ a {
     z-index: 999;
 }
 
-.registered:hover, .login:hover, .f1:hover, .f2:hover, .learnMore:hover {
+.registered:hover, .login:hover,.dengdan:hover,.gerenxinxi:hover, .f1:hover, .f2:hover, .learnMore:hover {
     color: #f05b72;
 }
 

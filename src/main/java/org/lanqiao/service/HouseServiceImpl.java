@@ -59,7 +59,7 @@ public class HouseServiceImpl implements HouseService{
 
     @Override
     public int houseInsert(House house){
-        return houseMapper.insert(house);
+        return houseMapper.insertSelective(house);
     }
     @Override
     public int payInsert(Pay pay){

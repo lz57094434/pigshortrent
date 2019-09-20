@@ -5,6 +5,8 @@
     <title></title>
     <link rel="stylesheet" href="css/index.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/vue.js"></script>
     <script type="text/javascript">
         var arr = ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg"];
         var ord = 0;//代表当前图片的序号，从0开始。
@@ -197,7 +199,23 @@
             },function () {
                 $("#fd_dianP4").show();
             })
-        })
+        });
+        //名字显示
+        $(function () {
+            var Name = new Vue({
+                el:".nav_R",
+                data:{
+                    register:'注册',
+                    login:'登录'
+                }
+            });
+            if($.cookie('userId')!=null){
+                Name.register='';
+                Name.login=$.cookie('realName');
+            }else {
+                alert(1);
+            }
+        });
 
     </script>
 </head>
@@ -209,9 +227,13 @@
             <a href="#" class="logo_index"></a>
             <span class="slogan_v2">居住自由主义</span>
             <div class="nav_R">
-                <a href="registered.html" class="registered">注册</a>
+                <a href="register.html" class="registered">{{register}}</a>
                 <span>·</span>
-                <a href="login.html" class="login">登录</a>
+                <a href="login.html" class="login">{{login}}</a>
+                <span>·</span>
+                <a href="order.html" class="dengdan">订单</a>
+                <span>·</span>
+                <a href="usermsg.html" class="gerenxinxi">个人信息</a>
                 <span>·</span>
                 <a href="#" class="rent">短租指南</a>
                 <div class="rent_pop" hidden="true">
@@ -230,7 +252,7 @@
                         <a href="#" class="learnMore">了解更多</a>
                     </span>
                 </div>
-                <a href="#" class="btn_free" id="Pub_Btn">免费发布房间</a>
+                <a href="mm.html" class="btn_free" id="Pub_Btn">免费发布房间</a>
             </div>
 
 
@@ -273,7 +295,7 @@
             </div>
             <!--button-->
             <div class="index_search_box">
-                <input type="button" value="搜索小猪" onclick class="btn_pink_search">
+                <a href="search.html"><input type="button" value="搜索小猪" onclick class="btn_pink_search"></a>
                 <span class="icon_palce_box" id="">
                     <img src="img/right_arrow.png" class="iconfton_right_arrow">
                 </span>
