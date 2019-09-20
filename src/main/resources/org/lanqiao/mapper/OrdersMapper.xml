@@ -30,6 +30,14 @@
       <result column="house_id" property="houseId" jdbcType="INTEGER" />
       </association>
 
+      <association property="houseUse" javaType="org.lanqiao.entity.HouseUse">
+      <id column="house_use_id" property="houseUseId" jdbcType="INTEGER" />
+      <result column="stayin_date" property="stayinDate" jdbcType="DATE" />
+      <result column="leave_date" property="leaveDate" jdbcType="DATE" />
+      <result column="house_id" property="houseId" jdbcType="INTEGER" />
+      <result column="user_id" property="userId" jdbcType="INTEGER" />
+      </association>
+
       <association property="house" javaType="org.lanqiao.entity.House">
 
           <id column="house_id" property="houseId" jdbcType="INTEGER" />
@@ -61,7 +69,7 @@
     where orders_id = #{ordersId,jdbcType=INTEGER}
   </select>
   <select id="getAllOrders" resultMap="OrderResultMap" parameterType="java.lang.Integer">
-    select * from orders o,user u,house h ,houseImg i where u.user_id=o.user_id and h.house_id=o.house_id and  i.house_id=h.house_id and o.user_id=#{userId}
+    select * from orders o,user u,house h ,houseImg i,houseUse hu where u.user_id=o.user_id and h.house_id=o.house_id and  i.house_id=h.house_id and hu.user_id=u.user_id and o.user_id=#{userId}
   </select>
 
 

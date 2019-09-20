@@ -1,13 +1,15 @@
 package org.lanqiao.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class HouseUse {
     private Integer houseUseId;
-
-    private Date stayinDate;
-
-    private Date leaveDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String stayinDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String leaveDate;
 
     private Integer houseId;
 
@@ -21,19 +23,19 @@ public class HouseUse {
         this.houseUseId = houseUseId;
     }
 
-    public Date getStayinDate() {
+    public String getStayinDate() {
         return stayinDate;
     }
 
-    public void setStayinDate(Date stayinDate) {
+    public void setStayinDate(String stayinDate) {
         this.stayinDate = stayinDate;
     }
 
-    public Date getLeaveDate() {
+    public String getLeaveDate() {
         return leaveDate;
     }
 
-    public void setLeaveDate(Date leaveDate) {
+    public void setLeaveDate(String leaveDate) {
         this.leaveDate = leaveDate;
     }
 

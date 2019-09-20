@@ -3,6 +3,7 @@ package org.lanqiao.entity;
 import java.util.Date;
 
 public class Orders {
+    private HouseUse houseUse;
     private HouseImg houseImg;
     private User user;
     private House house;
@@ -22,6 +23,14 @@ public class Orders {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public HouseUse getHouseUse() {
+        return houseUse;
+    }
+
+    public void setHouseUse(HouseUse houseUse) {
+        this.houseUse = houseUse;
     }
 
     public House getHouse() {

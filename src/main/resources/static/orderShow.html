@@ -43,6 +43,7 @@
                 success: function (data) {
                     $(".order_right_img").append("<img class=\"house_img\"" + "src="+data.houseImg.houseImgUrl+">")
                     $(".house_title").append("<h3>" + data.house.houseName  + "</h3>\n")
+                    $(".date_text").append(data.houseUse.stayinDate + " - " +data.houseUse.leaveDate)
                 }
             })
         })
@@ -159,7 +160,7 @@
                     <div class="date_box">
                         <div class="calendar_all">
                     <span class="date_text">
-                        2019.09.11 - 2019.09.13
+                        <!--2019.09.11 - 2019.09.13-->
                         <i class="iconfont"></i>
                     </span>
                         </div>
