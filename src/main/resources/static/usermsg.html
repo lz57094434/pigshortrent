@@ -5,7 +5,10 @@
     <title>个人资料</title>
 </head>
 <link rel="stylesheet" href="css/usermsg.css" type="text/css">
+<link rel="stylesheet" href="layui/css/layui.css" type="text/css">
 <script src="js/jquery-3.4.1.js"></script>
+<script src="layui/sliderVerify.js"></script>
+<script src="layui/layui.js"></script>
 <script>
     var userId = 3;
     var username;
@@ -37,79 +40,99 @@
                 $("#uy_address").val(data.userAddress);
                 $("#qwqw").val(data.userName);
             }
-            // })
         })
+    });
 
-        //更新
-        $("input[name='t']").click(function () {
-            if ($("input[name='u_name']").val() == "") {
-                username = $("#uy_name").val();
+    //滑块验证
+    layui.config({
+        base: 'layui/'
+    }).use(['sliderVerify', 'jquery', 'form'], function () {
+        var sliderVerify = layui.sliderVerify,
+            form = layui.form;
+        var slider = sliderVerify.render({
+            elem: '#slider'
+        });
+        //监听提交
+        form.on('submit(formDemo)', function () {
+            if (slider.isOk()) {//用于表单验证是否已经滑动成功
+                //更新
+                $("input[name='t']").click(function () {
+                    //赋值
+                    if ($("input[name='u_name']").val() == "") {
+                        username = $("#uy_name").val();
+                    } else {
+                        username = $("input[name='u_name']").val();
+                    }
+                    if ($("input[name='u_pass']").val() == "") {
+                        password = $("#uy_pass").val();
+                    } else {
+                        password = $("input[name='u_pass']").val();
+                    }
+                    if ($("input[name='u_tell']").val() == "") {
+                        phone = $("#uy_tell").val();
+                    } else {
+                        phone = $("input[name='u_tell']").val();
+                    }
+                    if ($("input[name='u_email']").val() == "") {
+                        email = $("#uy_email").val();
+                    } else {
+                        email = $("input[name='u_email']").val();
+                    }
+                    if ($("input[name='u_rail']").val() == "") {
+                        realName = $("#uy_rail").val();
+                    } else {
+                        realName = $("input[name='u_rail']").val();
+                    }
+                    if ($("input[name='u_card']").val() == "") {
+                        cardId = $("#uy_card").val();
+                    } else {
+                        cardId = $("input[name='u_card']").val();
+                    }
+                    if ($("input[name='u_address']").val() == "") {
+                        userAddress = $("#uy_address").val();
+                    } else {
+                        userAddress = $("input[name='u_address']").val();
+                    }
+                    if ($("input[name='u_birth']").val() == "") {
+                        birthday = $("#uy_birth").val();
+                    } else {
+                        birthday = $("input[name='u_birth']").val();
+                    }
+                    if ($("input[name='u_sex']").val() == "") {
+                        u_sex = $("#uy_sex").val();
+                    } else {
+                        u_sex = $("input[name='u_sex']").val();
+                    }
+                    //更新
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:8080/usermsg",
+                        dataType: "json",
+                        data: {
+                            "userName": username,
+                            "userId": userId,
+                            "sex": u_sex,
+                            "password": password,
+                            "phone": phone,
+                            "email": email,
+                            "realName": realName,
+                            "cardId": cardId,
+                            "birthday": birthday,
+                            "userAddress": userAddress
+                        },
+                        success: function () {
+                            window.location.href = "http://localhost:8080/usermsg.html"
+                        }
+                    })
+                });
             } else {
-                username = $("input[name='u_name']").val();
+                layer.msg("请先通过滑块验证");
             }
-            if ($("input[name='u_pass']").val() == "") {
-                password = $("#uy_pass").val();
-            } else {
-                password = $("input[name='u_pass']").val();
-            }
-            if ($("input[name='u_tell']").val() == "") {
-                phone = $("#uy_tell").val();
-            } else {
-                phone = $("input[name='u_tell']").val();
-            }
-            if ($("input[name='u_email']").val() == "") {
-                email = $("#uy_email").val();
-            } else {
-                email = $("input[name='u_email']").val();
-            }
-            if ($("input[name='u_rail']").val() == "") {
-                realName = $("#uy_rail").val();
-            } else {
-                realName = $("input[name='u_rail']").val();
-            }
-            if ($("input[name='u_card']").val() == "") {
-                cardId = $("#uy_card").val();
-            } else {
-                cardId = $("input[name='u_card']").val();
-            }
-            if ($("input[name='u_address']").val() == "") {
-                userAddress = $("#uy_address").val();
-            } else {
-                userAddress = $("input[name='u_address']").val();
-            }
-            if ($("input[name='u_birth']").val() == "") {
-                birthday = $("#uy_birth").val();
-            } else {
-                birthday = $("input[name='u_birth']").val();
-            }
-            if ($("input[name='u_sex']").val() == "") {
-                u_sex = $("#uy_sex").val();
-            } else {
-                u_sex = $("input[name='u_sex']").val();
-            }
-
-            $.ajax({
-                type: "post",
-                url: "http://localhost:8080/usermsg",
-                dataType: "json",
-                data: {
-                    "userName": username,
-                    "userId": userId,
-                    "sex": u_sex,
-                    "password": password,
-                    "phone": phone,
-                    "email": email,
-                    "realName": realName,
-                    "cardId": cardId,
-                    "birthday": birthday,
-                    "userAddress": userAddress
-                },
-                success: function () {
-                    window.location.href = "http://localhost:8080/usermsg.html"
-                }
-            })
+            return false;
         });
     })
+
+
 </script>
 <body>
 <div id="top">
@@ -117,7 +140,6 @@
         <div class="top-one">
             <a class="logo_v2 logo_black" href="#"></a>
             <span class="slogan"></span>
-
             <ul class="nav">
                 <li>
                     <input type="text" id="qwqw">
@@ -157,46 +179,41 @@
         <div id="msg_main">
             <form method="post">
                 <div class="l_t">基本信息</div>
+                <div class="change">请在此列输入修改信息</div>
                 <div class="m">
                     <div class="g">用户名:</div>
                     <input type="text" id="uy_name" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_name" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_name" type="text">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">密码:</div>
                     <input type="text" id="uy_pass" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_pass" type="password"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_pass" type="password">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">手机号码:</div>
                     <input type="text" id="uy_tell" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_tell" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_tell" type="text">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">邮箱:</div>
                     <input type="text" id="uy_email" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_email" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_email" type="text">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">出生日期:</div>
                     <input type="text" id="uy_birth" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_birth" type="date"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_birth" type="date">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">地址:</div>
                     <input type="text" id="uy_address" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_address" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_address" type="text">
                     </div>
                 </div>
                 <div class="l_t">个人信息</div>
@@ -204,40 +221,48 @@
                 <div class="m">
                     <div class="g">真实姓名:</div>
                     <input type="text" id="uy_rail" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_rail" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_rail" type="text">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">身份证:</div>
                     <input type="text" id="uy_card" style="width: 180px;border: 0">
-                    <div class="i"><input name="u_card" type="text"
-                                          style="width:200px;height:20px;border:1px solid #666666;">
+                    <div class="i"><input name="u_card" type="text">
                     </div>
                 </div>
                 <div class="m">
                     <div class="g">性别:</div>
                     <input type="text" id="uy_sex" style="width: 130px;border: 0">
-                    <div class="i"><input name="u_sex" type="radio" value="" style="width: 40px">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-                            name="c"
+                    <div class="i"><input name="u_sex" type="radio" value="男" style="width: 40px">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                            name="u_sex"
                             type="radio"
-                            value=""
+                            value="女"
                             style="width: 40px">女
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                 </div>
             </form>
-            <div id="chang"><input name="t" id="baocun" type="button" value="一键保存"></div>
+            <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <div id="slider" style="width: 300px"></div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <div id="chang" class="layui-btn" lay-submit lay-filter="formDemo"
+                             style="background-color: white"><input name="t" id="baocun" type="button" value="确认提交">
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div id="foot">
 
-        <div class="foot_btm">京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp; <a |=""
-                                                                                             name="mt8SMvYyRDI92b06nuDs8dPFapllCJYidqhM1WlOoGRZ9DWpbo"
-                                                                                             rel="nofollow"
-                                                                                             target="_blank">安全联盟</a>
-            &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp; <a |="" name="yingyezhizhao" rel="nofollow" target="_blank">营业执照号
-                103613118</a> <span
+        <div class="foot_btm">京ICP备12035936号-1 &nbsp;&nbsp;许可证号：京ICP证140510号 &nbsp;&nbsp; 安全联盟
+            &nbsp;&nbsp; 北京快跑信息科技有限公司 &nbsp;&nbsp; 营业执照号
+            103613118<span
                     style="display:none">  &nbsp;&nbsp; 地址：北京市海淀区知春路56号   &nbsp;&nbsp;电话：010-62961978</span>
             <div style="margin:0 auto;color:#bdc3c7;">
                 <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020380"
@@ -250,6 +275,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

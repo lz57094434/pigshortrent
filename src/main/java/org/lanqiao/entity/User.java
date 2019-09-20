@@ -23,7 +23,7 @@ public class User {
 
     private String sex;
     @DateTimeFormat (pattern= "yyyy-MM-dd")
-    private Date birthday;
+    private String birthday;
 
     private String userAddress;
 
@@ -95,11 +95,11 @@ public class User {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

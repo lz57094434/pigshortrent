@@ -3,8 +3,8 @@
 }
 
 body {
-    width: 1366px;
-    height: 700px;
+    width: 1349px;
+    height: 850px;
     font: normal 14px/22px "Microsoft YaHei";
 }
 
@@ -20,7 +20,7 @@ ul li {
     width: 1366px;
     height: 57px;
     float: left;
-    background: linear-gradient(black, black);
+    background: linear-gradient(#313131, #313131);
     font: 12px/1.5 Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -82,9 +82,16 @@ ul li {
 
 .m {
     float: left;
-    width: 600px;
+    width: 700px;
 }
-
+.change{
+    color: grey;
+    float: right;
+    width: 140px;
+    height: 20px;
+    padding-top: 18px;
+    margin-right: 84px;
+}
 .g {
     float: left;
     width: 80px;
@@ -94,7 +101,7 @@ ul li {
     float: right;
     width: 300px;
     height: 20px;
-    padding: 0 20px 0 0;
+    padding: 0 80px 0 0;
 
 }
 
@@ -119,6 +126,7 @@ ul li {
     font: 12px/1.5 Verdana, Arial, Helvetica, sans-serif;
     line-height: 26px;
     margin-left: 17px;
+    margin-top: 50px;
 }
 
 .l_t {
@@ -144,20 +152,28 @@ ul li {
 
 #chang {
     float: left;
+    margin: -9px 0 0 -50px;
     width: 300px;
     height: 80px;
-    padding: 30px 0 0 180px;
+    padding: 20px 0 0 0;
+
+}
+
+input {
+    width: 170px;
+    height: 20px;
+    border: 1px solid #666666;
+    border-radius: 7px;
 }
 
 #baocun {
+    width: 112px;
+    height: 50px;
     background-color: #ffffff;
     color: black;
     font-size: large;
     border-width: 1px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 19px;
-    padding-right: 19px;
+    padding: 12px 19px;
     border-radius: 13px;
     border-color: gray;
 }
@@ -176,7 +192,7 @@ ul li {
     height: 40px;
     display: block;
     float: left;
-    margin-top: 8px;
+    margin: 8px 0 0 -27px;
 }
 
 .slogan {
@@ -191,6 +207,7 @@ ul li {
 .nav {
     float: right;
     margin-top: 13px;
+    margin-right: 16px;
     width: 600px;
 }
 
@@ -237,13 +254,14 @@ ul li {
 }
 
 .nav li a.icon {
-    background: /*url(//jci.xiaozhustatic2.com/e19080801/images/icon_head.png);*/ url(../img/phone.png) no-repeat;
+    background: url(../img/phone.png) no-repeat;
 }
 
 #qwqw {
+    float: left;
     margin-top: 4px;
     color: white;
-    background-color: black;
+    background-color: #313131;
     width: 80px;
     border: 0;
 }
