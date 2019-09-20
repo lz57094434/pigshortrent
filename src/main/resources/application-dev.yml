@@ -28,3 +28,10 @@ logging:
     org:
       lanqiao:
         mapper: debug
+#pagehelper 分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+

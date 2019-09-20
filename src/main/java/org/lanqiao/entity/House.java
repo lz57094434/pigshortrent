@@ -264,4 +264,29 @@ public class House {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "houseId=" + houseId +
+                ", houseName='" + houseName + '\'' +
+                ", housePrice=" + housePrice +
+                ", deposit=" + deposit +
+                ", houseNumber=" + houseNumber +
+                ", houseAddress='" + houseAddress + '\'' +
+                ", houseArea='" + houseArea + '\'' +
+                ", houseModel='" + houseModel + '\'' +
+                ", liveNubmer=" + liveNubmer +
+                ", characterDes='" + characterDes + '\'' +
+                ", internalSit='" + internalSit + '\'' +
+                ", trafficSit='" + trafficSit + '\'' +
+                ", surroundingSit='" + surroundingSit + '\'' +
+                ", houseImgurl='" + houseImgurl + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", publisherId=" + publisherId +
+                ", userId=" + userId +
+                '}';
+    }
 }
+

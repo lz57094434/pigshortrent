@@ -7,6 +7,9 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import org.lanqiao.Tool.CodeUtil;
 import org.lanqiao.Tool.changeclass;
 import org.lanqiao.config.AlipayConfig;
+import org.lanqiao.entity.Orders;
+import org.lanqiao.mapper.OrdersMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,5 +47,17 @@ public class OrderServiceImpl implements OrderService{
         //输出
         out.println(result);//以下写自己的订单代码
     }
+    @Autowired
+    OrdersMapper ordersMapper;
+    @Override
+    public int insertOrders(Orders orders) {
 
+        return ordersMapper.insertSelective(orders);
+    }
+
+    @Override
+    public Orders getAllOrders(Integer userId) {
+
+        return ordersMapper.getAllOrders(userId);
+    }
 }

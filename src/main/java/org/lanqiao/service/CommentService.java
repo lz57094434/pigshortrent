@@ -9,4 +9,5 @@ public interface CommentService {
 
     public int insert(Comment record);
 
+    public List<Comment> getListByPage(Integer houseId);
 }

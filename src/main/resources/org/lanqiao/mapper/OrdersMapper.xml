@@ -1,22 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.lanqiao.mapper.OrdersMapper" >
-  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Orders" >
+  <resultMap id="OrderResultMap" type="org.lanqiao.entity.Orders" >
     <id column="orders_id" property="ordersId" jdbcType="INTEGER" />
     <result column="orders_price" property="ordersPrice" jdbcType="INTEGER" />
     <result column="orders_date" property="ordersDate" jdbcType="TIMESTAMP" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="house_id" property="houseId" jdbcType="INTEGER" />
+
+      <association property="user" javaType="org.lanqiao.entity.User">
+
+          <id column="user_id" property="userId" jdbcType="INTEGER" />
+          <result column="user_name" property="userName" jdbcType="VARCHAR" />
+          <result column="password" property="password" jdbcType="VARCHAR" />
+          <result column="phone" property="phone" jdbcType="VARCHAR" />
+          <result column="email" property="email" jdbcType="VARCHAR" />
+          <result column="real_name" property="realName" jdbcType="VARCHAR" />
+          <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+          <result column="sex" property="sex" jdbcType="VARCHAR" />
+          <result column="birthday" property="birthday" jdbcType="DATE" />
+          <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+          <result column="work" property="work" jdbcType="VARCHAR" />
+          <result column="user_note" property="userNote" jdbcType="VARCHAR" />
+      </association>
+
+      <association property="house" javaType="org.lanqiao.entity.House">
+
+          <id column="house_id" property="houseId" jdbcType="INTEGER" />
+          <result column="house_name" property="houseName" jdbcType="VARCHAR" />
+          <result column="house_price" property="housePrice" jdbcType="INTEGER" />
+          <result column="deposit" property="deposit" jdbcType="INTEGER" />
+          <result column="house_number" property="houseNumber" jdbcType="INTEGER" />
+          <result column="house_address" property="houseAddress" jdbcType="VARCHAR" />
+          <result column="house_area" property="houseArea" jdbcType="VARCHAR" />
+          <result column="house_model" property="houseModel" jdbcType="VARCHAR" />
+          <result column="live_nubmer" property="liveNubmer" jdbcType="INTEGER" />
+          <result column="character_des" property="characterDes" jdbcType="VARCHAR" />
+          <result column="internal_sit" property="internalSit" jdbcType="VARCHAR" />
+          <result column="traffic_sit" property="trafficSit" jdbcType="VARCHAR" />
+          <result column="surrounding_sit" property="surroundingSit" jdbcType="VARCHAR" />
+          <result column="house_imgurl" property="houseImgurl" jdbcType="VARCHAR" />
+          <result column="longitude" property="longitude" jdbcType="REAL" />
+          <result column="latitude" property="latitude" jdbcType="REAL" />
+          <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
+          <result column="user_id" property="userId" jdbcType="INTEGER" />
+      </association>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Order_Column_List" >
     orders_id, orders_price, orders_date, user_id, house_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from orders
+
+  <select id="selectByPrimaryKey" resultMap="OrderResultMap" parameterType="java.lang.Integer" >
+    select * from orders
     where orders_id = #{ordersId,jdbcType=INTEGER}
   </select>
+  <select id="getAllOrders" resultMap="OrderResultMap" parameterType="java.lang.Integer">
+    select * from orders o,user u,house h where u.user_id=o.user_id and h.house_id=o.house_id and o.user_id=#{userId}
+  </select>
+
+
+
+
+
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from orders
     where orders_id = #{ordersId,jdbcType=INTEGER}

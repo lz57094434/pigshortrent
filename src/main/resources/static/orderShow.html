@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交订单</title>
+    <link rel="stylesheet" type="text/css" href="css/orderShow.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script rel="stylesheet" src="js/jquery-3.4.1.min.js"></script>
+    <!--<script>-->
+        <!--$(window).scroll(function(){-->
+            <!--var tops = $(this).scrollTop();-->
+            <!--$('.Return_header').css({'top':tops})-->
+        <!--})-->
+    <!--</script>-->
+    <script>
+        // $(function () {
+        //     $("input[name=butt]").click(function () {
+        //         $(".kk_box").append("<div class=\"kk\">\n" +
+        //             "        真实姓名     <input type=\"text\" name=\"userName\" value=\"\"/>\n" +
+        //             "    </div>\n" +
+        //             "    <div class=\"kk\">\n" +
+        //             "        身份证号    <input type=\"text\" name=\"userId\" value=\"\"/>\n" +
+        //             "    </div>\n" +
+        //             "    <div class=\"kk\">\n" +
+        //             "        手机号     <input type=\"tel\" name=\"phone\" value=\"\"/>\n" +
+        //             "    </div>\n" +
+        //             "    <span class=\"kk_cancle\">\n" +
+        //             "                            取消\n" +
+        //             "                        </span>\n" +
+        //
+        //             "------------------------------------------------------------------------"
+        //     )
+        //     })
+        // })
+        // 取消
+        $(function () {
+            $(".kk_cancle").click(function () {
+
+                $(".kk").siblings().remove();
+            })
+        })
+
+        //预订人
+        $(function () {
+            $.ajax({
+                url: "/getuser",
+                type: "post",
+                data: {"userId": 1},
+                dataType: "json",
+                success: function (data) {
+                    $(".h_right_e1").append(data.user.userName)
+                    $(".order_info_msg").append("<h3>预订人信息</h3>\n" +
+                        "                <div class=\"order_box\">\n" +
+                        "                    <div class=\"name\">\n" +
+                        "                        <label>昵称：</label>\n" +
+                        "                        <span>" +
+                        data.user.userName +
+                        "</span>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"phone\">\n" +
+                        "                        <label>手机号：</label>\n" +
+                        "                        <span>\n" +
+                        data.user.phone  +
+                        "                        </span>\n" +
+                        "                    </div>\n" +
+                        "                </div>")
+                }
+            })
+        })
+        //总价格
+        $(function () {
+            $.ajax({
+                url: "/getuser",
+                type: "post",
+                data: {"userId": 1},
+                dataType: "json",
+                success: function (data){
+                    $(".money").append("¥" + data.house.housePrice)
+                    var sum=0;
+                    sum = data.house.housePrice + 100;
+                    $(".totalfee_m").append("¥"+ sum)
+                    $(".totalfee_count").append("¥"+ sum)
+                }
+            })
+        })
+        //提交订单
+        $(function () {
+            $("input[name=sub]").click(function () {
+                $.ajax({
+                    url:"/insert",
+                    type:"post",
+                    data:{"userName":$("input[name=userName]").val(),
+                        "cardId":$("input[name=cardId]").val(),
+                        "phone":$("input[name=phone]").val()
+                    },
+                    dataType:"json",
+                    success: function f(data) {
+                        alert("提交成功");
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="head_mgcenter">
+            <ul id="h_left">
+                <li class="logo"><a href="www.xiaozhu.com"><img src="image/logo.png"></a></li>
+            </ul>
+            <ul id="h_right">
+                <li class="h_right_e1"></li>
+                <li class="h_right_al"></li>
+                <li class="h_right_a">·</li>
+                <li class="h_right_e2">短租指南</li>
+                <li class="h_right_al"></li>
+                <li class="font_24 iconfont"></li>
+                <li class="h_right_e3">手机小猪</li>
+                <li class="publish"><a target="_blank" href="www.xiaozhu.com/publish">免费发布房间</a></li>
+            </ul>
+        </div>
+    </div>
+<div class="order_wrap">
+    <div class="order_left">
+        <div class="order_left_panel">
+            <div class="item_step">
+                <div class="main">
+                    <span class="dot_wrapper"><i class="dot_cur"></i></span>
+                    <span class="step_text_cur">申请预定</span>
+                </div>
+                <div class="line_off"></div>
+            </div >
+            <div class="item_step">
+                <div class="main">
+                    <span class="dot_wrapper"><i class="dot_off"></i></span>
+                    <span class="step_text_cur">待支付</span>
+                </div>
+                <div class="line_off"></div>
+            </div>
+            <div class="item_step">
+                <div class="main">
+                    <span class="dot_wrapper"><i class="dot_off"></i></span>
+                    <span class="step_text_cur">待入住</span>
+                </div>
+            </div>
+        </div>
+        <!--<form action="/insert" method="post" enctype="multipart/form-data">-->
+        <div class="order_info_wrap">
+            <h3>预定信息</h3>
+            <div class="book_info_wrap">
+                <div class="book_info_box">
+                    <span class="rTitle">入住时段</span>
+                    <div class="date_box">
+                        <div class="calendar_all">
+                    <span class="date_text">
+                        2019.09.11 - 2019.09.13
+                        <i class="iconfont"></i>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="order_tips">
+                    最多预订100晚
+                </div>
+            </div>
+        </div>
+        <div class="rent_info">
+            <h3>入住人信息</h3>
+            <h4>填写包含手机号在内的完整信息</h4>
+            <h5 class="insurance">
+                <i class="txt">可免费获赠最高保额10万元住宿旅行意外保险</i>
+                <i class="iconfont_a"></i>
+            </h5>
+            <div class="kk_box">
+                <div class="kk">
+                    真实姓名:  <input type="text" name="userName" value=""/>
+                </div>
+                <div class="kk">
+                    身份证号:  <input type="text" name="cardId" value=""/>
+                </div>
+                <div class="kk">
+                    手机号:  <input type="tel" name="phone" value=""/>
+                </div>
+            </div>
+            <div class="order_info_msg">
+                <!--<h3>预订人信息</h3>-->
+                <!--<div class="order_box">-->
+                    <!--<div class="name">-->
+                        <!--<label>昵称：</label>-->
+                        <!--<span>张三</span>-->
+                    <!--</div>-->
+                    <!--<div class="phone">-->
+                        <!--<label>手机号：</label>-->
+                        <!--<span>-->
+                                <!--+86 17863905145-->
+                        <!--</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+
+            <div class="order_info_invoice">
+                <h3>发票</h3>
+                    <div class="invoice_box">
+                        <label class="el_radio is_checked" role= "radio" aria-checked="true" tabindex="0">
+                            <span class="el_radio_input_a is-checked">
+                                <span class="el_radio_inner_a"></span>
+                                <input class="el_radio_original_a" type="radio" aria-hidden="true" tabindex="-1" value="false">
+                            </span>
+                            <span class="el_radio_label_a">
+                                不需要
+                            </span>
+                        </label>
+                        <label class="el_radio" role="radio" tabindex="0">
+                            <span class="el_radio_input_b">
+                                <span class="el_radio_inner_b"></span>
+                                <input class="el_radio_original_b" type="radio" aria-hidden="true" tabindex="-1" value="true">
+                            </span>
+                            <span class="el_radio_label_b">
+                                需要
+                            </span>
+                        </label>
+                        <span class="tips">
+                            （需自付发票服务费¥99.29）
+                        </span>
+                    </div>
+                </div>
+            <div class="order_info_rule" >
+                <h3>退订须知</h3> <!---->
+                <div class="rule_wrap">
+                    <ul class="rule_detail">
+                        <li><h3>10月7日14:00前取消，所有金额全部退还</h3></li>
+                        <li><h3>10月7日14:00后取消，扣除未入住首日房费</h3></li>
+                    </ul>
+                </div>
+                <ul class="rule_tips">
+                    <li>取消订单和提前退房的时间，以小猪系统中记录的时间为准。如与房东产生争议，请致电小猪客服电话：400-010-7890。</li>
+                </ul>
+            </div>
+            <div class="checkall_wrap">
+                <span>
+                    我同意
+                    <a target="_blank" href="https://www.xiaozhu.com/help/service">《小猪服务协议》</a>
+                    <a target="_blank" href="https://www.xiaozhu.com/help/tenantRule">《房客规则》</a>
+                    <a target="_blank" href="https://www.xiaozhu.com/insurancedescription">《意外健康险保险告知书》</a>
+                    <a target="_blank" href="https://www.xiaozhu.com/xz_web2/vipprotocol/pages/index.html">《会员服务协议》</a>
+                    及房东规定的退订规则及入住要求
+                </span>
+            </div> <!---->
+            <div class="push_order">
+                <a><input name="sub" type="submit"  value="提交订单"/></a>
+            </div>
+        </div>
+        <!--</form>-->
+    </div>
+    <div class="order_right">
+        <img class="house_img" src="image/house.png">
+        <div class="house_title">
+            <h3>西涌（西冲） 舒适宜居宽敞双床房近沙滩</h3>
+        </div>
+        <div class="rentfee_wrap">
+            <div class="fee_title">
+                <div class="rent">房租</div>
+                <div class="money"> </div>
+            </div>
+            <div class="fee_title_deposit">
+                <div class="deposit">押金</div>
+                <div class="deposit_exempt">
+                        立即认证免押
+                    <i class="connect"></i>
+                </div>
+                <div class="deposit_money">¥100.00</div>
+            </div>
+        </div>
+        <div class="order_totalfee">
+            <div class="totalfee_box">
+                <div class="totalfee_t">需在线支付</div>
+                <div class="totalfee_m"></div>
+            </div>
+            <div class="totalfee_money">
+                <div class="totalfee_text">订单总额</div>
+                <div class="totalfee_count"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="foot_center">
+    <div id="font">
+    <ul>
+    <li>
+    <a class="guide icon_fa" href="#" target="_blank">房客指南</a>
+    </li>
+    <li class="icon-d">
+    <a class="guide icon_fk" href="#" target="_blank">房东指南</a>
+    </li>
+    <li class="icon-a">
+    <span class="guide_T">关于我们</span>
+    <a href="#" target="_blank">关于小猪</a>
+    <a href="#" target="_blank">加入我们</a>
+    <a href="#" target="_blank">联系我们</a>
+    </li>
+    <li class="icon-a">
+    <a href="#" target="_blank">网站帮助</a>
+    <a href="#" target="_blank">帮助中心</a>
+    <a href="#" target="_blank">网站地图</a>
+    </li>
+    <li class="width_280">
+    <span class="guide_T">网站协议</span><br>
+    <a href="#" target="_blank">服务协议</a>
+    <a href="#" target="_blank">房东规则</a>
+    <a href="#" target="_blank">房客规则</a>
+    <a href="#" target="_blank">房源上线标准</a>
+    <a href="#" target="_blank">隐私保护</a>
+    <a href="#" target="_blank">版权声明</a>
+    <a href="#" target="_blank">免责声明</a>
+    <a href="#" target="_blank">知识产权声明</a>
+    <a href="#" target="_blank">点评发布规则</a>
+    <a href="#" target="_blank">日本标准住宅宿泊仲介业约款</a>
+    </li>
+    <li class="bigFont">
+    <span><a href="#">在线客服</a></span>
+    <p>客服电话  400 - 010 - 7890</p>
+    <p>客服邮箱  service@xiaozhu.com</p>
+    </li>
+    </ul>
+    </div>
+    <dl class="link_dl">
+    <dt>城市导航</dt>
+    <dd>
+    <a target="_blank" href="#">北京短租房</a>
+    <a target="_blank" href="#">上海短租房</a>
+    <a target="_blank" href="#">南京短租房</a>
+    <a target="_blank" href="#">成都短租房</a>
+    <a target="_blank" href="#">广州短租房</a>
+    <a target="_blank" href="#">重庆短租房</a>
+    <a target="_blank" href="#">武汉短租房</a>
+    <a target="_blank" href="#">大连短租房</a>
+    <a target="_blank" href="#">三亚短租房</a>
+    <a target="_blank" href="#">丽江短租房</a>
+    <a target="_blank" href="#">天津短租房</a>
+    <a target="_blank" href="#">香港短租房</a>
+    <a target="_blank" href="#">长沙短租房</a>
+    <a target="_blank" href="#">无锡短租房</a>
+    <a target="_blank" href="#">昆明短租房</a>
+    <a target="_blank" href="#">济南短租房</a>
+    <a target="_blank" href="#">厦门短租房</a>
+    <a target="_blank" href="#">青岛短租房</a>
+    <a target="_blank" href="#">郑州短租房</a>
+    <a target="_blank" href="#">西安短租房</a>
+    <a target="_blank" href="#">杭州短租房</a>
+    <a target="_blank" href="#">深圳短租房</a>
+    <a target="_blank" href="#">沈阳短租房</a>
+    <a target="_blank" href="#">苏州短租房</a>
+    </dd>
+    </dl>
+    </div>
+
+</body>
+</html>

@@ -7,6 +7,20 @@
     <result column="comment_date" property="commentDate" jdbcType="TIMESTAMP" />
     <result column="score" property="score" jdbcType="REAL" />
     <association property="house" resultMap="HouseResultMap"></association>
+      <association property="user" javaType="org.lanqiao.entity.User">
+          <id column="user_id" property="userId" jdbcType="INTEGER" />
+          <result column="user_name" property="userName" jdbcType="VARCHAR" />
+          <result column="password" property="password" jdbcType="VARCHAR" />
+          <result column="phone" property="phone" jdbcType="VARCHAR" />
+          <result column="email" property="email" jdbcType="VARCHAR" />
+          <result column="real_name" property="realName" jdbcType="VARCHAR" />
+          <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+          <result column="sex" property="sex" jdbcType="VARCHAR" />
+          <result column="birthday" property="birthday" jdbcType="DATE" />
+          <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+          <result column="work" property="work" jdbcType="VARCHAR" />
+          <result column="user_note" property="userNote" jdbcType="VARCHAR" />
+      </association>
   </resultMap>
   <resultMap id="HouseResultMap" type="org.lanqiao.entity.House" >
     <id column="house_id" property="houseId" jdbcType="INTEGER" />
@@ -26,11 +40,13 @@
     <result column="longitude" property="longitude" jdbcType="REAL" />
     <result column="latitude" property="latitude" jdbcType="REAL" />
   </resultMap>
-
+    <select id="getAllComment"  resultMap="BaseResultMap">
+    select * from comment c,user u, house h where u.user_id=c.user_id and h.house_id=c.house_id  and c.house_id=#{houseId}
+  </select>
 
 
   <select id="selectByPrimaryKey" resultMap="CommentResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     *
     from comment
     where comment_id = #{commentId,jdbcType=INTEGER}

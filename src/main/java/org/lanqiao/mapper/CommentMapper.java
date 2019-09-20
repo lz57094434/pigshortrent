@@ -15,6 +15,8 @@ public interface CommentMapper {
 
     Comment selectByPrimaryKey(Integer commentId);
 
+    List<Comment> getAllComment(Integer houseId);
+
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);

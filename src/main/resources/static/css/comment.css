@@ -1,0 +1,134 @@
+/*评论开头部分*/
+.comment{
+    width: 920px;
+    height: 1339px;
+    font: normal 14px/24px "Microsoft YaHei";
+    color: #2c3e50;
+    margin-left:55px;
+}
+.comment_tab{
+    width: 920px;
+    height: 52px;
+    padding: 10px 0 9px 20px;
+    border-bottom: 1px solid #ecf0f1;
+}
+.tab_this{
+    width: 116px;
+    height: 30px;
+    border-bottom: 2px solid #f05b72;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 40px;
+    padding-left: 20px;
+    color: #f05b72;
+    line-height: 30px;
+}
+.tab_other{
+    width: 158px;
+    height: 30px;
+    border-bottom: 2px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 40px;
+    padding-left: 20px;
+    color: #f05b72;
+    line-height: 30px;
+}
+/*评分部分*/
+.comment_box{
+    width: 920px;
+    height: 2287px;
+}
+.score_l{
+    width: 130px;
+    height: 96px;
+    float: left;
+    padding: 30px 78px 0 106px;
+}
+.x_score{
+    width: 130px;
+    height: 38px;
+    font-size: 42px;
+    text-align: center;
+    line-height: 38px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.all_score{
+    width: 48.33px;
+    height: 31px;
+    font-size: 24px;
+}
+.stars_box{
+    width: 140px;
+    height: 18px;
+    text-align: left;
+}
+.stars_info{
+    width: 18px;
+    height: 18px;
+    float: left;
+    /*background: url(/image/star.png) no-repeat;*/
+    margin-left: 10px;
+}
+.score_details{
+    height: 130px;
+    float: left;
+    width: 606px;
+    padding: 34px 0 20px;
+}
+.score_details li{
+    float: left;
+    width: 202px;
+    height: 20px;
+    margin-bottom: 18px;
+}
+.score_details li span{
+    display: inline-block;
+    float: left;
+    width: 68px;
+}
+.comment_list{
+    width: 920px;
+    height: 1157px;
+}
+.comment_list_box{
+    width: 780px;
+    height: 128px;
+    padding: 30px 0 25px;
+    margin: 0 70px;
+    border-top: 1px solid #ecf0f1;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.head_picture{
+    display: block;
+    float: left;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+}
+.information{
+    width: 688px;
+    height: 60px;
+    float: right;
+}
+.information h6{
+    padding: 5px 0 7px;
+    font-weight: normal;
+}
+.information h6 span{
+    padding-right: 5px;
+    font-weight: bold;
+    color: #f05b72!important;
+}
+.information_tit{
+    border-bottom: 1px solid #f0f5f6;
+    height: 34px;
+    line-height: 34px;
+    font-size: 100%;
+}
+.information_tit a{
+    color: #2c3e50!important;
+    text-decoration: none;
+}

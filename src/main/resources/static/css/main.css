@@ -1,0 +1,53 @@
+/*全局样式控制*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+i, em {
+    font-style: normal;
+}
+
+li {
+    list-style: none;
+    float: left
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+input, button {
+    font-family: 'Microsoft YaHei', 'Heiti SC', tahoma, arial, 'Hiragino Sans GB', '\5B8B\4F53', sans-serif;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    background-color: #fff;
+    font-family: Circular, PingFang-SC, "Hiragino Sans GB", 微软雅黑, "Microsoft YaHei", "Heiti SC";
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgb(33, 33, 33);
+    font-weight: 300;
+    outline: none;
+}
+
+/*引入矢量字体和配置样式*/
+@font-face {
+    font-family: 'iconfont';
+    src: url(//misc.360buyimg.com/mtd/pc/index_2019/1.0.0/fonts/ba43574760fe93a35fca3c6f9b9e73f4.eot);
+    src: url(//misc.360buyimg.com/mtd/pc/index_2019/1.0.0/fonts/ba43574760fe93a35fca3c6f9b9e73f4.eot?#iefix) format("embedded-opentype"), url(//misc.360buyimg.com/mtd/pc/index_2019/1.0.0/fonts/a84f5777e97992c6fb6d423c003f187b.woff) format("woff"), url(//misc.360buyimg.com/mtd/pc/index_2019/1.0.0/fonts/43f6b5fd284d120fd59582a14e3e0844.ttf) format("truetype"), url(//misc.360buyimg.com/mtd/pc/index_2019/1.0.0/fonts/7e3a7b715cf938242acf0fe64a0e1817.svg#iconfont) format("svg");
+}
+
+.iconfont {
+    font-family: 'iconfont', sans-serif;
+    font-style: normal;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}

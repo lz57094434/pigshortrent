@@ -1,12 +1,17 @@
 package org.lanqiao.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Comment {
+    private User user;
+    private House house;
     private Integer commentId;
 
     private String message;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date commentDate;
 
     private House house;
@@ -35,6 +40,14 @@ public class Comment {
 
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getMessage() {

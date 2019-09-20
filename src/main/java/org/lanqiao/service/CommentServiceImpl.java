@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-
     @Autowired
     CommentMapper commentMapper;
 
@@ -20,6 +19,8 @@ public class CommentServiceImpl implements CommentService {
     public int insert(Comment record) {
         return commentMapper.insert(record);
     }
-
-
+    @Override
+    public List<Comment> getListByPage(Integer houseId) {
+        return commentMapper.getAllComment(houseId);
+    }
 }
