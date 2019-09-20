@@ -14,7 +14,7 @@
 <script src="js/img.js"></script>
 <script>
     $(function() {
-        $("input[name='button']").click(function () {
+        $("input[name=butt]").click(function () {
             // alert($("input[name=housename]").val());
             $.ajax({
                 url: "/house",
@@ -32,7 +32,8 @@
                     "houseModel":$("input[name=house_model]").val(),
                     "houseAddress":$("input[name=house_address]").val()+$("input[name=address_three]").val(),
                     "latitude":$("input[name=latitude]").val(),"longitude":$("input[name=longitude]").val()
-
+                    // "houseImgUrl": getUrl(data.files[0]),
+                    ,"publisherId":userId
                 },
                 dataType: "Json",
                 success:function(data) {
@@ -41,18 +42,19 @@
             })
            window.location="";
         });
-        // $("input[name=butt]").click(function () {
-        //     alert($("input[name=file]").val());
+
+
         //     $.ajax({
-        //         url: "/insert",
+        //         url: "/s",
         //         type:"post",
         //         data:{
-        //             "houseImgUrl":$("input[name=file]").val(),},
+        //             "userId":userId},
         //     dataType: "json",
         //         success:function(data) {
+        //
         //     }
         // })
-        // })
+
         $("input[name=butto]").click(function () {
             $.ajax({
                 type: "post",
@@ -168,7 +170,7 @@
             <input type="text" name="latitude" value="" class="house-name">
         </div>
         <input type="file" name="lg" multiple="multiple">
-        <input type="button" name="button" value="提交">
+        <input type="button" name="butt" value="提交">
     </form>
     logo:<input type="file" class="fileupload" name="logo" multiple="multiple">
     <button id="logo">上传</button> <div id="image">预览：</div>

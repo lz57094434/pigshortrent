@@ -10,6 +10,7 @@ $(function () {
             //获取图片路径并显示预览
             var url = getUrl(data.files[0]);
             var $img = $("<img>").attr("src", url).css("width","50px");
+
             $.ajax({
                 url:"/Imginsert",
                 data:{"houseImgUrl":url},
