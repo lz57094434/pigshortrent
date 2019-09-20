@@ -13,27 +13,7 @@
         <!--})-->
     <!--</script>-->
     <script>
-        // $(function () {
-        //     $("input[name=butt]").click(function () {
-        //         $(".kk_box").append("<div class=\"kk\">\n" +
-        //             "        真实姓名     <input type=\"text\" name=\"userName\" value=\"\"/>\n" +
-        //             "    </div>\n" +
-        //             "    <div class=\"kk\">\n" +
-        //             "        身份证号    <input type=\"text\" name=\"userId\" value=\"\"/>\n" +
-        //             "    </div>\n" +
-        //             "    <div class=\"kk\">\n" +
-        //             "        手机号     <input type=\"tel\" name=\"phone\" value=\"\"/>\n" +
-        //             "    </div>\n" +
-        //             "    <span class=\"kk_cancle\">\n" +
-        //             "                            取消\n" +
-        //             "                        </span>\n" +
-        //
-        //             "------------------------------------------------------------------------"
-        //     )
-        //     })
-        // })
-
-        //图片
+        //图片 时间 等信息
         $(function () {
             $.ajax({
                 url: "/getuser",
@@ -44,6 +24,7 @@
                     $(".order_right_img").append("<img class=\"house_img\"" + "src="+data.houseImg.houseImgUrl+">")
                     $(".house_title").append("<h3>" + data.house.houseName  + "</h3>\n")
                     $(".date_text").append(data.houseUse.stayinDate + " - " +data.houseUse.leaveDate)
+                    $(".h_right_e1").append(data.user.userName)
                     $(".order_info_msg").append("<h3>预订人信息</h3>\n" +
                         "                <div class=\"order_box\">\n" +
                         "                    <div class=\"name\">\n" +
