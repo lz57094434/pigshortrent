@@ -177,12 +177,12 @@ li{
 }
 /*主体2*/
 #body2{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     height: 1115px;
 }
 /*主体2左部*/
 #body2_left{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 600px;
     height: 100%;
     float: left;
@@ -203,14 +203,14 @@ li{
 }
 /*主体2右部*/
 #body2_right{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 897px;
     height: 100%;
     float: left;
 }
 /*面包条*/
 #bread{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 100%;
     height: 36px;
     color: #bdc3c7;
@@ -232,13 +232,13 @@ li{
 }
 /*图片信息*/
 #body2_right_xinxi{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 100%;
     height: 800px;
 }
 #body2_right_xinxi span{
     float: left;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 60px;
     height: 25px;
     background-color: #000;
@@ -249,7 +249,7 @@ li{
     margin-top: -41px;
 }
 #body2_right_xinxi li{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 412px;
     height: 350px;
     margin-left: 25px;
@@ -295,7 +295,7 @@ li{
 }
 /*主体2右部的尾部*/
 #body2_right_tail{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     width: 100%;
     height: 270px;
 }

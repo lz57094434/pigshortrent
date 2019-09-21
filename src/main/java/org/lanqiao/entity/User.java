@@ -27,6 +27,7 @@ public class User implements Serializable{
 
     private String sex;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String userAddress;

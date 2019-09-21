@@ -285,14 +285,15 @@
                 housesPage();
             });
 
-            //solr
+            //关键字solr
             var solr=[0];
             $("#body1_left_four_guanjianci input").change(function () {
                 // alert($(this).val());
                 if($(this).val()==''){
-                    alert($(this).val())
+                    // alert($(this).val())
                     solr.splice(0,solr.length);//清空solr查询数组
                     solr.push(0);
+                    housesPage();
                 } else{
                     $.ajax({
                         url:'/searchsolr',
@@ -385,7 +386,7 @@
                 var p = e.target;
                 $("#body2_left_baiduditu").css("display","block");
                 // alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
-                alert(houses.infos.length);
+                // alert(houses.infos.length);
                 for(var i=0;i<houses.infos.length;i++){
                     if(p.getPosition().lng==houses.infos[i].longitude && p.getPosition().lat==houses.infos[i].latitude){
                         baidu.houseName=houses.infos[i].houseName;

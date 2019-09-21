@@ -72,7 +72,7 @@
             $.ajax({
                 url: "/getuser",
                 type: "post",
-                data: {"userId": 1},
+                data: {"userId": 2},
                 dataType: "json",
                 success: function (data){
                     $(".money").append("¥" + data.house.housePrice)

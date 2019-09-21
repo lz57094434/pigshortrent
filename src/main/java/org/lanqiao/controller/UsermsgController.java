@@ -14,6 +14,7 @@ public class UsermsgController {
     @RequestMapping("/usermsg")
     @ResponseBody
     public int updateByPrimaryKey(User user) {
+        System.out.println(user.getUserId());
         return userImpl.updateByPrimaryKey(user);
     }
     @RequestMapping("/s")

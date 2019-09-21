@@ -12,7 +12,7 @@ public class UsermsgImpl implements Usermsg{
     UserMapper usesrmapper;
     @Override
     public int updateByPrimaryKey(User user) {
-        return usesrmapper.updateByPrimaryKey(user);
+        return usesrmapper.updateByPrimaryKeySelective(user);
     }
     @Override
     public User selectByPrimaryKey(Integer userId){return usesrmapper.selectByPrimaryKey(userId);}

@@ -30,8 +30,6 @@ public class OrdersController {
     }
     @RequestMapping("/getuser")
     public Orders getAllOrders(Integer userId) {
-        System.out.print(orderService.getAllOrders(userId).toString());
-
         return orderService.getAllOrders(userId);
     }
 

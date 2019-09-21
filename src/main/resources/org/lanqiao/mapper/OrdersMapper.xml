@@ -55,7 +55,7 @@
     where orders_id = #{ordersId,jdbcType=INTEGER}
   </select>
   <select id="getAllOrders" resultMap="OrderResultMap" parameterType="java.lang.Integer">
-    select * from orders o,user u,house h where u.user_id=o.user_id and h.house_id=o.house_id and o.user_id=#{userId}
+    select * from orders o,user u,house h where u.user_id=o.user_id and h.house_id=o.house_id
   </select>
 
 
