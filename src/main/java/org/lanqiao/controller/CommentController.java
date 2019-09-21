@@ -32,6 +32,7 @@ public class CommentController {
     //订单信息
     @RequestMapping("/OrderMessage")
     public List<House> OrderMessage(Integer houseId) {
+        System.out.println(1);
         return houseService.OrderMessage(houseId);
     }
 
