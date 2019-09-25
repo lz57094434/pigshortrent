@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @RestController
-public class HouseController {
+public class HouseInfosController {
     @Autowired
     HouseServiceImpl houseServiceImpl;
 
