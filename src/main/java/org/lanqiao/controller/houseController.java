@@ -20,22 +20,22 @@ import java.util.List;
 
 
 @RestController
-public class houseController {
+public class HouseController {
     @Autowired
-   HouseServiceImpl houseServiceImpl;
+    HouseServiceImpl houseServiceImpl;
 
     @RequestMapping(value = "/really", method = RequestMethod.POST)
     public int insertReall(User user){
         return houseServiceImpl.updateReall(user);
     }
-   @RequestMapping("/house")
+    @RequestMapping("/house")
     public int insertHouse(House house){
         return houseServiceImpl.houseInsert(house);
-   }
-   @RequestMapping("/Imginsert")
+    }
+    @RequestMapping("/Imginsert")
     public int insertImg(HouseImg houseImg){
         return  houseServiceImpl.sendImg(houseImg);
-   }
+    }
     @Value("${file.location.path}")
     private String fileLocation;
     @RequestMapping("/houseinsert")
@@ -45,7 +45,7 @@ public class houseController {
     }
     @RequestMapping("/payInsert")
     public int insertPay(Pay pay){
-       return houseServiceImpl.payInsert(pay);
+        return houseServiceImpl.payInsert(pay);
     }
     @Autowired
     HouseService houseService;
